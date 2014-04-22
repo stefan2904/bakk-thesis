@@ -1,5 +1,5 @@
 ## please modify following line for naming the end products (PDFs, ZIPs, ...)
-PROJECTNAME = "Projectname"
+PROJECTNAME = "StefanBachelorThesis"
 
 ## -----------------------------------------
 ##       DO NOT EDIT BELOW THIS LINE
