@@ -1,0 +1,52 @@
+"Java Privacy Guard"
+an implementation of the 'openPGP message format' in Java(tm)
+
+- Abstract
+- TOC
+- Introduction
+
+- The openPGP message format
+-- History
+-- Principles
+--- Symmetric & Asymmetric
+--- Signatures
+--- Web of Trust
+-- Similar protocols
+
+- openPGP Packet structure
+-- Principle
+-- Data primitives
+--- MPI
+-- Decoding keys
+-- Decoding messages
+-- Encoding ... (?)
+...
+-- Sign and Verify
+
+- Java implementation of openPGP
+-- Status
+-- API
+--- PGPObjectStream
+-- Keystore
+-- Issues
+--- unsigned
+--- RFC
+-- Interoperability
+--- GnuPG
+--- Bouncycastle
+-- Implementation security
+--- possible attacks
+--- countermeasures
+-- Future development
+--- Sign
+--- Encrypt
+--- Key generation
+
+- Concerns (?)
+-- outdated cipher ?
+-- outdaten hash-algos ?
+-- elliptic curve cryptography ?
+-- state-of-the-art keysizes ?
+
+- References
+- (possibly) list of figures
