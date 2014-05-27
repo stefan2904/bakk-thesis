@@ -5,25 +5,36 @@ an implementation of the 'openPGP message format' in Java(tm)
 - TOC
 - Introduction
 
-- The openPGP message format
+- [PGP] openPGP
 -- History
 -- Principles
---- Symmetric & Asymmetric
---- Signatures
---- Web of Trust
+--- Confidentiality (Symmetric & Asymmetric Encryption)
+---  Integrity (Message Signing)
+--- Authentication (Trust / Web of Trust)
+-- Applications
+--- Mail (PGP/Mime?)
+--- TLS (RFC 6091)
+--- Data storage?
+-- (Popular) Implementations
+--- PGP
+--- GPG / Gpg4win
+--- BouncyCastle
+--- APG
+--- ...
 -- Similar protocols
+--- S/MIME
 
-- openPGP Packet structure
+- [PGP] The openPGP message format
 -- Principle
 -- Data primitives
 --- MPI
--- Decoding keys
--- Decoding messages
--- Encoding ... (?)
-...
--- Sign and Verify
+-- Keys
+-- Messages
+--- Multipart
+-- Signatures
+-- Compression
 
-- Java implementation of openPGP
+- [JPG] Java implementation of openPGP
 -- Status
 -- API
 --- PGPObjectStream
@@ -31,22 +42,26 @@ an implementation of the 'openPGP message format' in Java(tm)
 -- Issues
 --- unsigned
 --- RFC
--- Interoperability
+
+-- [JPG] Interoperability
 --- GnuPG
 --- Bouncycastle
--- Implementation security
---- possible attacks
---- countermeasures
--- Future development
+
+-- [JPG] Future development
+--- modularity (add more ciphers/algorithms on runtime? use experimental ids)
 --- Sign
 --- Encrypt
 --- Key generation
 
-- Concerns (?)
+-- [JPG] Implementation security
+--- possible attacks
+--- countermeasures
+
+- [PGP] Concerns (?)
+-- key sizes (NIST, ECRYPT, BSI, via http://www.keylength.com/en/compare/)
 -- outdated cipher ?
 -- outdaten hash-algos ?
 -- elliptic curve cryptography ?
--- state-of-the-art keysizes ?
 
 - References
 - (possibly) list of figures
