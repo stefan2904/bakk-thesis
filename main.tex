@@ -226,7 +226,7 @@
 %% include the abstract without chapter number but include it on table of contents:
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Abstract}
-\include{abstract}              %% Abstract
+\include{0-abstract}              %% Abstract
 
 
 \tableofcontents                %% this produces the table of contents - you might have guessed :-)
@@ -239,11 +239,17 @@
 }{}                             %% with todonotes-package option "disable" you can get rid of any todo in the output
 
 \mainmatter                     %% KOMA: marks main part using arabic page numbers and such; only available in scrbook
+ 
 
-\todo{add content here}
+\input{1-introduction}   
 
-\input{example-short-chapter}   %% remove this line to get rid of the example chapter
-\input{example-style-chapter}   %% remove this line to get rid of the style chapter
+\input{2-openPGP}   
+
+\input{3-theOpenPGPmessageFormat}   
+
+\input{4-jpg}  
+ 
+\input{5-concerns} 
 
 %% include tex file chapters:
 % \include{introduction}        %% this is a suggestion: you have to create this file on demand

@@ -3,9 +3,9 @@ an implementation of the 'openPGP message format' in Java(tm)
 
 - Abstract
 - TOC
-- Introduction
+1 - Introduction
 
-- [PGP] openPGP
+2 - [PGP] openPGP
 -- History
 -- Principles
 --- Confidentiality (Symmetric & Asymmetric Encryption)
@@ -24,7 +24,7 @@ an implementation of the 'openPGP message format' in Java(tm)
 -- Similar protocols
 --- S/MIME
 
-- [PGP] The openPGP message format
+3 - [PGP] The openPGP message format
 -- Principle
 -- Data primitives
 --- MPI
@@ -34,7 +34,7 @@ an implementation of the 'openPGP message format' in Java(tm)
 -- Signatures
 -- Compression
 
-- [JPG] Java implementation of openPGP
+4 - [JPG] Java implementation of openPGP
 -- Status
 -- API
 --- PGPObjectStream
@@ -57,7 +57,7 @@ an implementation of the 'openPGP message format' in Java(tm)
 --- possible attacks
 --- countermeasures
 
-- [PGP] Concerns (?)
+5 - [PGP] Concerns (?)
 -- key sizes (NIST, ECRYPT, BSI, via http://www.keylength.com/en/compare/)
 -- outdated cipher ?
 -- outdaten hash-algos ?
