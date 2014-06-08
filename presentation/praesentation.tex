@@ -3,10 +3,10 @@
 % \documentclass[aspectratio=169]{beamer}
 % \usetheme{tugraz2013}
 % \usetheme[notes]{tugraz2013}
-\usetheme[minimal]{tugraz2013}
+\usetheme[minimal, notes]{tugraz2013}
 
 %% Titelblatt-Einstellungen
-\title[openPGP in Java]{An implementation\\ of the OpenPGP Message Format\\ in Java}
+\title[openPGP in Java]{\tiny{Java Privacy Guard}\\\normalsize An Implementation of the \\ OpenPGP Message Format in Java}
 \author{Stefan More}
 % \date{Graz, XX. Dezember 2010}		% \today für heutiges Datum verwenden
 \date{June 13, 2014}
@@ -24,12 +24,162 @@
   \frametitle{Agenda}
   \tableofcontents%[hideallsubsections] 
   \note{
-  	I'm going to talk about \ldots
+  	First I'm going to talk about what openPGP is\ldots \\
+  	after that i will compare it to other protocols \ldots \\
+  	last but not least i am going to introduce you to my implementation \ldots
   }
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem Statement}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Agenda}
+\begin{frame}
+
+% snowden trying to mail with greenwald -> gchq, nsa, china ... listening
+% cloud in between? secret service?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% me trying to mail with customer -> konkurenz listening
+% cloud in between? internet routing via england?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% hospital trying to mail with client -> employer listening
+% gmail in between?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% slide which explains why we need privacy (even if we have nothing to hide?)
+% explain why ssl is not enough => gmail == google, nsa has access, wirtschaftsspionage, etc
+
+\end{frame}
+
+% short extra slide?
+% we need confidential, integrity, authentizity.
+% end to end
+% pgp provides that
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{openPGP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\note{
+	 Zimmermann: anti-nuclear activist \\
+	 PGP: invented to store message on message boards	
+}
+\frametitle{PGP History}
+\begin{itemize}
+	\item Pretty Good Privacy
+	\item 1991: PGP created by Phil Zimmermann 
+	\item \textit{most widely used email encryption software in the world}
+	\item 1998: PGP 5 standardized: \textbf{OpenPGP (RFC 4880)}
+	\item 2010: PGP assets sold to Symantec for \$ 300.000.000 (Enterprise Security Group)
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+% explain what gpg is, what pgp is, what openpgp is and what jog is (bouncycastle, too)
+
+	\begin{itemize}
+		\item Standard: openPGP (RFC 4880 et al.)
+		\item Implementations:
+		\begin{itemize}
+		\item PGP (Zimmermann, Symantec)
+		\item GnuPG / GPG (GNU)
+		\item APG (Android)
+		\item End-to-end (Google, Chrome)
+		\item Bouncycastle (Java)
+		\item \textit{Java Privacy Guard} (IAIK-JCE)
+		\end{itemize}
+	\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+% again, slide with snowden & greenwald + cloud + secret services
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% adding gpg: 
+% snowden knows its greenwald
+% snowden know message not changed
+% nsa does not know what they write
+% BUT: nsa knows (possibly) THAT they write -> TOR solves that?
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% summing up, pgp provides confidential, integrity, authentizity
+% but not anonymity (metadata)
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% how does pgp do that? -> explain encryption (confidentiality)
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% how does pgp do that? -> explain message signing (integrity)
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% so... pgp == s/mime ???
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% NO! => explain authentizy => web of trust
+% advantages: does not need ca, everyone is ca
+% dissadvantages: social graph public (again: no anonymity!), how secure is a ca? usability?
+% concusio: bussines vs private? central vs decentral
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{frame}
 	\frametitle{Ziele der ersten Vorlesung}
 	Einführung in die KORE
@@ -61,28 +211,17 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Aufzählungen}
+\section{Related Protocols}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Formeln und Links}
-\begin{frame}
-	\frametitle{Formeln und Links}
-	Eine Formel:
-	\begin{eqnarray*}
-	u(x,t) & = & \sum_{k=1}^{\infty} f_k \sin \frac{k \pi x}{L} \cos 
-				 \frac{k \pi t}{aL} + \\
-		   & + & \sum_{k=1}^{\infty} g_k \sin \frac{k \pi x}{L} \sin 
-				 \frac{k \pi t}{aL} \\
-	\end{eqnarray*}
-
-	Ein Link:
-	\begin{center}
-		\url{http://www.tugraz.at}		
-	\end{center}
-\end{frame}
+%% Evtl streichen weil sosnt zu viel?
+% vergleich mit smime shcon im openpgp kapitel,
+% vergleich mit ssl ganz oben?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Quelltexte}
+\section{Java Privacy Guard}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}[fragile]
 	\frametitle{Quelltexte}
 	\begin{spacing}{1}
@@ -99,7 +238,7 @@ SUCHE (A,x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Spalten und Grafiken}
+
 \begin{frame}
 	\frametitle{Zwei Inhalte Links/Rechts\\Wahlweise Text/Grafik}
 	\begin{columns}[onlytextwidth]
@@ -120,7 +259,7 @@ SUCHE (A,x)
 	\end{columns}
 \end{frame}
 
-\section{Weitere Beispielfolien}
+
 
 \begin{frame}
 	\frametitle{Nur Titel \\maximal 2-zeilig}
@@ -137,14 +276,25 @@ SUCHE (A,x)
 	\begin{itemize}
 		\item Master Project
 		\item Encryption and Signature Validation
-		\item Better API
+		\item RFC 6637: ECC
 		\item Keyservers?
 	\end{itemize}
 	\begin{itemize}
-		\item Provide Anonymity? (Metadata?)\footnotemark
+		\item Provide Anonymity? (Metadata?)%\footnotemark
 		 \item Provide Integrity for Headers?
 	\end{itemize}
-	\footnotetext{http://grimoire.ca/gpg/terrible}
+	%\footnotetext{http://grimoire.ca/gpg/terrible}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sources}
+\small
+\begin{thebibliography}{1}
+	\bibitem{snowden} Laura Poitras \small \url{https://commons.wikimedia.org/wiki/File:Edward_Snowden-2.jpg} 
+	
+	\bibitem{greenwald} Glenn Greenwald \small \url{https://en.wikipedia.org/wiki/File:Glenn_greenwald_portrait_transparent.png}
+
+\end{thebibliography}
 \end{frame}
 
 \sectionheader[Questions? Remarks?]{Thank You for Your Attention}
