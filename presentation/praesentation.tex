@@ -1,0 +1,156 @@
+% LaTeX Präsentationsvorlage (2013) der TU Graz, rev12, 2013/01/31
+\documentclass{beamer}
+% \documentclass[aspectratio=169]{beamer}
+% \usetheme{tugraz2013}
+% \usetheme[notes]{tugraz2013}
+\usetheme[minimal]{tugraz2013}
+
+%% Titelblatt-Einstellungen
+\title[openPGP in Java]{An implementation\\ of the OpenPGP Message Format\\ in Java}
+\author{Stefan More}
+% \date{Graz, XX. Dezember 2010}		% \today für heutiges Datum verwenden
+\date{June 13, 2014}
+\institute[Bakk@IAIK]{\\Advisor: Dieter Bratko}
+%\instituteurl{iaik.tugraz.at}
+\institutelogo{javaSec.jpg}
+\additionallogo{institutslogo.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleframe
+
+\begin{frame}
+  \frametitle{Agenda}
+  \tableofcontents%[hideallsubsections] 
+  \note{
+  	I'm going to talk about \ldots
+  }
+\end{frame}
+
+
+\section{Agenda}
+\begin{frame}
+	\frametitle{Ziele der ersten Vorlesung}
+	Einführung in die KORE
+	\begin{itemize}
+		\item Geschichte der KORE kennen lernen
+		\item Aufgaben der KORE und Einordnung in das betriebliche Rechnungswesen verstehen
+		\item Wertebenen im Rechnungswesen unterscheiden
+	\end{itemize}
+	
+	Grundlagen der KORE
+	\begin{itemize}
+		\item Kostenwürfel als Hilfsmittel verwenden
+		\item Überleitung von externem zu internem Rechnungswesen durchführen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Titel der Folie\\maximal zwei Zeilen}
+	Text Ebene 1
+	\begin{itemize}
+		\item Zweite Ebene
+		\begin{itemize}
+			\item Dritte Ebene
+			\begin{itemize}
+				\item Vierte Ebene
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aufzählungen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Formeln und Links}
+\begin{frame}
+	\frametitle{Formeln und Links}
+	Eine Formel:
+	\begin{eqnarray*}
+	u(x,t) & = & \sum_{k=1}^{\infty} f_k \sin \frac{k \pi x}{L} \cos 
+				 \frac{k \pi t}{aL} + \\
+		   & + & \sum_{k=1}^{\infty} g_k \sin \frac{k \pi x}{L} \sin 
+				 \frac{k \pi t}{aL} \\
+	\end{eqnarray*}
+
+	Ein Link:
+	\begin{center}
+		\url{http://www.tugraz.at}		
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quelltexte}
+\begin{frame}[fragile]
+	\frametitle{Quelltexte}
+	\begin{spacing}{1}
+	\begin{semiverbatim}
+SUCHE (A,x)
+1: i = 0
+2: WHILE i<n
+3:     i = i+1
+4:     \alert{IF A[i]=x THEN RETURN i}
+5: ELSE RETURN -1
+	\end{semiverbatim}
+	\end{spacing}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Spalten und Grafiken}
+\begin{frame}
+	\frametitle{Zwei Inhalte Links/Rechts\\Wahlweise Text/Grafik}
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Lorem ipsum dolor sit amet, consectetur 
+				\item adipisicing elit, sed do eiusmod tempor 
+				\item incididunt ut labore et dolore magna aliqua. 
+				\item Ut enim ad minim veniam, quis nostrud 
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+			\includegraphics[width=0.5\textwidth]{logo.pdf}\\
+			Grafik in Spalte 2
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{Weitere Beispielfolien}
+
+\begin{frame}
+	\frametitle{Nur Titel \\maximal 2-zeilig}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outlook}
+%%%%%%%%%%%%%%%%%%/%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Outlook}
+	\begin{itemize}
+		\item Master Project
+		\item Encryption and Signature Validation
+		\item Better API
+		\item Keyservers?
+	\end{itemize}
+	\begin{itemize}
+		\item Provide Anonymity? (Metadata?)\footnotemark
+		 \item Provide Integrity for Headers?
+	\end{itemize}
+	\footnotetext{http://grimoire.ca/gpg/terrible}
+\end{frame}
+
+\sectionheader[Questions? Remarks?]{Thank You for Your Attention}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% EOF
