@@ -18,15 +18,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\titleframe
+\titleframe[This is a second-screen test. \\
+		Hello, second-screen! \\
+		\textbf{If audience can read this, something is wrong}.]
 
 \begin{frame}
   \frametitle{Agenda}
   \tableofcontents%[hideallsubsections] 
   \note{
-  	First I'm going to talk about what openPGP is\ldots \\
-  	after that i will compare it to other protocols \ldots \\
-  	last but not least i am going to introduce you to my implementation \ldots
+  	First I'm going to talk about what openPGP is \ldots \\ 
+  	and do a short comparison to other protocols \ldots \\
+  	last but not least i am going to introduce you to my implementation \ldots \\
+  	and sum up what i have done
   }
 \end{frame}
 
@@ -34,12 +37,72 @@
 \section{Problem Statement}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[anchor=north west,inner sep=0pt] at (-1, 2) {
+                \includegraphics[width=\paperwidth]{media/internet.png}
+            };
+        
+        \pause
+        
+            \node[anchor=north west,inner sep=0pt] at (0, 0) {
+                \includegraphics[width=65pt]{media/greenwald.png}
+            };
+        
+            \node[anchor=north west,inner sep=0pt] at (0, -4) {
+                \includegraphics[width=65pt]{media/poitras.jpg}
+            };
+       
+            \node[anchor=north west,inner sep=0pt] at (8, -5) {
+                \includegraphics[width=65pt]{media/snowden.jpg}
+            };
 
-% snowden trying to mail with greenwald -> gchq, nsa, china ... listening
-% cloud in between? secret service?
+        \pause
+        
+            \node[anchor=north west,inner sep=0pt] at (8, 1) {
+                \includegraphics[width=60pt]{media/servers.png}
+            };
+        	 \draw [<->, line width=0.2cm, red, dashed] (9, -5) -- (9, -1.5); % line from server to snowden
+        	 
+        % \pause
+        	 
+        	 \draw [<->, line width=0.2cm, red, dashed] (2.5, -2) -- (8, 0); % line from server to greenwald
+        	 \draw [<->, line width=0.2cm, red, dashed] (2.5, -6) -- (8, -1.5); % line from server to poitras
+        	 
+        	 \node[anchor=north west,inner sep=0pt] at (9, -3) {
+                \includegraphics[width=30pt]{media/lock.png}
+            };
+            \node[anchor=north west,inner sep=0pt] at (4, -4) {
+                \includegraphics[width=30pt]{media/lock.png}
+            };
 
-\end{frame}
+			\pause            
+            
+            \node[anchor=north west,inner sep=0pt] at (4, -0.5) {
+                \includegraphics[width=30pt]{media/attack.png}
+            };
+            
+             \node[anchor=north west,inner sep=0pt] at (9, 0) {
+                \includegraphics[width=30pt]{media/attack.png}
+            };
+        	 
+        \end{tikzpicture}
+        
+         \note {
+     		Take the internet as an example. \\
+			Well, lets say we have two persons who have good reasons \\
+			to communicate confidentiality over such a network.		\\
+			\ldots \\
+			Laura POITRAS, glenn greenwald \\
+			and of course edward snowden
+			\ldots \\
+			
+			 \textbf{provided SSL / TLS is secure}
+     }
+     \end{frame}    
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -268,23 +331,56 @@ SUCHE (A,x)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Outlook}
-%%%%%%%%%%%%%%%%%%/%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary \&{} Outlook}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{Outlook}
+	\frametitle{Summary}
+	
 	\begin{itemize}
-		\item Master Project
-		\item Encryption and Signature Validation
+		\item Studied RFC 4880
+		\item Studied IAIK-JCE
+		\item Implemented:
+		\begin{itemize}
+			\item Reading ASCII-Armor (Base 64 + CRC24)
+			\item Parsing PGP Message Objects (\textit{Packets})
+			\item Key Management (Simple Keychain)
+			\item Message Decryption (RSA \&{} ElGamal)
+			\item Signature Validation (RSA \&{} DSA)
+			\item Decompression
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Future (Research) Outlook}
+	
+	\begin{itemize}
+		%\item Master Project
+		\item Message Encryption and Signature Validation
+		\item Missing parts of RFC 4880 (Partial body length, \ldots)
 		\item RFC 6637: ECC
 		\item Keyservers?
 	\end{itemize}
+	Out of scope:
 	\begin{itemize}
-		\item Provide Anonymity? (Metadata?)%\footnotemark
-		 \item Provide Integrity for Headers?
+	    \item RFC 3156: PGP/MIME
+		\item Provide Anonymity? (Metadata!)%\footnotemark
+		\item Provide Integrity for Mail-Headers?
+		\item Protocol/Implementation Usability?
 	\end{itemize}
 	%\footnotetext{http://grimoire.ca/gpg/terrible}
+	
+	\note{
+		 Master Project, Summer job, \\
+		 further research?	
+	}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \frametitle{Sources}
@@ -293,6 +389,12 @@ SUCHE (A,x)
 	\bibitem{snowden} Laura Poitras \small \url{https://commons.wikimedia.org/wiki/File:Edward_Snowden-2.jpg} 
 	
 	\bibitem{greenwald} Glenn Greenwald \small \url{https://en.wikipedia.org/wiki/File:Glenn_greenwald_portrait_transparent.png}
+	
+	\bibitem{poitras} Katy Scoggin \small \url{https://commons.wikimedia.org/wiki/File:Laura_Poitras_2014.jpg}
+	
+	\bibitem{servers} RRZE \item \url{https://commons.wikimedia.org/wiki/Category:RRZE-Icon-Set}
+	
+	\bibitem{internet}  The Opte Project \small \url{http://www.opte.org/the-internet}
 
 \end{thebibliography}
 \end{frame}
