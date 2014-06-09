@@ -145,7 +145,7 @@
 	\begin{itemize}
 		\item Pretty Good Privacy
 		\item 1991: PGP created by Phil Zimmermann 
-		\item \textit{most widely used email encryption software}
+		\item \textit{most widely used email encryption software} \cite{zimmermann}
 		\item 1998: PGP 5 standardized: \textbf{OpenPGP (RFC 4880)}
 		\item 2010: PGP assets sold to Symantec \\ for \$ 300.000.000 (Enterprise Security)
 	\end{itemize}
@@ -189,11 +189,25 @@
 		\item + Data Compression
 		\item + Trust Model 
 	\end{itemize}
+	
+\end{frame}
 
-	\note{
-		 Zimmermann: anti-nuclear activist \\
-		 PGP: invented to store message on message boards	
-	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+	\frametitle{De-/Encryption}
+
+% how does pgp do that? -> explain message signing (integrity)
+
+	\begin{itemize}
+		\item Encrypt Data Symmetric, only Symmetric-Key with Public-Key
+		\item Multiple Receiver: Encrypt Data Oonly once \\
+		\item Symmetric Cipher: IDEA, 3DES, AES, CAST5, \ldots 
+		\item Public-Key Cipher: RSA, ElGamal \\
+				\small Keysize $\geq 2048 bits$ \cite{nist} 
+	\end{itemize}
 
 \end{frame}
 
@@ -205,9 +219,25 @@
 
 % how does pgp do that? -> explain encryption (confidentiality)
 
-	\begin{center}
-			\includegraphics[width=\textwidth]{media/pgp.png}
-	\end{center}
+	\begin{tikzpicture}[remember picture,overlay]
+		\only<1-4> \node[anchor=south west,inner sep=0pt] at (-1.5, -7) {
+			\includegraphics[width=1.2\textwidth]{media/pgp.png}
+		};
+		
+		%\pause
+		
+		\only<-1> \draw [fill=white, white] (-1.5, -3.25) rectangle (5,-0.95);
+		
+		%\pause
+		
+		\only<-2> \draw [fill=white, white] (-1.5, -3.25) rectangle (5,-7);
+		\only<-2> \draw [fill=white, white] (5, -5.5) rectangle (13,-7);
+
+		%\pause		
+		
+		\only<-3> \draw [fill=white, white] (5, 2) rectangle (13,-5.7);
+			
+     \end{tikzpicture}		
 
 \end{frame}
 
@@ -215,7 +245,17 @@
 
 \begin{frame}
 
+	\frametitle{Digital Signatures}
+
 % how does pgp do that? -> explain message signing (integrity)
+
+	\begin{itemize}
+		\item Hash Message Body \&{} Sign Hash with Private Key
+		\item Sign Other Keys ($\rightarrow$ Trust Model)	 \\
+		\item Hash Algorithms: MD5, SHA-1 SHA-2, RIPE-MD
+		\item Signature Cipher: RSA, DSA \\
+			\small Keysize $\geq 112 bits$ \cite{nist} 
+	\end{itemize}
 
 \end{frame}
 
@@ -253,12 +293,15 @@
 	\frametitle{Revisiting Problem Statement}
 
 	\begin{itemize}
-		\item Message Confidentiality: \textbf{Encryption}
-		\item Message Integrity:          \textbf{Digital Signatures}
+		\item Message Confidentiality: \textbf{Encryption} 
+		\item Message Integrity:          \textbf{Digital Signatures} 
 		\item Sender Authentication:    	\textbf{Web Of Trust}
 		\item Anonymity? Tor, I2P, \ldots
 	\end{itemize}
 
+	\note{
+		Metadata-less PGP Encryption is possible	
+	}
 
 \end{frame}
 
@@ -382,6 +425,10 @@ SUCHE (A,x)
 	\bibitem{servers} Regionales RechenZentrum Erlangen  \url{https://commons.wikimedia.org/wiki/Category:RRZE-Icon-Set}
 	
 	\bibitem{internet}  The Opte Project \url{http://www.opte.org/the-internet}
+	
+	\bibitem{zimmermann} \url{http://www.philzimmermann.com/EN/background/index.html}
+	
+	\bibitem{nist} Recommendation for Key Management, Special Publication 800-57 Part 1 Rev. 3, NIST, 07/2012. \url{http://www.keylength.com/en/4/}
 
 \end{thebibliography}
 \end{frame}
