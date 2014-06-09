@@ -40,6 +40,7 @@
 { % all template changes are local to this group.
     \setbeamertemplate{navigation symbols}{}
     \begin{frame}[plain]
+    
         \begin{tikzpicture}[remember picture,overlay]
             \node[anchor=north west,inner sep=0pt] at (-1, 2) {
                 \includegraphics[width=\paperwidth]{media/internet.png}
@@ -107,80 +108,92 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-
-% me trying to mail with customer -> konkurenz listening
-% cloud in between? internet routing via england?
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-
-% hospital trying to mail with client -> employer listening
-% gmail in between?
+	\frametitle{Other Examples}
+	
+	\begin{itemize}
+		\item Health Details
+		\item Company Secrets
+		\item Journalism
+		\item Activism
+	\end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
+	\frametitle{Problem Statement}
 
-% slide which explains why we need privacy (even if we have nothing to hide?)
-% explain why ssl is not enough => gmail == google, nsa has access, wirtschaftsspionage, etc
+	\begin{itemize}
+		\item Message Confidentiality
+		\item Message Integrity
+		\item Sender Authentication
+		\item Anonymity?
+	\end{itemize}
 
 \end{frame}
-
-% short extra slide?
-% we need confidential, integrity, authentizity.
-% end to end
-% pgp provides that
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{openPGP}
+\sectionheader{openPGP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{frame}
-\note{
-	 Zimmermann: anti-nuclear activist \\
-	 PGP: invented to store message on message boards	
-}
-\frametitle{PGP History}
-\begin{itemize}
-	\item Pretty Good Privacy
-	\item 1991: PGP created by Phil Zimmermann 
-	\item \textit{most widely used email encryption software in the world}
-	\item 1998: PGP 5 standardized: \textbf{OpenPGP (RFC 4880)}
-	\item 2010: PGP assets sold to Symantec for \$ 300.000.000 (Enterprise Security Group)
-\end{itemize}
+	\frametitle{PGP History}
+
+	\begin{itemize}
+		\item Pretty Good Privacy
+		\item 1991: PGP created by Phil Zimmermann 
+		\item \textit{most widely used email encryption software}
+		\item 1998: PGP 5 standardized: \textbf{OpenPGP (RFC 4880)}
+		\item 2010: PGP assets sold to Symantec \\ for \$ 300.000.000 (Enterprise Security)
+	\end{itemize}
+	
+	\note{
+		 Zimmermann: anti-nuclear activist \\
+		 PGP: invented to store message on message boards	
+	}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
 
 % explain what gpg is, what pgp is, what openpgp is and what jog is (bouncycastle, too)
+
+\begin{frame}
 
 	\begin{itemize}
 		\item Standard: openPGP (RFC 4880 et al.)
 		\item Implementations:
 		\begin{itemize}
-		\item PGP (Zimmermann, Symantec)
-		\item GnuPG / GPG (GNU)
-		\item APG (Android)
-		\item End-to-end (Google, Chrome)
-		\item Bouncycastle (Java)
-		\item \textit{Java Privacy Guard} (IAIK-JCE)
+			\item PGP (Zimmermann, Symantec)
+			\item GnuPG / GPG (GNU)
+			\item APG (Android)
+			\item End-to-End (Google Chrome)
+			\item Bouncycastle (Java)
+			\item \textit{Java Privacy Guard} (IAIK-JCE)
 		\end{itemize}
 	\end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
 
-% again, slide with snowden & greenwald + cloud + secret services
+\begin{frame}
+	\frametitle{openPGP}
+	
+	\begin{itemize}
+		\item Combines Symmetric-Key Cryptography \\and Public-Key Cryptography
+		\item + Hashing
+		\item + Data Compression
+		\item + Trust Model 
+	\end{itemize}
+
+	\note{
+		 Zimmermann: anti-nuclear activist \\
+		 PGP: invented to store message on message boards	
+	}
 
 \end{frame}
 
@@ -188,28 +201,13 @@
 
 \begin{frame}
 
-% adding gpg: 
-% snowden knows its greenwald
-% snowden know message not changed
-% nsa does not know what they write
-% BUT: nsa knows (possibly) THAT they write -> TOR solves that?
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-
-% summing up, pgp provides confidential, integrity, authentizity
-% but not anonymity (metadata)
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
+%\frametitle{openPGP: De-/Encryption}
 
 % how does pgp do that? -> explain encryption (confidentiality)
+
+	\begin{center}
+			\includegraphics[width=\textwidth]{media/pgp.png}
+	\end{center}
 
 \end{frame}
 
@@ -223,11 +221,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-
-% so... pgp == s/mime ???
-
-\end{frame}
+\sectionheader{So \ldots PGP == S/MIME ?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -238,48 +232,35 @@
 % dissadvantages: social graph public (again: no anonymity!), how secure is a ca? usability?
 % concusio: bussines vs private? central vs decentral
 
-\end{frame}
+	\frametitle{Web Of Trust}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}
-	\frametitle{Ziele der ersten Vorlesung}
-	Einführung in die KORE
 	\begin{itemize}
-		\item Geschichte der KORE kennen lernen
-		\item Aufgaben der KORE und Einordnung in das betriebliche Rechnungswesen verstehen
-		\item Wertebenen im Rechnungswesen unterscheiden
-	\end{itemize}
+		\item Decentralized Trust Model \\ (Can be centralized)
+		\item No Certificate Authority
+	\end{itemize}	
 	
-	Grundlagen der KORE
 	\begin{itemize}
-		\item Kostenwürfel als Hilfsmittel verwenden
-		\item Überleitung von externem zu internem Rechnungswesen durchführen
+	  % \item Keyserver Statistics: \url{sks-keyservers.net/status}
+		\item Pathfinder:          \url{pgp.cs.uu.nl/doc/faq.html}
+		\item Key-Set Analysis: \url{pgp.cs.uu.nl/plot}
 	\end{itemize}
+
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{Titel der Folie\\maximal zwei Zeilen}
-	Text Ebene 1
+	\frametitle{Revisiting Problem Statement}
+
 	\begin{itemize}
-		\item Zweite Ebene
-		\begin{itemize}
-			\item Dritte Ebene
-			\begin{itemize}
-				\item Vierte Ebene
-			\end{itemize}
-		\end{itemize}
+		\item Message Confidentiality: \textbf{Encryption}
+		\item Message Integrity:          \textbf{Digital Signatures}
+		\item Sender Authentication:    	\textbf{Web Of Trust}
+		\item Anonymity? Tor, I2P, \ldots
 	\end{itemize}
+
+
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Related Protocols}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Evtl streichen weil sosnt zu viel?
-% vergleich mit smime shcon im openpgp kapitel,
-% vergleich mit ssl ganz oben?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Java Privacy Guard}
@@ -382,26 +363,30 @@ SUCHE (A,x)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\sectionheader[Questions? Remarks?]{Thank You for Your Attention}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
 \begin{frame}
 \frametitle{Sources}
-\small
+
 \begin{thebibliography}{1}
-	\bibitem{snowden} Laura Poitras \small \url{https://commons.wikimedia.org/wiki/File:Edward_Snowden-2.jpg} 
+\scriptsize
+
+	\bibitem{snowden} Laura Poitras \url{https://commons.wikimedia.org/wiki/File:Edward_Snowden-2.jpg} 
 	
-	\bibitem{greenwald} Glenn Greenwald \small \url{https://en.wikipedia.org/wiki/File:Glenn_greenwald_portrait_transparent.png}
+	\bibitem{greenwald} Glenn Greenwald  \url{https://en.wikipedia.org/wiki/File:Glenn_greenwald_portrait_transparent.png}
 	
-	\bibitem{poitras} Katy Scoggin \small \url{https://commons.wikimedia.org/wiki/File:Laura_Poitras_2014.jpg}
+	\bibitem{poitras} Katy Scoggin \url{https://commons.wikimedia.org/wiki/File:Laura_Poitras_2014.jpg}
 	
-	\bibitem{servers} RRZE \item \url{https://commons.wikimedia.org/wiki/Category:RRZE-Icon-Set}
+	\bibitem{servers} Regionales RechenZentrum Erlangen  \url{https://commons.wikimedia.org/wiki/Category:RRZE-Icon-Set}
 	
-	\bibitem{internet}  The Opte Project \small \url{http://www.opte.org/the-internet}
+	\bibitem{internet}  The Opte Project \url{http://www.opte.org/the-internet}
 
 \end{thebibliography}
 \end{frame}
 
-\sectionheader[Questions? Remarks?]{Thank You for Your Attention}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
