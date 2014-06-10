@@ -3,7 +3,12 @@
 % \documentclass[aspectratio=169]{beamer}
 % \usetheme{tugraz2013}
 % \usetheme[notes]{tugraz2013}
-\usetheme[minimal, notes]{tugraz2013}
+
+\usetheme[minimal]{tugraz2013}
+%\usetheme[minimal, notes]{tugraz2013}
+%\usetheme[minimal, notes, istitute]{tugraz2013}
+
+\usepackage{listings}
 
 %% Titelblatt-Einstellungen
 \title[openPGP in Java]{\tiny{Java Privacy Guard}\\\normalsize An Implementation of the \\ OpenPGP Message Format in Java}
@@ -23,7 +28,7 @@
 		\textbf{If audience can read this, something is wrong}.]
 
 \begin{frame}
-  \frametitle{Agenda}
+  \frametitle{Overview}
   \tableofcontents%[hideallsubsections] 
   \note{
   	First I'm going to talk about what openPGP is \ldots \\ 
@@ -42,11 +47,11 @@
     \begin{frame}[plain]
     
         \begin{tikzpicture}[remember picture,overlay]
-            \node[anchor=north west,inner sep=0pt] at (-1, 2) {
-                \includegraphics[width=\paperwidth]{media/internet.png}
-            };
+            %\node[anchor=north west,inner sep=0pt] at (-1, 2) {
+            %    \includegraphics[width=\paperwidth]{media/internet.png}
+            %};
         
-        \pause
+       %  \pause
         
             \node[anchor=north west,inner sep=0pt] at (0, 0) {
                 \includegraphics[width=65pt]{media/greenwald.png}
@@ -164,7 +169,7 @@
 \begin{frame}
 
 	\begin{itemize}
-		\item Standard: openPGP (RFC 4880 et al.)
+		\item Standard: openPGP (RFC 4880 etc.)
 		\item Implementations:
 		\begin{itemize}
 			\item PGP (Zimmermann, Symantec)
@@ -202,11 +207,15 @@
 % how does pgp do that? -> explain message signing (integrity)
 
 	\begin{itemize}
-		\item Encrypt Data Symmetric, only Symmetric-Key with Public-Key
-		\item Multiple Receiver: Encrypt Data Oonly once \\
-		\item Symmetric Cipher: IDEA, 3DES, AES, CAST5, \ldots 
+		\item Encrypt Data with Random Symmetric-Key,\\ encrypt Symmetric-Key with Public-Key
+		\item Multiple Receiver: Encrypt Data only once 
+	\end{itemize}
+		
+	\begin{itemize}
+		\item Symmetric Cipher: IDEA, 3DES, AES, CAST5, \ldots  \\
+				\small Keysize $\geq$ 112 bits \cite{nist} 
 		\item Public-Key Cipher: RSA, ElGamal \\
-				\small Keysize $\geq 2048 bits$ \cite{nist} 
+				\small Keysize $\geq$ 2048 bits \cite{nist} 
 	\end{itemize}
 
 \end{frame}
@@ -251,10 +260,12 @@
 
 	\begin{itemize}
 		\item Hash Message Body \&{} Sign Hash with Private Key
-		\item Sign Other Keys ($\rightarrow$ Trust Model)	 \\
+		\item Sign Other Keys ($\rightarrow$ Trust Model)	 
+	 \end{itemize}
+		
+	\begin{itemize}
 		\item Hash Algorithms: MD5, SHA-1 SHA-2, RIPE-MD
-		\item Signature Cipher: RSA, DSA \\
-			\small Keysize $\geq 112 bits$ \cite{nist} 
+		\item Signature Cipher: RSA, DSA 
 	\end{itemize}
 
 \end{frame}
@@ -277,6 +288,7 @@
 	\begin{itemize}
 		\item Decentralized Trust Model \\ (Can be centralized)
 		\item No Certificate Authority
+		\item Transitive Trust
 	\end{itemize}	
 	
 	\begin{itemize}
@@ -307,52 +319,68 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Java Privacy Guard}
+\sectionheader[openPGP in Java using IAIK-JCE]{Java Privacy Guard}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Java Privacy Guard}
+	
+	\begin{itemize}
+		\item Full Implementation of RFC 4880 (not yet)
+		\item Compatibility to other PGP Implementations
+		\item Simple API \&{} Extended API
+		\item Key Management
+	\end{itemize}
+	
+	\begin{itemize}
+		\item Cipher provided by IAIK-JCE
+		\item No Integration into JCE or JCA
+	\end{itemize}
+	
+	\note{
+		JCA = Java Crypto Architecture \\
+		\textbf{JCE} = Java Crypto Extention	
+	
+	}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\lstdefinestyle{myjava}{
+language=Java,
+basicstyle=\footnotesize, %\scriptsize,
+keywordstyle=\color{javapurple}\bfseries,
+stringstyle=\color{javared},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=none,
+numberstyle=\tiny\color{black},
+stepnumber=1,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+showstringspaces=false,
+frame=single
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-	\frametitle{Quelltexte}
-	\begin{spacing}{1}
-	\begin{semiverbatim}
-SUCHE (A,x)
-1: i = 0
-2: WHILE i<n
-3:     i = i+1
-4:     \alert{IF A[i]=x THEN RETURN i}
-5: ELSE RETURN -1
-	\end{semiverbatim}
-	\end{spacing}
+	\frametitle{Load \&{} Decrypt PGP Message}
+	\lstinputlisting[style=myjava]{DecryptPGPMessage.java}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\begin{frame}
-	\frametitle{Zwei Inhalte Links/Rechts\\Wahlweise Text/Grafik}
-	\begin{columns}[onlytextwidth]
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-				\item Lorem ipsum dolor sit amet, consectetur 
-				\item adipisicing elit, sed do eiusmod tempor 
-				\item incididunt ut labore et dolore magna aliqua. 
-				\item Ut enim ad minim veniam, quis nostrud 
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-			\includegraphics[width=0.5\textwidth]{logo.pdf}\\
-			Grafik in Spalte 2
-			\end{center}
-		\end{column}
-	\end{columns}
+\begin{frame}[fragile]
+	\frametitle{PGP Input Stream}
+	\lstinputlisting[style=myjava]{PGPStreamDemo.java}
 \end{frame}
-
-
-
-\begin{frame}
-	\frametitle{Nur Titel \\maximal 2-zeilig}
-\end{frame}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary \&{} Outlook}
@@ -380,7 +408,7 @@ SUCHE (A,x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-	\frametitle{Future (Research) Outlook}
+	\frametitle{Outlook / Future Research}
 	
 	\begin{itemize}
 		%\item Master Project
@@ -411,7 +439,7 @@ SUCHE (A,x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
 \begin{frame}
-\frametitle{Sources}
+%\frametitle{Sources}
 
 \begin{thebibliography}{1}
 \scriptsize
@@ -433,6 +461,14 @@ SUCHE (A,x)
 \end{thebibliography}
 \end{frame}
 
+\begin{frame}
+	
+	\tiny
+	Oracle and Java are registered trademarks of Oracle and/or its affiliates. \\
+	Google and Chrome are registered trademarks of Google and/or its affiliates. \\
+	Other names may be trademarks of their respective owners.
+
+\end{frame}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
