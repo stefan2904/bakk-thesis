@@ -112,17 +112,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
-	\frametitle{Other Examples}
-	
-	\begin{itemize}
-		\item Health Details
-		\item Company Secrets
-		\item Journalism
-		\item Activism
-	\end{itemize}
-
-\end{frame}
+%\begin{frame}
+%	\frametitle{Other Examples}
+%	
+%	\begin{itemize}
+%		\item Health Details
+%		\item Company Secrets
+%		\item Journalism
+%		\item Activism
+%	\end{itemize}
+%
+%\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -133,7 +133,7 @@
 		\item Message Confidentiality
 		\item Message Integrity
 		\item Sender Authentication
-		\item Anonymity?
+		\item Anonymity
 	\end{itemize}
 
 \end{frame}
@@ -334,7 +334,7 @@
 	
 	\begin{itemize}
 		\item Cipher provided by IAIK-JCE
-		\item No Integration into JCE or JCA
+%		\item No Integration into JCE or JCA
 	\end{itemize}
 	
 	\note{
@@ -342,6 +342,34 @@
 		\textbf{JCE} = Java Crypto Extention	
 	
 	}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+% evtl als klassendiagramm?
+
+	\frametitle{openPGP Structure}
+	
+	\begin{itemize}
+		\item Packets: 
+		\begin{itemize}
+			\item Internal Structure
+			\item Contain actual Data (+ Metadata)
+		\end{itemize}
+		
+		\item Transferable:
+		\begin{itemize}
+			\item Consists Packets
+			\item Message, Keys, Signature, Keyring, \ldots
+		\end{itemize}
+	\end{itemize}
+	
+	\note{
+		19 packets \\ (excl. Sub-Packets)
+	}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -417,6 +445,8 @@ frame=single
 		\item RFC 6637: ECC
 		\item Keyservers?
 	\end{itemize}
+	
+	\pause
 	Out of scope:
 	\begin{itemize}
 	    \item RFC 3156: PGP/MIME
