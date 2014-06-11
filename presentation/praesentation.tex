@@ -4,8 +4,8 @@
 % \usetheme{tugraz2013}
 % \usetheme[notes]{tugraz2013}
 
-%\usetheme[minimal]{tugraz2013}
-\usetheme[minimal, notes]{tugraz2013}
+\usetheme[minimal]{tugraz2013}
+%\usetheme[minimal, notes]{tugraz2013}
 %\usetheme[minimal, notes, istitute]{tugraz2013}
 
 \usepackage{listings}
@@ -15,7 +15,7 @@
 \author{Stefan More}
 % \date{Graz, XX. Dezember 2010}		% \today für heutiges Datum verwenden
 \date{June 13, 2014}
-\institute[Bakk@IAIK]{\\Advisor: Dieter Bratko}
+\institute[Bakk@IAIK]{\\\tiny Advisor: Dieter Bratko, Peter Lipp}
 %\instituteurl{iaik.tugraz.at}
 \institutelogo{javaSec.jpg}
 \additionallogo{institutslogo.png}
@@ -151,7 +151,7 @@
 		\item Pretty Good Privacy
 		\item 1991: PGP created by Phil Zimmermann 
 		\item \textit{most widely used email encryption software} \cite{zimmermann}
-		\item 1998: PGP 5 standardized: \textbf{OpenPGP (RFC 4880)}
+		\item 1998: PGP 5 standardized: \textbf{openPGP (RFC 4880)}
 		\item 2010: PGP assets sold to Symantec \\ for \$ 300.000.000 (Enterprise Security)
 	\end{itemize}
 	
@@ -197,6 +197,23 @@
 	
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Revisiting Problem Statement}
+
+	\begin{itemize}
+		\item Message Confidentiality: \textbf{Encryption} 
+		\item Message Integrity:          \textbf{Digital Signatures} 
+		\item Sender Authentication:    	\textbf{Web Of Trust}
+		\item Anonymity? Tor, I2P, \ldots
+	\end{itemize}
+
+	\note{
+		Metadata-less PGP Encryption is possible	
+	}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -297,22 +314,9 @@
 		\item Key-Set Analysis: \url{pgp.cs.uu.nl/plot}
 	\end{itemize}
 
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-	\frametitle{Revisiting Problem Statement}
-
-	\begin{itemize}
-		\item Message Confidentiality: \textbf{Encryption} 
-		\item Message Integrity:          \textbf{Digital Signatures} 
-		\item Sender Authentication:    	\textbf{Web Of Trust}
-		\item Anonymity? Tor, I2P, \ldots
-	\end{itemize}
-
 	\note{
-		Metadata-less PGP Encryption is possible	
+		S/MIME: X.509 \\
+		public key infrastructure (PKI)
 	}
 
 \end{frame}
@@ -418,8 +422,7 @@ frame=single
 	\frametitle{Summary}
 	
 	\begin{itemize}
-		\item Studied RFC 4880
-		\item Studied IAIK-JCE
+		\item Studied RFC 4880 \&{} IAIK-JCE
 		\item Implemented:
 		\begin{itemize}
 			\item Reading ASCII-Armor (Base 64 + CRC24)
@@ -446,14 +449,14 @@ frame=single
 		\item Keyservers?
 	\end{itemize}
 	
-	\pause
-	Out of scope:
-	\begin{itemize}
-	    \item RFC 3156: PGP/MIME
-		\item Provide Anonymity? (Metadata!)%\footnotemark
-		\item Provide Integrity for Mail-Headers?
-		\item Protocol/Implementation Usability?
-	\end{itemize}
+%	\pause
+%	Out of scope:
+%	\begin{itemize}
+%	    \item RFC 3156: PGP/MIME
+%		\item Provide Anonymity? (Metadata!)%\footnotemark
+%		\item Provide Integrity for Mail-Headers?
+%		\item Protocol/Implementation Usability?
+%	\end{itemize}
 	%\footnotetext{http://grimoire.ca/gpg/terrible}
 	
 	\note{
