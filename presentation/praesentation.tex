@@ -4,8 +4,8 @@
 % \usetheme{tugraz2013}
 % \usetheme[notes]{tugraz2013}
 
-\usetheme[minimal]{tugraz2013}
-%\usetheme[minimal, notes]{tugraz2013}
+%\usetheme[minimal]{tugraz2013}
+\usetheme[minimal, notes]{tugraz2013}
 %\usetheme[minimal, notes, istitute]{tugraz2013}
 
 \usepackage{listings}
@@ -229,7 +229,7 @@
 	\end{itemize}
 		
 	\begin{itemize}
-		\item Symmetric Cipher: IDEA, 3DES, AES, CAST5, \ldots  \\
+		\item Symmetric Cipher: AES, IDEA, 3DES, CAST5, \ldots  \\
 				\small Keysize $\geq$ 112 bits \cite{nist} 
 		\item Public-Key Cipher: RSA, ElGamal \\
 				\small Keysize $\geq$ 2048 bits \cite{nist} 
@@ -281,15 +281,15 @@
 	 \end{itemize}
 		
 	\begin{itemize}
-		\item Hash Algorithms: MD5, SHA-1 SHA-2, RIPE-MD
-		\item Signature Cipher: RSA, DSA 
+		\item Hash Algorithms: SHA-2, SHA-1,  RIPE-MD/160, MD5
+		\item Signature Algorithms: RSA, DSA 
 	\end{itemize}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\sectionheader{So \ldots PGP == S/MIME ?}
+% \sectionheader{So \ldots PGP == S/MIME ?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -337,13 +337,15 @@
 	\end{itemize}
 	
 	\begin{itemize}
-		\item Cipher provided by IAIK-JCE
+		\item Crypto provided by JCA (default: IAIK-JCE)
 %		\item No Integration into JCE or JCA
 	\end{itemize}
 	
 	\note{
 		JCA = Java Crypto Architecture \\
-		\textbf{JCE} = Java Crypto Extention	
+		\textbf{JCE} = Java Crypto Extention\\
+		\\
+		ElGamal not in JCA API (AlgorithmParameters)
 	
 	}
 \end{frame}
