@@ -1,7 +1,7 @@
 IAIK.addAsProvider();
 
-PGPMessage pgpMessage = parseMessage(fis1);
-PGPPrivateKey privKey = parsePrivatekey(fis2);
+PGPMessage pgpMessage = parseMessage(is1);
+PGPPrivateKey privKey = parsePrivatekey(is2);
 
 PGPCipher cipher = new PGPCipher();
 cipher.init(PGPCipher.DECRYPT_MODE, privkey);
