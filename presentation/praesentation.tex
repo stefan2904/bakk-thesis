@@ -136,6 +136,10 @@
 		\item Anonymity
 	\end{itemize}
 
+	\begin{itemize}
+		\item End to End
+	\end{itemize}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -380,6 +384,62 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+
+	\lstinputlisting[basicstyle=\ttfamily\tiny]{demo_asciimsg.txt}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tiny
+\begin{frame}
+	% \frametitle{A openPGP Message}
+
+	\begin{columns}[t]
+		\begin{column}[t]{0.5\paperwidth} \footnotesize
+		\vspace{1em}
+			\begin{itemize}
+				\item tag: \textit{Public-Key Encrypted Session Key Packet}
+				\item length: 526
+				\item version: 3
+				\item keyId: \\ ``\textbf{9BF7B564D09AFB49}''
+				\item publicKeyAlgorithm: \\ ``\textbf{Elgamal (Encrypt-Only)}''
+				\item encryptedSessionKey
+			\end{itemize}
+
+		\end{column}
+		\begin{column}[t]{0.5\paperwidth} \footnotesize
+			\begin{itemize}
+				\item tag: \textit{Public-Key Encrypted Session Key Packet}
+				\item length: 524
+				\item version: 3
+				\item keyId: \\ ``\textbf{B5801FD826746039}''
+				\item publicKeyAlgorithm:\\ ``\textbf{RSA (Encrypt or Sign)}''
+				\item encryptedSessionKey
+			\end{itemize}
+			
+		\end{column}
+	\end{columns}
+	\vspace{2em}
+	
+	\footnotesize
+	\begin{itemize}
+		\item tag: \textit{Symmetrically Encrypted Data Packet}
+		\item length: 33
+		\item Encrypted Data
+	\end{itemize}	
+	
+	\begin{tikzpicture}[remember picture,overlay]
+		
+		\draw (5, 2.5) --(5, 8);
+		\draw (0, 2.5) --(10, 2.5);
+			
+     \end{tikzpicture}		
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{javared}{rgb}{0.6,0,0} % for strings
 \definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
 \definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
@@ -411,10 +471,10 @@ frame=single
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[fragile]
-	\frametitle{PGP Input Stream}
-	\lstinputlisting[style=myjava]{PGPStreamDemo.java}
-\end{frame}
+%\begin{frame}[fragile]
+%	\frametitle{PGP Input Stream}
+%	\lstinputlisting[style=myjava]{PGPStreamDemo.java}
+%\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Summary \&{} Outlook}
@@ -492,6 +552,8 @@ frame=single
 	\bibitem{zimmermann} \url{http://www.philzimmermann.com/EN/background/index.html}
 	
 	\bibitem{nist} Recommendation for Key Management, Special Publication 800-57 Part 1 Rev. 3, NIST, 07/2012. \url{http://www.keylength.com/en/4/}
+	
+	\bibitem{pgpdecoder} \url{http://cirw.in/gpg-decoder}
 
 \end{thebibliography}
 \end{frame}
