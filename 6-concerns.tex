@@ -1,15 +1,4 @@
-\chapter{Conclusion and Concerns}
-
-Here (and not in Chapter 4) do you describe how well your idea
-worked. Talk about the experimental setup. Give the results. If
-applicable, give tables and point out general trends.
-
-Conclusions (evtl eigenes Kapitel?)
-
-Recapitulate the story in hindsight. State advantages and
-disadvantages again.
-
-\chapter{Concerns}
+\chapter{Concerns} \label{chapter:concerns}
 
 %\subsection{Security Evaluation Of Cryptographic Schemes}
 
@@ -49,7 +38,7 @@ The current NIST and BSI recommendations for cipher and hash strengths confirm t
 %             http://tools.ietf.org/html/rfc4880#section-5.13
 %             http://tools.ietf.org/html/rfc4880#section-13.11
 
-Most of the algorithms used by openPGP are still considered save. \todo{Referenz?}
+Most of the algorithms used by openPGP are still considered secure. \todo{Referenz?}
 The two exceptions are the \textit{MD5} and \textit{SHA-1} algorithms used for digital signatures and message authentication. 
 
 \textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}. 
@@ -69,10 +58,19 @@ Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1
 % KEY EXCHANGE
 
 Due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, the sender's and receiver's openPGP implementations never directly talk to each other.
-To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in chapter XXX. \todo{ref to chapter with key exchange and web of trust}
-This results in a number of security and usability problems. \\
+To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in chapter \ref{section:openpgp:principles}. This results in a number of security and usability problems.  \\
 
 % TRUST / WEB OF TRUST
+
+After generating the key-pair, the receiver has to transmit it to the sender over a potentially insecure channel. The sender then has to verify the integrity and authenticity of the key, which isn't easily possible.
+
+One way of doing this is by transmitting the key's fingerprint over a trusted channel (for example via phone or by printing it on a business card). 
+
+Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:authentication}. \\
+
+This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
+
+A second usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser-integrations are a possible solution to this problem.
 
 % SIDECHANNEL: KeyServer knows whick keys you requested, MITM possible if HTTP and not HTTPS
 
@@ -85,5 +83,16 @@ This results in a number of security and usability problems. \\
 % http://thehackernews.com/2014/08/cryptography-expert-pgp-encryption-is_19.html
 
 
+
+\chapter{Conclusion}
+
+Here (and not in Chapter 4) do you describe how well your idea
+worked. Talk about the experimental setup. Give the results. If
+applicable, give tables and point out general trends.
+
+Conclusions (evtl eigenes Kapitel?)
+
+Recapitulate the story in hindsight. State advantages and
+disadvantages again.
 
 
