@@ -1,14 +1,31 @@
 \chapter{The openPGP message format}
 
+% explain its inner workings, what a packet is and how packets work
+
+% explain that all is binary and what ascii armor is (ignore crc24 checksum?)
+
+% explain how the principles from chapter 3 are achieved usign this packet structures
+
+% explain what is encrypted
+% explain what is signed in case of message signing
+% explain what is signed in case of key certificating
+
+% explain things like cleartext signatures and detached signatures
+
+% ignore the following section marks (replace them with better ones!)
+% instead, list commons tasks and explain how this is achived (diagramm?) and what packets are used (make tables for interesting packets)
+
+% interesting things: transferables (key, encrypted message+signature)
+
 \section{Principles}
 
-\section{Data primitives}
+%\section{Data primitives}
 
 \section{Keys}
 
 \section{Messages}
 
-\subsection{Multipart}
+% \subsection{Multipart}
 
 \section{Signatures}
 
@@ -16,7 +33,12 @@
 
 \section{Algorithms and Parameters}
 
-%The openPGP standard allows the usage of various algorithms for encryption and signing. The following section lists the algorithms specified in the RFC (https://tools.ietf.org/html/rfc4880#section-9) and the IANA specification (https://www.iana.org/assignments/pgp-parameters/pgp-parameters.xhtml). Furthermore a brief summary of those algorithm regarding their state of security and recommended key lengths is given.
+% list algorithms from rfc, give short overview
+% mention that seciruty stuff is in last chapter
+
+% also mention IANA specification (https://www.iana.org/assignments/pgp-parameters/pgp-parameters.xhtml ?
+
+The openPGP standard allows the usage of various algorithms for encryption, integrity protection and signing. The following section lists the algorithms specified in \citep[section 9]{RFC4880}. A brief summary of those algorithm regarding their state of security and recommended key lengths is given in chapter \ref{chapter:concerns}.
 
 \subsection{Public-Key Algorithms}
 
