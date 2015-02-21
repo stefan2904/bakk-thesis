@@ -1,4 +1,4 @@
-\chapter{Conclusions and Concerns}
+\chapter{Conclusion and Concerns}
 
 Here (and not in Chapter 4) do you describe how well your idea
 worked. Talk about the experimental setup. Give the results. If
@@ -9,13 +9,81 @@ Conclusions (evtl eigenes Kapitel?)
 Recapitulate the story in hindsight. State advantages and
 disadvantages again.
 
+\chapter{Concerns}
+
+%\subsection{Security Evaluation Of Cryptographic Schemes}
+
+The following chapter gives an overview of concerns with the openPGP standard.
+A detailed security evaluation of openPGP was out of scope of this thesis. \\
+
+It should be noted that at the time of writing of this thesis the used schemes were undergoing a security evaluation \citep{TUB2015}.
+
 \section{Keylengths}
 
-\section{Outdated Ciphers}
+Various algorithms are used in openPGP, whose strengths are not strictly defined in the standard. 
+Only a recommendation of hash sizes and key lengths is given \citep[section 14]{RFC4880}.
+The recommended values at the time of writing of the openPGP standard are shown in table \ref{tab:keylengths}.
 
-\section{Outdated Hash-Algorithms}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline Date & 			Asymmetric & Hash & Symmetric \\ 
+		\hline\hline 2010 (Legacy) & 1024 & 160 & 80 \\ 
+		\hline 2011 - 2030 & 2048 & 224 & 112 \\ 
+		\hline $>$ 2030 		   & 3072 & 256 & 128 \\ 
+		\hline $>>$ 2030       & 7680 & 384 & 192 \\ 
+		\hline $>>>$ 2030     & 15360 & 512 & 256 \\ 
+		\hline 
+	\end{tabular}
+	\label{tab:keylengths}
+	\caption{Strengths for algorithms as recommended in \citep[section 14]{RFC4880}} 
+\end{table}
+
+The current NIST and BSI recommendations for cipher and hash strengths confirm the recommendations given \cite{keylenNIST} \cite{KeylenBSI}. 
+
+\section{Algorithms}
+
+% MD5: deprecated
+
+% SHA-1: modification detection nur mit sha1 
+%             http://tools.ietf.org/html/rfc4880#section-5.13
+%             http://tools.ietf.org/html/rfc4880#section-13.11
+
+Most of the algorithms used by openPGP are still considered save. \todo{Referenz?}
+The two exceptions are the \textit{MD5} and \textit{SHA-1} algorithms used for digital signatures and message authentication. 
+
+\textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}. 
+
+OpenPGP is not using authenticated ciphers to detect modifications to encrypted messages.
+Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
+Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1attack} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The openPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
+
+
+\section{Sign-then-Encrypt}
+
+
 
 \section{The Case On Usability}
 
-zB
-http://blog.cryptographyengineering.com/2014/08/whats-matter-with-pgp.html
+
+% KEY EXCHANGE
+
+Due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, the sender's and receiver's openPGP implementations never directly talk to each other.
+To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in chapter XXX. \todo{ref to chapter with key exchange and web of trust}
+This results in a number of security and usability problems. \\
+
+% TRUST / WEB OF TRUST
+
+% SIDECHANNEL: KeyServer knows whick keys you requested, MITM possible if HTTP and not HTTPS
+
+% WEBMAIL
+
+% SUBKEYS
+
+% http://blog.cryptographyengineering.com/2014/08/whats-matter-with-pgp.html
+% https://pthree.org/2014/08/18/whats-the-matter-with-pgp/
+% http://thehackernews.com/2014/08/cryptography-expert-pgp-encryption-is_19.html
+
+
+
+
