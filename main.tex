@@ -92,6 +92,7 @@
 \newcommand{\mycolorlinks}{true}  %% "true" or "false"
 %% Enables or disables colored links (hyperref package).
 
+
 \newcommand{\mytitlepage}{template/title_Thesis_IAIK}
 %% Your own or one of following pre-defined title pages:
 %% "template/title_plain_maketitle": simple maketitle page
@@ -125,10 +126,14 @@
 %% ========================================================================
 
 %% general metadata:
-\newcommand{\myauthor}{Stefan}  %% also used for PDF metadata (hyperref)
+\newcommand{\myauthor}{Stefan J. More}  %% also used for PDF metadata (hyperref)
 \newcommand{\mytitle}{Java Privacy Guard}  %% also used for PDF metadata (hyperref)
-\newcommand{\mysubject}{An implementation of the OpenPGP Message Format in Java}  %% also used for PDF metadata (hyperref)
-\newcommand{\mykeywords}{openPGP, Java, Public-key cryptography}  %% also used for PDF metadata (hyperref)
+
+\newcommand{\mysubject}{The OpenPGP Message Format \\and an Implementation in Java}  %% also used for PDF metadata (hyperref)
+%\newcommand{\mysubject}{An implementation of the OpenPGP Message Format in Java}  %% also used for PDF metadata (hyperref)
+
+\newcommand{\mykeywords}{openPGP, PGP, Java, End-to-End Encryption, Public-Key Cryptography}  %% also used for PDF metadata (hyperref)
+% PGP, end-to-end encryption, web of trust, privacy
 
 %% this information is used only for generating the title page:
 \newcommand{\myworktitle}{Bachelor's Thesis}  %% official type of work like ``Master theses''
@@ -240,11 +245,17 @@
 }{}                             %% with todonotes-package option "disable" you can get rid of any todo in the output
 
 \mainmatter                     %% KOMA: marks main part using arabic page numbers and such; only available in scrbook
+
+
  
 
 \input{1-introduction}   
 
+% TODO: Abbreviations ?
+% (Abkürzungsverzeichnis?)
+
 \input{2-preliminaries.tex}   
+% TODO: Wie detailiert?
 
 \input{3-openPGP}   
 
@@ -253,6 +264,9 @@
 \input{5-jpg}  
  
 \input{6-concerns} 
+% TODO: was ist das colclusio?
+
+
 
 %% include tex file chapters:
 % \include{introduction}        %% this is a suggestion: you have to create this file on demand
