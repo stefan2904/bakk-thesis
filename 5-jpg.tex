@@ -1,62 +1,65 @@
-\chapter{The \textit{Java Privacy Guard}}
+\chapter{The \textit{Java Privacy Guard}} \label{chapter:jpg}
 
-% completely change this chapter, make it shorter shorter!
-% rename thesis?
+% explain what was done in java (and what not?)
 
-% only discuss how things mentioned in chapter 3 and 4 are implemented in java
-% mainly, explain stream stuff ?
-% ()explain reading and/or writing site? or only one?)
-% only give overview, explain how things work in principle, give exmple for short usecase 
+As practical part of this thesis we did a implementation of the openPGP message format \citep{RFC4880} in the \textit{Java} programing language, creating a library called \textit{Java Privacy Guard}.
+
+For cryptographic primitives like basic data types and encryption and digest algorithms we used the \textit{IAIK-JCE} library. \\
+
+%TODO: figure with (clean) class-diagram of (important) JPG classes?
+
+%\section{Introduction}
+
+
+% only discuss how things mentioned in chapter 3 and 4 (the packets/transferables) are implemented in java
+
+The \textit{Packet}- and \textit{Transferable}-structure as described in chapter \ref{chapter:messageformat} represents the base-structure of our implementation. All \textit{Packets} defined in \citep[section 5]{RFC4880} are implemented as one or more \textit{Java}-classes. Additionally all relevant \textit{Packet}-compositions are implemented in the form of \textit{Transferable}-classes as defined in \citep[section 11]{RFC4880}.
+
+\section{The APIs}
 
 % explain difference between high-/low-level api
 
-% if all things fail, delete this chapter
+To facilitate the use of our implementation we provide \textbf{two APIs} for access to the library functionality. \\  
 
-\section{Introduction}
+The \textit{high-level API} represents the interface used by users of our library. It mostly consists of \textit{Transferable}-classes and related toolbox-classes.
 
+The \textit{low-level API} represents the inner working of the library. It is made up of all \textit{Packet}-classes and toolbox-classes needed to work with them. For the sake of usability (and extensibility in the future) this classes are hidden from library-users. \\
 
-\section{The API}
+To the time of writing of this thesis, it was not clear in detail which part of the library belongs to which API. 
 
-\subsection{PGP Objects}
-
-\subsection{The \textit{PGPObjectStream}}
-
-
-\section{Storing keys}
+\section{The \textit{PGPObjectStream}}
 
 
-\section{Issues during Implementation}
 
-\subsection{Unsigned and Java}
-
-\subsection{RFC}
-
---- Ab hier section Evaluation? ---
-
-\section{Interoperability}
-
-\subsection{Bouncycastle}
-
-\subsection{GnuPG}
-
+%\section{Issues during Implementation}
+%
+%\subsection{Unsigned and Java}
+%
+%\subsection{RFC}
+%
+%--- Ab hier section Evaluation? ---
+%
+%\section{Interoperability}
+%
+%\subsection{Bouncycastle}
+%
+%\subsection{GnuPG}
 
 \section{Implementation Security}
 
-Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in \citep[section 14]{RFC4880}. In the following chapter, we summarize this concerns and discuss how they effect our implementation. We are closing this chapter with a short overview of countermeasures we implemented in our implementation.
+Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter \ref{chapter:concerns} and in \citep[section 14]{RFC4880}. In the following section, we give an overview on how they effect our implementation. 
+% We are closing this chapter with a short overview of countermeasures we implemented in our implementation.
 
 \subsection{Possible Attacks}
 
 
-\subsection{Countermeasures}
+%\subsection{Countermeasures}
 
 
-\section{Status of implementation (?)}
+%\section{Status of implementation (?)}
 
 
-\section{Future development}
 
-\subsection{Modularity}
 
-\subsection{Advanced API}
 
-\subsection{Integration into JCA / JCE}
+
