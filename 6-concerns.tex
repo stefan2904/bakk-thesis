@@ -7,6 +7,10 @@ A detailed security evaluation of openPGP was out of scope of this thesis. \\
 
 It should be noted that at the time of writing of this thesis the used schemes were undergoing a security evaluation \citep{TUB2015}.
 
+%TODO: "An attack on CFB mode encryption as used by OpenPGP"
+%TODO: "Attack on Private Signature Keys of the OpenPGP format, PGP (TM) Programs and Other Applications Compatible with OpenPGP"
+
+
 \section{Keylengths}
 
 Various algorithms are used in openPGP, whose strengths are not strictly defined in the standard. 
@@ -38,6 +42,8 @@ The current NIST and BSI recommendations for cipher and hash strengths confirm t
 %             http://tools.ietf.org/html/rfc4880#section-5.13
 %             http://tools.ietf.org/html/rfc4880#section-13.11
 
+%TODO: Never say things like "SSL is considered to be secure" without stating who is doing the considering.
+
 Most of the algorithms used by openPGP are still considered secure. \todo{Referenz?}
 The two exceptions are the \textit{MD5} and \textit{SHA-1} algorithms used for digital signatures and message authentication. 
 
@@ -47,18 +53,28 @@ OpenPGP is not using authenticated ciphers to detect modifications to encrypted 
 Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
 Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1attack} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The openPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
 
+%TODO: "Incorporating a new hash function in OpenPGP and SSL/TLS"
+
+\section{Key Security}
+
+% local
+% mobile
+% online
+% smartcard / NFC
 
 \section{Sign-then-Encrypt}
 
+% "Defective Sign and Encrypt in S/MIME, PKCS#7, MOSS, PEM, PGP, and XML"
 
-
-\section{The Case On Usability}
-
+\section{The Case On Usability} \label{section:concerns:usability}
 
 % KEY EXCHANGE
 
-Due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, the sender's and receiver's openPGP implementations never directly talk to each other.
-To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in chapter \ref{section:openpgp:principles}. This results in a number of security and usability problems.  \\
+The usability of openPGP implementations is a critical factor. As usability evaluations of such implementations \cite{Whitten1999} have shown, ``effective security requires a different usability standard, and will not be achieved through the user interface design techniques appropriate to other types of consumer software''.
+
+This is often hard to achieve due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, since the sender's and receiver's openPGP implementations never directly talk to each other. \\
+
+To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in chapter \ref{section:openpgp:keydistribution}. This results in a number of security and usability problems.  \\
 
 % TRUST / WEB OF TRUST
 
@@ -66,11 +82,12 @@ After generating the key-pair, the receiver has to transmit it to the sender ove
 
 One way of doing this is by transmitting the key's fingerprint over a trusted channel (for example via phone or by printing it on a business card). 
 
-Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:authentication}. \\
+Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:trustmodel}. \\
 
 This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
 
-A second usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser-integrations are a possible solution to this problem.
+A second usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser-integrations are a possible solution to this problem. 
+\todo{references needed? possible problems with webbrowser integration?}
 
 % SIDECHANNEL: KeyServer knows whick keys you requested, MITM possible if HTTP and not HTTPS
 
@@ -94,5 +111,13 @@ Conclusions (evtl eigenes Kapitel?)
 
 Recapitulate the story in hindsight. State advantages and
 disadvantages again.
+
+%TODO: future work?
+% * security evaluation
+% * new ciphers
+% * usability evaluation (also security usability in general -> concepts, interaction/transparent, mobile ...)
+% * (new packets?)
+% * break compatibility?
+% -> new RFC
 
 
