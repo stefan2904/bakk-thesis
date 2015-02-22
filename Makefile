@@ -39,8 +39,8 @@ all: pdf
 #help	pdf	makes a file per pdflatex
 .PHONY: pdf
 pdf:
-	-rm mendeley.bib
-	cp /tmp/openPGP.bib mendeley.bib
+	#-rm mendeley.bib
+	-cp /tmp/openPGP.bib mendeley.bib
 	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
 	-${BIBTEX_CMD} ${MAINDOCUMENTBASENAME}
 	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
