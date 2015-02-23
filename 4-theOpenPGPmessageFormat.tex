@@ -17,9 +17,39 @@
 
 % interesting things: transferables (key, encrypted message+signature)
 
-\section{Packets}
+\section{Structure}
 
-\section{Transferables}
+\subsection{Packets}
+
+The basic building blocks of openPGP are called \textit{Packets} \citep[section 4]{RFC4880}.
+
+\todo{example packet, for example a key packet, a signature packet (with subpackets) and a literal data packet?}
+
+\subsection{Transferables}
+
+\textit{Packets} are representations of very basic data structures. To create openPGP messages and keys some of this \textit{Packets} are composed in a meaningful way \citep[section 11]{RFC4880}. A (defined) composition of \textit{Packets} is called \textit{Transferable}, since its purpose is to be transfered from one openPGP implementation to another or just to be stored and used later. 
+
+openPGP defines four different \textit{Transferable} types \citep[section 11]{RFC4880}. \\
+
+First of all it is necessary to export public and secret keys in form of \textbf{Transferable Public Keys} and \textbf{Transferable Private Keys}. This enables storing the keys in \textit{keyrings} while the openPGP implementation is halted.  Additionally it is necessary to transmit the public key to other parties of the communication, as described in section \ref{section:openpgp:keydistributio}. \\
+
+\todo{table: packet structure of a pgp key with some signatures?}
+
+The core functionality of openPGP is to securely transmit messages. The third type of \textit{Transferables} therefore is a composition of \textit{Packets} representing such a \textbf{OpenPGP Message}. \\
+
+\todo{table: packet structure of a pgp message (like on the whiteboard?)}
+
+Furthermore it is possible to transmit signatures separated from the actual signed message, so called \textbf{Detached Signatures}.
+
+\subsection{Representation}
+
+Since openPGP defines the structure of \textit{Packets} as a sequence of arbitrary bytes, the primary representation of a \textit{Transferable} is also in byte format.
+
+For many use-cases it is sufficient to store and transmit a \textit{Transferable} in binary form.
+
+Additionally it is possible to convert a binary \textit{Transferable} to ASCII-format for sending it  via channels which can not deal with binary data. Such an representation of a binary openPGP \textit{Transferable} is called \textit{ASCII-armored}.
+
+\todo{sample ascii armored stuff (a mesage and a key?)}
 
 \section{Keys}
 
@@ -27,11 +57,16 @@
 
 % encryption and signing
 
+% \subsection{Compression}
+
 % \subsection{Multipart}
 
 \section{Key Certification}
 
-\section{Compression}
+
+\subsection{Key Revocation}
+%\subsection{Revocation Signatures}
+
 
 \section{Algorithms and Parameters}
 
