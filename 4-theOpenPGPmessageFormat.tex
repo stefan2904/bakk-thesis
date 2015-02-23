@@ -12,18 +12,32 @@
 
 % explain things like cleartext signatures and detached signatures
 
-% ignore the following section marks (replace them with better ones!)
-% instead, list commons tasks and explain how this is achived (diagramm?) and what packets are used (make tables for interesting packets)
+%  list commons tasks and explain how this is achived (diagramm?) and what packets are used (make tables for interesting packets)
 
 % interesting things: transferables (key, encrypted message+signature)
 
-\section{Structure}
+% \section{Structure}
+
+In this chapter we explain the principles behind the inner working of openPGP. 
+Furthermore we illustrate some important data structures defined by openPGP.  
+
+We show how openPGP carries out the principles described in chapter \ref{chapter:openpgp} and give an overview of the algorithms used in openPGP.
 
 \subsection{Packets}
 
-The basic building blocks of openPGP are called \textit{Packets} \citep[section 4]{RFC4880}.
+The basic building blocks of openPGP are called \textit{Packets} \citep[section 4]{RFC4880}. \textit{Packets} are a structured and defined sequence of bytes.
 
-\todo{example packet, for example a key packet, a signature packet (with subpackets) and a literal data packet?}
+Each \textit{Packet} consists of a header and a body. The header describes the type of the \textit{Packet} and its length. The body contains the actual \textit{Packet}.
+
+OpenPGP defines two different versions of \textit{Packets}. They main difference between the version is the structure of the packet-header. The new version also allows 64 different \textit{Packet} types. The old version reserves only 4 bit for the \textit{Packet} type and therefore allows a maximum of 16 different \textit{Packet} types. \\
+
+OpenPGP currently defines 17 different \textit{Packet} types. \todo{table} gives an overview of the supported \textit{Packet} types. A detailed description can be found in \citep[section 5]{RFC4880}.
+
+To illustrate the principles described here, \todo{} shows the structure of a \textit{key packet} as an example.
+
+\todo{example packet, key?}
+
+\todo{more examples? a message? a signature with subpacket?}
 
 \subsection{Transferables}
 
