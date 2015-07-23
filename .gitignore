@@ -8,3 +8,9 @@
 *.log
 *.run.xml
 *.toc
+*.vrb
+*.snm
+*.out
+*.tdo
+*.nav
+*.pdf
