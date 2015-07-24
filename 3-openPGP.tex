@@ -1,109 +1,47 @@
 \chapter{openPGP} \label{chapter:openpgp}
 
-In this chapter we give an introduction into \textit{openPGP}. 
-We present its history and explain the fundamental principles. 
-Furthermore we list some common use-cases of openPGP implementations
-and compare openPGP with related protocols.
+In this chapter we give an introduction into openPGP. 
+We present its history and list its fundamental principles.
+ Furthermore we explain this principles are addressed by openPGP.
 
 % explain what it is, what it does and how it does it
 % dont explain packet stuff in this chapter!
 
 \section{History}
 
+The Pretty Good Privacy (PGP) software was developed by Philip Zimmermann in 1991.  
+PGP was intended to be used to securely communicate via bulletin board systems, Usenet and E-Mail, but it can be used to encrypt and sign all kinds of data.
+
+
+To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the openPGP Message Format. \\
+
+
+The openPGP standard is actively developed by the openPGP Working Group of the IETF. The WG was reopened in 2015 as reaction to an emerging discussion about secure (and usable) digital messaging.
+
+
 \section{Principles} \label{section:openpgp:principles}
 
-% combination sym cryp o + public crypto
-% key pairs
-% (key id / fingerprint)
-% (key exchange?)
-
-\subsection{PGP Key-Pairs} \label{section:openpgp:keys}
-
-\subsection{Message Confidentiality} \label{section:openpgp:confidentiality}
+Software based on the openPGP Message Format can be used to encrypt and decrypt data. Furthermore it is possible to sign data and verify those signatures. \\
 
 
-\subsection{Message Integrity} \label{section:openpgp:integrity}
-
-% via signature and/or integrity protected packets
-
-\subsection{Sender Authentication} \label{section:openpgp:authentication}
+To do so openPGP combines asymmetric cryptosystems with symmetric cryptosystems. Asymmetric cryptosystems are used to provide message integrity by digitally signing data. Additionally they are used to exchange the keys used by symmetric cryptosystems. Symmetric cryptosystems are used to provide message confidentiality by encrypting data. OpenPGP allows the usage of various symetric and asymmetric algorithms. Furthermore openPGP allows sender (and therefore message) authentication by defining it's own trust model, called the Web of Trust. \\
 
 
-% explain key signing here
-
-% explain key servers here? "Key Distribution"
-
-\subsection{Key Distribution} \label{section:openpgp:keydistribution}
-
-To encrypt a message one needs the openPGP public key of the designated receiver of the message.
-To verify the signature of a received message, the openPGP public key of the sender is needed, respectively.
-OpenPGP users therefore have to distribute their openPGP public keys.
-
-The easiest way to do perform this \textbf{key-exchange} is by sending the openPGP public key along with every message or by publishing it on a website. 
-
-Another way to distribute openPGP public keys is by publishing them to a designated key directory, a so called \textbf{key-server}. \\
-
-Such an key-exchange via an untrusted channel results in the need to verify the authenticity and integrity of the received key, as described in sections \ref{section:openpgp:trustmodel} and \ref{section:concerns:usability}.
-
-\subsection{Trust Model} \label{section:openpgp:trustmodel}
-
-In the openPGP ecosystem it is in general not possible to transmit the openPGP public-key via an secure channel. Therefore it is necessary to validate the integrity and authenticity of a public-key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting to a public-key, respectively. \\
-
-In the simplest case it is sufficient to hash the sensitive key-parts and then compare the hash-digest via an secure channel (for example via phone or by printing it on a business card). In openPGP this hash over the public-key is called a \textbf{fingerprint} \citep[section 12.2]{RFC4880}.
-
-When it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance, a more sophisticated approach is needed. For such cases openPGP provides its own trust model, called the \textbf{Web of Trust}.
-
-In contrast to hierarchical trust models, in the \textit{Web of Trust} it is possible for every key to certify every other key. \todo{what does "certify" mean?}
-This results in a (directed) graph of trust. \\
-
-% expail WoT here?
-
-A detailed explanation of the \textit{Web of Trust} approach was out of scope of this thesis. A analysis of the openPGP \textit{Web of Trust} can be found in \cite{Ulrich2011}. \todo{move this to "related work"?}
-
-\subsection{Key Revocation}
+Message \textbf{Confidentiality} is ensured by first encrypting data using and symmetric cipher using a session key generated randomly for every encryption. The (symmetric) session key is then encrypted using the (asymmetric) public key of the receiver. The resulting encrypted session key is then prepended to the encrypted data and send to the receiver. The sender uses their (asymmetric) private key to decrypt the encrypted (symmetric) session key. The decrypted session key is then used to decrypt the actual data.\\
 
 
+Message \textbf{Integrity} is provided by first forming a digital signature of the (plaintext) data. This is done by first calculating the hash of the data. Then the hash is signed using the private key of the sender. Afterward the calculated signature together with the encrypted data is send to the receiver. The receiver then uses their private key to encrypt the data. After that they are able to verify the integrity using the signature and the public key of the sender.
+
+To encrypt a message the openPGP public key of the designated receiver is needed. To verify the signature of a received message, the openPGP public key of the sender is needed, respectively. OpenPGP users therefore have to distribute their openPGP public keys. The easiest way to do perform this \textbf{key-exchange} is by sending the openPGP public key along with every message or by publishing it on a website. Another way to distribute openPGP public keys is by publishing them to a designated key directory, a so called \textbf{key-server}. \\
 
 
+In the openPGP ecosystem it is in general not possible to transmit the openPGP public-key via a secure channel. Therefore it is necessary to validate the integrity and authenticity of a public-key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting to a public-key, respectively. In openPGP there are multiple ways to ensure \textbf{Sender Authentication}.
+
+In the simplest case it is sufficient to hash the sensitive key-parts and then compare the hash-digest via a secure channel (for example via phone or by printing it on a business card). In openPGP this hash over the public-key is called a \textbf{fingerprint} [RFC4880].
+
+When it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance, a more sophisticated approach is needed. For such cases openPGP provides its own trust model, called the \textbf{Web of Trust (WoT)}. The WoT is a trust-model without any central authorities. Binding between an identity and a keypair is done via cryptographic signatures. A user certifies the authenticity of a keypair (it's public key) by signing the identifying part of the key with their own key. The resulting trust relation between the two keys is called certification. Since there exists no central certificate authority all openPGP users can issue certifications for all other openPGP keys. The result of this process is not a linear trust chain but a (directed) trust graph. Sender authentication is created by searching for one (or multiple) (directed) patch from the sender's keypair to the receiver's keypair.
+
+A detailed explanation of the Web of Trust approach was out of scope of this thesis. An analysis of the openPGP Web of Trust can be found in [Ulrich2011]. \\
 
 
-
-% maybe not / shorter (in one section without subsection?):
-
-\section{Applications}
-
-%\subsection{E-Mail and PGP/Mime}
-
-%\subsection{TLS}
-
-%\section{Implementations}
-
-%\subsection{PGP}
-
-%\subsection{GnuPG / Gpg4win}
-
-%\subsection{BouncyCastle}
-
-%\subsection{APG}
-
-\section{Similar protocols ("Related work")}
-
-The location of Chapter 3 is always a point of contention. It
-could also be the last chapter before the conclusions, or it could
-be a section in the introduction. You choose. In any case, you will
-have to embed related work throughout your thesis to explain
-the difference in details between your work and others and to
-explain where you have copied ideas.
-
-Again, related work is a chance to show that you have looked
-around. You should ideally include any work that someone could
-think makes your work obsolete. You should not include unrelated
-work and for every paper you mention, you should explain the
-difference to your work. Try to tell a story, rather than giving a
-list.
-
-Chapter 3 does not contain anything new. You can give some critique
-of the related work, which is obviously your opinion, but in this
-chapter, such a critique is usually not very long.
-
-\subsection{S/MIME}
+Because of the persistence (longevity) of a keypair and the sensitivity of the private key it is necessary to be able to replace a keypair. Thus it is necessary to be able to invalidate the old keypair. For this reasons openPGP provides the ability to set an expiration date for all parts of an keypair (public key). In addition it is possible to \textbf{revoke} key (or key-parts). This is possible by placing a self-signature of a certain type on the (now invalid) key-part. This signals the invalidity to the openPGP implementation not to use the specific key-part.
