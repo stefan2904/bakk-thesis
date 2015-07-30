@@ -24,9 +24,23 @@ The low-level API represents the inner working of the library. It is made up of 
 
 \todo{Klassendiagramm ohne helper?) gives an overview of the main parts our library.}
 
+To illustrate the high-level API figure \ref{fig:jpg:key} shows how to load an openPGP key. In this example an keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
 
-\todo{TODO(listing mit code) shows how the high-level API can be used to load a Transferable Public Key. TODO(listing mit code) shows how the loaded key can be used to encrypt and sign data.}
+Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's Stream-Architecture it is possible to process the ciphertext or just store it.
 
+\begin{figure}[p]
+	\centering
+	\lstinputlisting[style=myjava]{figures/KeyDemo.java}
+	\caption{Loading an openPGP key using JavaPrivacyGuard}
+	\label{fig:jpg:key}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\lstinputlisting[style=myjava]{figures/EncryptionDemo.java}
+	\caption{Encrypting and signing data using JavaPrivacyGuard}
+	\label{fig:jpg:enc}
+\end{figure}
 
 %\section{Issues during Implementation}
 %
