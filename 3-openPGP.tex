@@ -76,7 +76,11 @@ The main application of openPGP is to secure email communication. This can be ac
 Furthermore openPGP allows to only signing email data without encrypting it. This is also possible if the receiver is not using openPGP, resulting in the signature being displayed next to the message. This is usability issue. To counteract this issue PGP/MIME hides the signature in it's own email header. \\
 
 
-The main limitation of both approaches is the fact that meta data is not signed. In the email system it is not possible to protect the receiver of a message. In addition the email standard does not allow encryption or signing of the subject.
+The main limitation of both approaches is the fact that meta data is not signed. In the email system it is not possible to protect the receiver of a message. In addition the email standard does not allow encryption or signing of the subject. \\
+
+OpenPGP is also used to digitally sign software, a very common practice in the FLOSS community. This is done to ensure integrity and authenticate the source of downloaded software. 
+
+Because the community providing the software already build a Web of Trust it is easy to use openPGP.The used approach provides greater security compared to unauthorized hashes. Furthermore it allows automated processing by package managers.
 
 \section{Related protocol} \label{section:openpgp:smime}
 
