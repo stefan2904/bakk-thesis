@@ -1,40 +1,31 @@
 \chapter{The \textit{Java Privacy Guard}} \label{chapter:jpg}
 
-% explain what was done in java (and what not?)
-
-In this chapter we show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore we give an introduction into our API. 
-
-Additionally we give a brief overview of the implementation security and possible attacks on the implementation. \\
-\todo{do we arealy?} 
-
-As practical part of this thesis we did an implementation of the openPGP message format \citep{RFC4880} in the \textit{Java} programing language, creating a library called \textit{Java Privacy Guard}.
-
-For cryptographic primitives like basic data types and encryption and digest algorithms we used the \textit{IAIK-JCE} library. \\
+In this chapter we given a brief overview of our implementation of the openPGP message format in Java. We show how we implemented the structures described in chapter 4. We illustrate the structure of our implementation. Furthermore we give an introduction of our API.
+Additionally we give discuss the implementation security and possible attacks on the implementation.
 
 
-%TODO: figure with (clean) class-diagram of (important) JPG classes?
+As practical part of this thesis we did an implementation of the openPGP message format [RFC4880] in the Java programing language, creating a library workingtitled Java Privacy Guard.
 
-%\section{Introduction}
+For cryptographic primitives like basic data types, encryption and digest algorithms we used the IAIK-JCE library.
 
+The Packet- and Transferable-structure as described in chapter 4 represents the base-structure of our implementation. All Packets defined in [RFC4880] are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in [RFC4880].
 
-% only discuss how things mentioned in chapter 3 and 4 (the packets/transferables) are implemented in java
+Parsing and constructing of Transferables and other internal data processing heavily rely on Java's stream Architecture. This allows a fast and memory-saving flow of data.
 
-The \textit{Packet}- and \textit{Transferable}-structure as described in chapter \ref{chapter:messageformat} represents the base-structure of our implementation. All \textit{Packets} defined in \citep[section 5]{RFC4880} are implemented as one or more \textit{Java}-classes. Additionally all relevant \textit{Packet}-compositions are implemented in the form of \textit{Transferable}-classes as defined in \citep[section 11]{RFC4880}.
+To facilitate the use of our implementation we crated two APIs for access to the library functionality. The APIs are explained in the following section.
 
 \section{The APIs}
 
-% explain difference between high-/low-level api
+In this section we given an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the openPGP message format. Furthermore we show how the high-level API can be used to perform basic openPGP operations.
 
-To facilitate the use of our implementation we provide \textbf{two APIs} for access to the library functionality. \\  
+The high-level API represents the interface used by users of our library. It mostly consists of Transferable-classes and related toolbox-classes.
 
-The \textit{high-level API} represents the interface used by users of our library. It mostly consists of \textit{Transferable}-classes and related toolbox-classes.
+The low-level API represents the inner working of the library. It is made up of all Packet-classes and toolbox-classes needed to work with them. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API.
 
-The \textit{low-level API} represents the inner working of the library. It is made up of all \textit{Packet}-classes and toolbox-classes needed to work with them. For the sake of usability (and extensibility in the future) this classes are hidden from library-users. \\
+\todo{Klassendiagramm ohne helper?) gives an overview of the main parts our library.}
 
-To the time of writing of this thesis, it was not clear in detail which part of the library belongs to which API. 
 
-\section{The \textit{PGPObjectStream}}
-
+\todo{TODO(listing mit code) shows how the high-level API can be used to load a Transferable Public Key. TODO(listing mit code) shows how the loaded key can be used to encrypt and sign data.}
 
 
 %\section{Issues during Implementation}
@@ -52,18 +43,18 @@ To the time of writing of this thesis, it was not clear in detail which part of 
 %\subsection{GnuPG}
 
 \section{Implementation Security}
+In this section, we give an overview of the security measures of our implementation. 
+Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter 6 and in [RFC4880]. 
 
-Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter \ref{chapter:concerns} and in \citep[section 14]{RFC4880}. In the following section, we give an overview on how they effect our implementation. 
-% We are closing this chapter with a short overview of countermeasures we implemented in our implementation.
+Basic security measures like constant-time implementations are taken into account by our implementation.
 
-\subsection{Possible Attacks}
+We use the IAIK-JCE toolbox to perform cryptographic operations and some other tasks. The toolbox is developed with a focus on security and well tested. No other external libraries are used.
 
+Another issue are weak defaults for ciphers and other algorithms. Because of the generic nature of a library our implementation does not set any defaults. Thus the issue of bad defaults is shifted to the user of the library.
 
-%\subsection{Countermeasures}
+Since all openPGP implementations can be used as oracle [TODO schneier paper] it is recommended not to use openPGP in an unprotected and interactive mode. Due to the non-interactive nature of common applications (email) this was not taken into account.
 
-
-%\section{Status of implementation (?)}
-
+\todo{list attacks and show how our implementation reacts to it?}
 
 
 
