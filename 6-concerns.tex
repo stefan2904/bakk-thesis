@@ -37,7 +37,7 @@ The current NIST and BSI recommendations for cipher and hash strengths confirm t
 
 \section{Algorithms}
 
-In this chapter we discuss the security of the algorithms used by openPGP.
+In this chapter we discuss the security of the algorithms used by openPGP.  \\
 
 % MD5: deprecated
 
@@ -50,7 +50,7 @@ In this chapter we discuss the security of the algorithms used by openPGP.
 Most of the algorithms used by openPGP are still considered secure. \todo{Referenz?}
 The two exceptions are the \textit{MD5} and \textit{SHA-1} algorithms used for digital signatures and message authentication. 
 
-\textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}. 
+\textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}.   \\
 
 OpenPGP is not using authenticated ciphers to detect modifications to encrypted messages.
 Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
@@ -71,7 +71,7 @@ Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1
 
 \section{The Case On Usability} \label{section:concerns:usability}
 
-In this section we discuss the usability of openPGP implementations. Furthermore we review the implications the openPGP standard itself brings in point of usability.
+In this section we discuss the usability of openPGP implementations. Furthermore we review the implications the openPGP standard itself brings in point of usability. \\
 
 % KEY EXCHANGE
 
@@ -89,9 +89,9 @@ One way of doing this is by transmitting the key's fingerprint over a trusted ch
 
 Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:trustmodel}. \\
 
-An issue of the Web of Trust concerns the definition of trust. Since the openPGP standard does not specify the precise meaning of a certification it is unclear what means of identity-verification have to be performed before issuing a certification. A possible solution to this problem is the publication of textual description of one's certification policy. In addition it is suggested to always follow common best practice. 
+An issue of the Web of Trust concerns the definition of trust. Since the openPGP standard does not specify the precise meaning of a certification it is unclear what means of identity-verification have to be performed before issuing a certification. A possible solution to this problem is the publication of textual description of one's certification policy. In addition it is suggested to always follow common best practice.   \\
 
-Another issue of the Web of Trust is the fact that it reveals the social structures of openPGP users. A suggested countermeasure is to certify keys of unrelated people. In the FLOSS community this is done at so called keysigning parties.
+Another issue of the Web of Trust is the fact that it reveals the social structures of openPGP users. A suggested countermeasure is to certify keys of unrelated people. In the FLOSS community this is done at so called keysigning parties.  \\
 
 All suggested measures and the Web of Trust itself require interaction by the user. This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
 
