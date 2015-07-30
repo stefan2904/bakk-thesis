@@ -239,14 +239,14 @@ Figure \ref{fig:key} shows a sample openPGP Transferable Public Key. (A short ke
 
 A ASCII-armored openPGP Message encrypted with the subkey contained in the Transferable Public Key shown in figure \ref{fig:key} is shown in figure \ref{fig:msg}. The internal structure of this message is explained in table \ref{fig:transferable-msg}. \\
 
-\begin{figure}
+\begin{figure}][p]
 	\centering
 	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/key-ecc.asc}
 	\caption{Sample ASCII-armored transferable openPGP public-key}
 	\label{fig:key}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[p]
 	\centering
 	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/msg-ecc.asc}
 	\caption{Sample ASCII-armored transferable openPGP message}
@@ -257,18 +257,18 @@ To process the actual Transferable a OpenPGP implementation first needs to remov
 
 
 
-\section{Algorithms and Parameters}
+%\section{Algorithms and Parameters}
 
 % list algorithms from rfc, give short overview
 % mention that seciruty stuff is in last chapter
 
 % also mention IANA specification (https://www.iana.org/assignments/pgp-parameters/pgp-parameters.xhtml ?
 
-The openPGP standard allows the usage of various algorithms for encryption, integrity protection and signing. The following section lists the algorithms specified in \citep[section 9]{RFC4880}. A brief summary of those algorithm regarding their state of security and recommended key lengths is given in chapter \ref{chapter:concerns}.
+%The openPGP standard allows the usage of various algorithms for encryption, integrity protection and signing. The following section lists the algorithms specified in \citep[section 9]{RFC4880}. A brief summary of those algorithm regarding their state of security and recommended key lengths is given in chapter \ref{chapter:concerns}.
 
-\subsection{Public-Key Algorithms}
+%\subsection{Public-Key Algorithms}
 
-\subsection{Symmetric-Key Algorithms}
+%\subsection{Symmetric-Key Algorithms}
 
-\subsection{Hash Algorithms}
+%\subsection{Hash Algorithms}
 
