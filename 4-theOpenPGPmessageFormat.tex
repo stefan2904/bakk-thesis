@@ -115,20 +115,25 @@ Furthermore it is possible to transmit signatures separated from the actual sign
 
 In this section we given an overview of openPGP keys. We describe what an openPGP key-pair is and explain how multiple keys and identifying metadata are stored in one openPGP key. \\
 
-A openPGP key is a composition of multiple keys, identity information and other metadata. OpenPGP organizes key material in primary-key and subkeys. The primary key is a signing key used to issue signatures of data. Furthermore the primary key is used to sign (certify) all other (critical) key parts. A primary key can be used for encryption. If the primary key is only used for  signing but data encryption is still needed subkeys are required. Subkeys are additional keys inside the openPGP key.
+A openPGP key is a composition of multiple keys, identity information and other metadata. OpenPGP organizes key material in primary-key and subkeys. The primary key is a signing key used to issue signatures of data. Furthermore the primary key is used to sign (certify) all other (critical) key parts. A primary key can be used for encryption. If the primary key is only used for  signing but data encryption is still needed subkeys are required. Subkeys are additional keys inside the openPGP key. 
 
 Identity information is stored in the openPGP key in form of a simple string. The identifying information is called User ID. Additionally it is possible to include images, so called User Attributes.
 
 Thanks to its asymmetric nature at last one key-pair is needed for every openPGP secured communication. A openPGP key-pair consists of a Transferable Public Key and it's corresponding Transferable Secret Key. 
 
-Table TODO shows the structure of a Transferable Public Key to illustrate this. The functionality of a Transferable  Key is explained in  TODO.
+Table \ref{fig:transferable-key} shows the structure of a Transferable Public Key to illustrate this. \\
 
-\todo{table: structure of key}
-
-Since the public key is share over possibly insecure channels it needs to be protected. This is done by using the primary key to issue signatures over other key parts and appending the signatures to the key. The parts to protect are subkeys, User IDs and User Attributes.
+Since the public key is share over possibly insecure channels it needs to be protected. This is done by using the primary key to issue signatures over other key parts and appending the signatures to the key. The parts to protect are subkeys, User IDs and User Attributes. \\
 
 
 In addition it is possible to revoke a key or certain parts of it. This is done by signing the part and appending the signature of a certain type. It is possible to revoke a subkey, the User ID, a User Attribute or the whole openPGP key.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/transferable-key.png}
+	\caption{The structure of a Transferable Public Key}
+	\label{fig:transferable-key}
+\end{figure}
 
 \section{Messages}
 
@@ -136,16 +141,31 @@ In this section we given an overview of the structure of openPGP messages. We ex
 
 An openPGP Message is a composition of different Packets. The actual data is contained in a Literal Data Packet. It is possible to compress and sign the data. In addition openPGP provides the functionality to encrypt the data and to ensure the integrity of the encrypted data.
 
-OpenPGP does not specify a precise structure of an openPGP Message, allowing various combinations of the involved Packets. For example it is not defined whether to sign the literal data and then compress or compress the data first and then sign the compressed data. In addition it is not defined whether sign-then-encrypt or encrypt-then-sign has to be performed.  Thus TODO shows only one possibility.
+OpenPGP does not specify a precise structure of an openPGP Message, allowing various combinations of the involved Packets. For example it is not defined whether to sign the literal data and then compress or compress the data first and then sign the compressed data. In addition it is not defined whether sign-then-encrypt or encrypt-then-sign has to be performed. Thus the example shown in table \ref{fig:transferable-msg} shows only one possibility.
 
-\todo{table: structure of message}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/transferable-msg.png}
+	\caption{The structure of a Transferable openPGP Message}
+	\label{fig:transferable-msg}
+\end{figure}
 
 
-In TODO the data is encapsulated in a Literal Data Packet. This Data Packet is compressed, resulting in a Compressed Data Packet. The Compressed Data Packet is signed using the One-Pass mechanism (TODO? Explained where?). The three resulting Packets are encrypted using a symmetric cipher and a randomly generated session-key, resulting in a Symmetrically Encrypted Data Packet. The session-key is encrypted twice using two different public-keys, resulting in two Public-Key Encrypted Session Key Packets.
 
-\todo{TODO: Diagramm encryption (vom Poster)?}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/encryption}
+	\caption{Visualization of process of encrypting and decrypting data}
+	\label{fig:encryption}
+\end{figure}
 
-To decrypt the receiver first finds the Public-Key Encrypted Session Key Packet encrypted using their public key and uses their private key to decrypt the session-key. Afterward the session-key is used to decrypt the three Packets. The One-Pass Signature Packets holds the information needed to calculate the hash while decompressing the Compressed Data Packet. The resulting hash and the sender's public key are then used to verify the signature contained in the Signature Packet. Afterward the Literal Data Packet can be used.
+
+The process of encryption and decryption is shown in figure \ref{fig:encryption}. In table \ref{fig:transferable-msg} the data is encapsulated in a Literal Data Packet. This Data Packet is compressed, resulting in a Compressed Data Packet. The Compressed Data Packet is signed using the One-Pass mechanism. The three resulting Packets are encrypted using a symmetric cipher and a randomly generated session-key, resulting in a Symmetrically Encrypted Data Packet. The session-key is encrypted twice using two different public-keys, resulting in two Public-Key Encrypted Session Key Packets. \\
+
+
+To decrypt the receiver first finds the Public-Key Encrypted Session Key Packet encrypted using their public key and uses their private key to decrypt the session-key. Afterward the session-key is used to decrypt the three Packets. The One-Pass Signature Packets holds the information needed to calculate the hash while decompressing the Compressed Data Packet. The resulting hash and the sender's public key are then used to verify the signature contained in the Signature Packet. 
+
+Afterward the Literal Data Packet can be used. This process can be seen on the right side of figure \ref{fig:encryption}.
 
 \section{Key Certification}
 
@@ -158,9 +178,35 @@ To enable this openPGP uses digital signatures in two ways. Self signatures are 
 
 As shown in table TODO an openPGP key consists of different parts. The most important parts are the primary-key Packet, User ID Packets and Subkeys. To cryptographically bind those parts together signatures are used. A binding signature is formed over the Packet to bind and the key to bind the Packet to. Additionally some control bytes and a trailer containing metadata are appended.  \\
 
-Table TODO illustrates the structure of the hashed data for a User ID binding.
+The following list illustrates the structure of the hashed data for a User ID binding.
 
-\todo{Table? structure of signed material}
+\begin{itemize}
+	\item Key to bind data to:
+	\begin{itemize}
+		\item $0x99$ (1 octet)
+		\item length x of key (2 octets)
+		\item key packet (x octets)
+	\end{itemize}
+	
+	\item Data to bind:
+	\begin{itemize}
+		\item $0xB4$ (1 octet)
+		\item length y of User ID (4 octets)
+		\item User ID Packet (y octets)
+	\end{itemize}
+	
+	\item Trailer:
+	\begin{itemize}
+		\item Signature Version (1 octet)
+		\item Signature Type (1 octet)
+		\item Key Algorithm ID (1 octet)
+		\item Hash-Digest Algorithm ID (1 octet)
+		\item Protected SubPackets (z octets)
+		\item Signature Version (1 octet) 
+		\item $0xFF$ (1 octet)
+		\item Length of Trailer: 6 + z (4 octets)
+	\end{itemize}
+\end{itemize}
 
 To ensure the integrity of a openPGP key self signatures are used to bind all key parts to the primary key. This is done by signing each key part together with the primary key using the primary key. Afterward the resulting signature is appended to the key part.
 
@@ -189,11 +235,23 @@ Since there are channel with are not able to transfer raw bytes there is a secon
 
 A ASCII-armored openPGP Transferable converts the raw bytes of a transferable to ASCII using the base64 algorithm [TODO: referenz]. In addition a crc24 [TODO: referenz] checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
 
-TODO shows a sample openPGP Transferable Public Key. (A short key was used for demonstration purposes.)
+Figure \ref{fig:key} shows a sample openPGP Transferable Public Key. (A short key was used for demonstration purposes.) The internal structure of this key is explained in table \ref{fig:transferable-key}
 
-TODO shows a openPGP Message encrypted with the subkey contained in the Transferable Public Key shown in TODO.
+A ASCII-armored openPGP Message encrypted with the subkey contained in the Transferable Public Key shown in figure \ref{fig:key} is shown in figure \ref{fig:msg}. The internal structure of this message is explained in table \ref{fig:transferable-msg}. \\
 
-\todo{sample ascii armored stuff (a mesage and a key?)}
+\begin{figure}
+	\centering
+	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/key-ecc.asc}
+	\caption{Sample ASCII-armored transferable openPGP public-key}
+	\label{fig:key}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/msg-ecc.asc}
+	\caption{Sample ASCII-armored transferable openPGP message}
+	\label{fig:msg}
+\end{figure}
 
 To process the actual Transferable a OpenPGP implementation first needs to remove the header and footer. Afterward a base64 parser can be used to recover the Packet bytes while calculating the crc24 checksum. Finally a (optional) comparison with the appended checksum is possible.
 
