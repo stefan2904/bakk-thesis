@@ -94,9 +94,6 @@ The OpenPGP protocol provides sender and key authentication via a decentralized 
 
 In contrast to this the Secure/Multipurpose Internet Mail Extensions (S/MIME) standard provides sender authentication by setting up a tree-like trust hierarchy. S/MIME uses the X.509 public key infrastructure (PKI) as trust model. Trust is issued by central Certificate Authorities (CAs). A CA uses their private key to digitally sign the receiver's key. The resulting signature is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted CA to the receiver's key. There are multiple ways to ensure if a CA is trusted. One was is to install the CA's certificate (containing it's public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. This CAs are called root CA. Another way to ensure trust in the CA is to sign the CA's certificate itself. This creates a the trust hierarchy. 
 
-\todo{graph of PKI and WoT}
-
-
 \begin{figure}
 	\centering
 	\begin{subfigure}{.5\textwidth}
