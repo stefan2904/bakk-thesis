@@ -2,8 +2,7 @@
 
 %\subsection{Security Evaluation Of Cryptographic Schemes}
 
-In this chapter we give an overview of concerns with the openPGP standard.
-A detailed security evaluation of openPGP was out of scope of this thesis. \\
+In this chapter we give an overview of known concerns with the openPGP standard. A detailed security evaluation of openPGP was out of scope of this thesis. We give an overview of current keylength recommendations. Furthermore we discuss the security of algorithms used by openPGP. In addition we highlight some complicacy concerning the security of keys itself. Finally we discuss the usability of openPGP. \\
 
 It should be noted that at the time of writing of this thesis the used schemes were undergoing a security evaluation \citep{TUB2015}.
 
@@ -12,6 +11,8 @@ It should be noted that at the time of writing of this thesis the used schemes w
 
 
 \section{Keylengths}
+
+The following section gives a brief overview of the question of key lengths. It furthermore summarizes the current recommendations for keylengths. 
 
 Various algorithms are used in openPGP, whose strengths are not strictly defined in the standard. 
 Only a recommendation of hash sizes and key lengths is given \citep[section 14]{RFC4880}.
@@ -36,6 +37,8 @@ The current NIST and BSI recommendations for cipher and hash strengths confirm t
 
 \section{Algorithms}
 
+In this chapter we discuss the security of the algorithms used by openPGP.
+
 % MD5: deprecated
 
 % SHA-1: modification detection nur mit sha1 
@@ -55,18 +58,20 @@ Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1
 
 %TODO: "Incorporating a new hash function in OpenPGP and SSL/TLS"
 
-\section{Key Security}
+%\section{Key Security}
 
 % local
 % mobile
 % online
 % smartcard / NFC
 
-\section{Sign-then-Encrypt}
+%\section{Sign-then-Encrypt}
 
 % "Defective Sign and Encrypt in S/MIME, PKCS#7, MOSS, PEM, PGP, and XML"
 
 \section{The Case On Usability} \label{section:concerns:usability}
+
+In this section we discuss the usability of openPGP implementations. Furthermore we review the implications the openPGP standard itself brings in point of usability.
 
 % KEY EXCHANGE
 
@@ -84,9 +89,13 @@ One way of doing this is by transmitting the key's fingerprint over a trusted ch
 
 Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:trustmodel}. \\
 
-This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
+An issue of the Web of Trust concerns the definition of trust. Since the openPGP standard does not specify the precise meaning of a certification it is unclear what means of identity-verification have to be performed before issuing a certification. A possible solution to this problem is the publication of textual description of one's certification policy. In addition it is suggested to always follow common best practice. 
 
-A second usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser-integrations are a possible solution to this problem. 
+Another issue of the Web of Trust is the fact that it reveals the social structures of openPGP users. A suggested countermeasure is to certify keys of unrelated people. In the FLOSS community this is done at so called keysigning parties.
+
+All suggested measures and the Web of Trust itself require interaction by the user. This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
+
+Another usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser-integrations are a possible solution to this problem. 
 \todo{references needed? possible problems with webbrowser integration?}
 
 % SIDECHANNEL: KeyServer knows whick keys you requested, MITM possible if HTTP and not HTTPS
