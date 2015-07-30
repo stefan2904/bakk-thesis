@@ -1,38 +1,43 @@
 \chapter{openPGP} \label{chapter:openpgp}
 
-In this chapter we give an introduction into openPGP. 
-We present its history and list its fundamental principles.
- Furthermore we explain this principles are addressed by openPGP.
+In this chapter we give an introduction into openPGP. We given an overview of the history and functionality. Furthermore we explain how this functionality is addressed by openPGP. In addition we list some common use-cases of openPGP implementations and compare openPGP with the related S/MIME protocol.
 
 % explain what it is, what it does and how it does it
 % dont explain packet stuff in this chapter!
 
 \section{History}
 
-The Pretty Good Privacy (PGP) software was developed by Philip Zimmermann in 1991.  
-PGP was intended to be used to securely communicate via bulletin board systems, Usenet and E-Mail, but it can be used to encrypt and sign all kinds of data.
+In this section we give a short overview of the history of the openPGP standard and it's most important implementations. 
 
 
-To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the openPGP Message Format. \\
+The Pretty Good Privacy (PGP) software was developed by Philip Zimmermann in 1991.  PGP was intended to be used to securely communicate via bulletin board systems, Usenet and E-Mail, but it can be used to encrypt and sign all kinds of data.
+
+To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the openPGP Message Format. 
 
 
 The openPGP standard is actively developed by the openPGP Working Group of the IETF. The WG was reopened in 2015 as reaction to an emerging discussion about secure (and usable) digital messaging.
 
+\section{3.2 Functionality} \label{section:openpgp:functionality}
 
-\section{Principles} \label{section:openpgp:principles}
+In this section we give an overview of the functionality provided by openPGP. 
 
-In this chapter we give an overview of the functionality provided by openPGP. 
+
 Software based on the openPGP Message Format can be used to encrypt and decrypt data. Furthermore it is possible to sign data and verify those signatures. In addition openPGP allows sender (and therefore message) authentication by defining it's own trust model, called the Web of Trust. 
 
 To do so openPGP combines asymmetric cryptosystems with symmetric cryptosystems. Asymmetric cryptosystems are used to provide message integrity by digitally signing data. Additionally they are used to exchange the keys used by symmetric cryptosystems. Symmetric cryptosystems are used to provide message confidentiality by encrypting data. OpenPGP allows the usage of various symmetric and asymmetric algorithms. 
 
-To provide this functionality every party participating in a communication secured by openPGP needs (at least) one openPGP key-pair. This key-pair consists of a public- and a private-key for usage by the asymmetric cryptosystem. A openPGP key is the composition of several cryptographic primitives and meta-data. This composition is explained in detail in section 4. 
+
+To provide this functionality every party participating in a communication secured by openPGP needs (at least) one openPGP key-pair. This key-pair consists of a public- and a private-key for usage by the asymmetric cryptosystem. A openPGP key is the composition of several cryptographic primitives and meta-data. This composition is explained in detail in section XXX. 
+
 
 OpenPGP uses different keys for different functionality. For example it uses a different key-pair for digital signatures than for encryption. The signing-key-pair is used to provide integrity-protection and authentication of the key's meta-data. Therefore it is desired not to replace this key-pair. This is enabled by allowing replacement of the encryption-key-pair while keeping the signing-key-pair (and thus the trust on it).
+
 
 Message Confidentiality is ensured by first encrypting data using and symmetric cipher using a session key generated randomly for every encryption. The (symmetric) session key is then encrypted using the (asymmetric) public key of the receiver. The resulting encrypted session key is then prepended to the encrypted data and send to the receiver. The sender uses their (asymmetric) private key to decrypt the encrypted (symmetric) session key. The decrypted session key is then used to decrypt the actual data.
 
 If data is send to more than one receiver the (symmetric) session key is encrypted  multiple times using the public key of each receiver. The receiver then picks the encrypted session key encrypt to their key and decrypts it using their private key. Therefore it is not required to encrypt the data for each receiver separately.
+
+In addition to the asymmetric key exchange it is possible to derive a symmetric key from a passphrase. In that case no asymmetric cryptosystem and therefore no key-pair is needed. This is useful if the data is stored and not transmited.
 
 Message Integrity is provided by first forming a digital signature of the (plaintext) data. This is done by first calculating the hash of the data. Then the hash is signed using the private key of the sender. Afterward the calculated signature together with the encrypted data is send to the receiver. The receiver then uses their private key to encrypt the data. After that they are able to verify the integrity using the signature and the public key of the sender.
 
@@ -50,14 +55,13 @@ In the simplest case it is sufficient to hash the sensitive key-parts and then c
 In come cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. In that case a more sophisticated approach is needed. For such cases openPGP provides its own trust model, called the Web of Trust (WoT). The WoT is a trust-model without any central authorities. Binding between the identity of an entity and a key-pair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (it's public key) by signing the identifying meta-data of the key with their own key. The resulting trust relation between the two keys is called certification. Since there exists no central certificate authority all openPGP users can issue certifications for all other openPGP keys. The result of this process is not a linear trust chain but a (directed) trust graph. 
 
 Sender authentication is created by searching for at least one (directed) patch from the sender's key-pair to the receiver's key-pair. A directed edge in the trust graph is represented by a digital signature. To establish a cryptographic trust path it is therefore needed to sign other openPGP keys. Since the owners of those keys signed other keys too it is possible to reach those keys by traversing on the edges. Thus it is possible to establish a trust path to before-unknown keys.
+
 A detailed explanation of the Web of Trust approach and trust models in general was out of scope of this thesis. An analysis of the openPGP Web of Trust can be found in [Ulrich2011].
 
 
 Because of the persistence (longevity) of a key-pair and the sensitivity of the private key it is necessary to be able to replace a key-pair or parts of it. Thus it is necessary to be able to invalidate the old key-pair. For this reasons openPGP provides the ability to set an expiration date for all public parts of an openPGP key-pair. In addition it is possible to revoke the key-pair or parts of it. This is possible by adding a self-signature of a certain type to the openPGP key. This signals the invalidity to the openPGP implementation and requests not to use the specific key-part.
 
-
-TODO: cleanup! Sections needed? Gliederung wie?
-The following chapter explain the details of the inner workings of openPGP.
+In addition openPGP provides funcitonality to protect private key material by encrypting it symmetrically using a passphrase. Therefore this passphrase is required in addition to the private key file to decrypt or sign data.
 
 \section{Applications} \label{section:openpgp:smime}
 
@@ -67,7 +71,7 @@ Although openPGP was designed to secure communication on bulletin board it can b
 In general terms software implementing the openPGP standard can be used to encrypt data. It does not limit the means of which the data has to be stored or transmitted. This allows to encrypt generic files, for example to be securely stored on disk, transferred over the internet or printed on paper.  
 
 
-The main application of openPGP is to secure email communication. This can be achieved in two different ways. The more intuitive approach is to use a software implementing the openPGP standard to encrypt and sign the body and attachments of the message. After doing so the ciphertexts are put in place of the original data. The receive has to reverse that process by using a openPGP implementation to decrypt the message parts. This is possible without any changes to the email standard. The second approach uses an extension of the email standard called PGP/MIME. It utilizes special headers to structure the email data secured by openPGP.
+The main application of openPGP is to secure email communication. This can be achieved in two different ways. The more intuitive approach is to use a software implementing the openPGP standard to encrypt and sign the body and attachments of the message. After doing so the ciphertexts are put in place of the original data. The receive has to reverse that process by using a openPGP implementation to decrypt the message parts. This is possible without any changes to the email standard. The second approach uses an extension of the email standard called PGP/MIME. It utilizes special headers to structure the email data secured by openPGP..
 
 Furthermore openPGP allows to only signing email data without encrypting it. This is also possible if the receiver is not using openPGP, resulting in the signature being displayed next to the message. This is usability issue. To counteract this issue PGP/MIME hides the signature in it's own email header.
 
@@ -76,7 +80,7 @@ The main limitation of both approaches is the fact that meta data is not signed.
 
 \section{Related protocol} \label{section:openpgp:smime}
 
-This section gives an overview of another protocol which provides the properties provided by openPGP. A short description of the Secure/Multipurpose Internet Mail Extensions (S/MIME) is given. Additionally the main differences between S/MIME and openPGP are given.
+In this section we give an overview of another protocol which provides the properties provided by openPGP. A short description of the Secure/Multipurpose Internet Mail Extensions (S/MIME) is given. Additionally the main differences between S/MIME and openPGP are given.
 
 The Secure/Multipurpose Internet Mail Extensions (S/MIME) is a standard for secure communication. It uses techniques similar to those used by openPGP to provide confidentiality, message integrity and sender authentication. S/MIME was designed to secure email communication. 
 
@@ -85,3 +89,5 @@ The main differences between Public Key Infrastructure (PKI) and Web of Trust (W
 The OpenPGP protocol provides sender and key authentication via a decentralized trust mode. It uses a Web of Trust to bind the identity of an entity to a key. This allows a trust model without any central authority. Every user of openPGP is able to issue a trust certification for every other openPGP key. The downside of this approach is a lack of usability. To securely authenticate a key it is required to find a cryptographic trust path to the receiver's key. Another issue is that it is not defined what the meaning of an openPGP certification is. Every user decides for themselves about the requirements for a certification.
 
 In contrast to this the Secure/Multipurpose Internet Mail Extensions (S/MIME) standard provides sender authentication by setting up a tree-like trust hierarchy. S/MIME uses the X.509 public key infrastructure (PKI) as trust model. Trust is issued by central Certificate Authorities (CAs). A CA uses their private key to digitally sign the receiver's key. The resulting signature is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted CA to the receiver's key. There are multiple ways to ensure if a CA is trusted. One was is to install the CA's certificate (containing it's public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. This CAs are called root CA. Another way to ensure trust in the CA is to sign the CA's certificate itself. This creates a the trust hierarchy. 
+
+\todo{graph of PKI and WoT}
