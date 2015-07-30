@@ -35,13 +35,52 @@ The structure of the Packet body is depended on the type of the Packet. \\
 
 OpenPGP defines two different versions of Packets (version 3 and 4). The main difference between the version is the structure of the packet-header. The new version allows 64 different Packet types. The old version reserves only 4 bit for the Packet type and therefore allows a maximum of 16 different Packet types.
 
-OpenPGP currently defines 17 different Packet types. TODO gives an overview of the important Packet types. A detailed description can be found in [RFC4880]. \\ 
+OpenPGP currently defines 17 different Packet types. The following paragraph gives an overview of the important Packet types. A detailed description can be found in [RFC4880]. \\ 
 
-Packets are composed to form the openPGP data structures, called Transferables. This is described in the next section.
+Packets are composed to form the openPGP data structures, called Transferables. This is described in the next section. \\
 
-\todo{table? key related packets}
+\textbf{Key related Packets} contain the cryptographic primitives used by openPGP. They hold and structure the actual key-bytes used by the different ciphers. In addition they hold metadata such as the identifying User-ID and information about the used algorithms.
 
-\todo{table? message related packets}
+\begin{itemize}
+	\item Key Data:
+	\begin{itemize}
+		\item \textit{Public-Key} Packet (Tag 6)
+		\item \textit{Public-Subkey} Packet (Tag 14)
+		\item \textit{Secret-Key} Packet (Tag 5)
+		\item \textit{Secret-Subkey} Packet (Tag 7)
+	\end{itemize}
+	\item Identification and Metadata:
+	\begin{itemize}
+		\item \textit{User ID} Packet (Tag 13)
+		\item \textit{User Attribute} Packet (Tag 17)
+		\item \textit{Trust} Packet (Tag 12)
+	\end{itemize}
+\end{itemize}
+
+\textbf{Message related Packets} hold the protected data. In case of integrity protection and authentication they contain the signature of the data. In case of confidentiality they contain the ciphertext and encrypted session key used to encrypt the data.
+Furthermore they hold the encrypted session key used to encrypt the data, used for the key exchange.
+
+\begin{itemize}
+	\item Key Exchange:
+	\begin{itemize}
+		\item \textit{Public-Key Encrypted Session Key} Packets (Tag 1)
+		\item \textit{Symmetric-Key Encrypted Session Key} Packets (Tag 3)
+	\end{itemize}
+	
+	\item Message:
+	\begin{itemize}
+		\item \textit{Symmetrically Encrypted Data} Packet (Tag 9)
+		\item \textit{Symmetrically Encrypted Integrity Protected Data} Packet (Tag 18)
+		\item \textit{Modification Detection} Code Packet (Tag 19)
+		\item \textit{Literal Data} Packet (Tag 11)
+	\end{itemize}
+	
+	\item Signature:
+	\begin{itemize}
+		\item \textit{Signature} Packet (Tag 2)
+		\item \textit{One-Pass Signature} Packets (Tag 4)
+	\end{itemize}
+\end{itemize}
 
 To encode large numbers (e.g. key material) openPGP defines a structure called Multi Precision Integer (MPI). A MPI consists of 2 octets holding the length of the Integer (in bits) followed by the actual integer. \\
 
