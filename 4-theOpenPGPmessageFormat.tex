@@ -87,7 +87,12 @@ To encode large numbers (e.g. key material) openPGP defines a structure called M
 
 To illustrate the described structures, TODO shows the structure of a version 4 RSA key packet as an example. In addition to the Packet header the Packet holds metadata and the actual public-key material. The structure of the key material is depended on the given Algorithm ID.
 
-\todo{table: Public Key Packet}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\linewidth]{figures/packet-key.png}
+\caption[]{The structure of a Key Packet}
+\label{fig:packet-key}
+\end{figure}
 
 
 \subsection{Transferables}
