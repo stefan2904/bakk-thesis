@@ -1,6 +1,9 @@
 \chapter{Preliminaries}
+\label{chapter:pre}
 
-\section{Symmetric Cryptography} \todo{more formal explanation needed?}
+
+\section{Symmetric Cryptography} \label{section:pre:symcrypto}
+
 
 A encryption function (cipher) is a transformation in the sense that it transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{Symmetric Cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}.
 
@@ -14,6 +17,7 @@ A encryption function (cipher) is a transformation in the sense that it transfer
 
 
 \section{Public-Key Cryptography}
+\label{section:pre:publiccrypto}
 
 In contrast to  {Symmetric Cryptography}, \textit{Piblic-Key Cryptography} references a class of cryptographic algorithms which require two different keys. \citep[section 1.8]{HAC} The so called public key is used to encrypt a message. On the other hand, a private key is needed to decrypt the message. The process principle is illustrated in equations \ref{eq:pkencrypt} and \ref{eq:pkdecrypt}. 
 
@@ -31,29 +35,41 @@ In contrast to  {Symmetric Cryptography}, \textit{Piblic-Key Cryptography} refer
 %\section{S/MIME}
 %\citep{RFC5751}
 
-\section{Digital Signature}
+%\section{Digital Signature}
 
 
-\section{Message Integrity Protection}
+\section{Key ID \&{} Fingerprint}
+\label{section:pre:keyid}
+
+
+% TODO !
+\todo{explain keyid + fingerprint}
+
+%\section{Message Integrity Protection}
 
 \section{Keyring}
+\label{section:pre:keyring}
 
-\section{SSL / TLS}
+% TODO !
+\todo{explain keyring}
 
-\textit{SSL} (Secure Sockets Layer) and \textit{TLS} (Transport Layer Security) are protocols which provide a way to create secure connections over computer networks like the Internet.  TLS ist the successor of SSL. A connection established using TLS is secure in a way that an attacker with access to the connection is not able to change transmitted data or to eavesdrop it. \cite{RFC5246} A TLS connection is established between two hosts and lasts only as long as the actual communication. The participants of the communication can be authenticated by a \textit{Public Key Infrastructure} (PKI) using \textit{X.509 certificates}.
+%\section{SSL / TLS}
 
-\section{E-Mail}
+%\textit{SSL} (Secure Sockets Layer) and \textit{TLS} (Transport Layer Security) are protocols which provide a way to create secure connections over computer networks like the Internet.  TLS ist the successor of SSL. A connection established using TLS is secure in a way that an attacker with access to the connection is not able to change transmitted data or to eavesdrop it. \cite{RFC5246} A TLS connection is established between two hosts and lasts only as long as the actual communication. The participants of the communication can be authenticated by a \textit{Public Key Infrastructure} (PKI) using \textit{X.509 certificates}.
 
-The \textit{E-Mail} communication system consists of several protocols to transmit messages from one person to one or more other people over computer networks. Used protocols such as \textit{IMAP} (Internet Message Access Protocol), \textit{POP3} (Post Office Protocol) and \textit{SMTP} (Simple Mail Transfer Protocol) don't provide encryption and transmit data in plan from one host to another. Although there exist secure versions of the named protocols, the sender of a message is not able to assure that a message will be secured along the whole transmission. \todo{References for this claims?} 
+%\section{E-Mail}
+
+%The \textit{E-Mail} communication system consists of several protocols to transmit messages from one person to one or more other people over computer networks. Used protocols such as \textit{IMAP} (Internet Message Access Protocol), \textit{POP3} (Post Office Protocol) and \textit{SMTP} (Simple Mail Transfer Protocol) don't provide encryption and transmit data in plan from one host to another. Although there exist secure versions of the named protocols, the sender of a message is not able to assure that a message will be secured along the whole transmission. \todo{References for this claims?} 
 
 \section{Java Crypto Architecture} \label{section:pre:jca}
 
 % TODO !
+\todo{explain jca}
 
 \section{IAIK-JCE} \label{section:pre:jce}
 
 % TODO !
-
+\todo{explain jce}
 
 
 
