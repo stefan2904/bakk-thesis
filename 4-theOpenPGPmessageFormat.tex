@@ -18,13 +18,22 @@
 
 % \section{Structure}
 
-In this chapter we explain the principles behind the inner working of openPGP. We explain how openPGP messages are organized internally. Furthermore we illustrate some important data structures defined.
+In this chapter we illustrate some important data structures used by openPGP. Furthermore we explain the principles behind the inner workings. \\
 
-We show how openPGP carries out the principles described in chapter \ref{chapter:openpgp} and give an overview of the algorithms used in openPGP.
+In chapter \ref{section:messageformat:packets} we introduce the low-level data structures called \textit{Packets}. In chapter \ref{section:messageformat:transferables} we show how Packets are composed to form the high-level data structures called \textit{Transferables}.
 
-\subsection{Packets}
+In chapters \ref{section:messageformat:keys} and \ref{section:messageformat:messages} we show how openPGP messages and keys are organized internally. \\
 
-In this section we give an overview of the basic building blocks of openPGP called Packets [RFC4880]. We describe how openPGP organizes data on it's lowest level. We list and describe some important Packets. Furthermore we show by exmaple the structure of a Packet.  \\
+We show how openPGP carries out the principles described in chapter \ref{chapter:openpgp}.
+% and give an overview of the algorithms used in openPGP.
+In chapter \ref{section:messageformat:messages} we discuss how encryption and decryption works. In chapter \ref{section:messageformat:cert} we explain how key certification works. In chapter \ref{section:messageformat:asciia} we show how openPGP data can be represented.
+
+\section{Packets}
+\label{section:messageformat:packets}
+
+In this section we give an overview of the basic building blocks of openPGP called \textit{Packets}\todo{RFC4880}. We describe how openPGP organizes data on it's lowest level. We list and describe some important Packets. Furthermore we show the structure of a Packet by example.  \\
+
+Packets are composed to form the openPGP data structures, called Transferables. This is described in section \ref{section:messageformat:transferables}. \\
 
 Packets are a structured and defined sequence of bytes.  Each Packet consists of a header and a body. The header describes the type of the Packet and its length. The body contains the actual data.
 
@@ -35,9 +44,8 @@ The structure of the Packet body is depended on the type of the Packet. \\
 
 OpenPGP defines two different versions of Packets (version 3 and 4). The main difference between the version is the structure of the packet-header. The new version allows 64 different Packet types. The old version reserves only 4 bit for the Packet type and therefore allows a maximum of 16 different Packet types.
 
-OpenPGP currently defines 17 different Packet types. The following paragraph gives an overview of the important Packet types. A detailed description can be found in [RFC4880]. \\ 
+OpenPGP currently defines 17 different Packet types. The following paragraph gives an overview of the important Packet types. A detailed description can be found in \todo{RFC4880}. \\ 
 
-Packets are composed to form the openPGP data structures, called Transferables. This is described in the next section. \\
 
 \textbf{Key related Packets} contain the cryptographic primitives used by openPGP. They hold and structure the actual key-bytes used by the different ciphers. In addition they hold metadata such as the identifying User-ID and information about the used algorithms.
 
@@ -57,28 +65,28 @@ Packets are composed to form the openPGP data structures, called Transferables. 
 	\end{itemize}
 \end{itemize}
 
-\textbf{Message related Packets} hold the protected data. In case of integrity protection and authentication they contain the signature of the data. In case of confidentiality they contain the ciphertext and encrypted session key used to encrypt the data.
+\textbf{Message related Packets} hold the protected data. In case of integrity protection and authentication they contain the signature of the data. In case of confidentiality they contain the encrypted data.
 Furthermore they hold the encrypted session key used to encrypt the data, used for the key exchange.
 
 \begin{itemize}
 	\item Key Exchange:
 	\begin{itemize}
-		\item \textit{Public-Key Encrypted Session Key} Packets (Tag 1)
-		\item \textit{Symmetric-Key Encrypted Session Key} Packets (Tag 3)
+		\item \textit{Public-Key Encrypted Session Key} Packet (Tag 1)
+		\item \textit{Symmetric-Key Encrypted Session Key} Packet (Tag 3)
 	\end{itemize}
 	
 	\item Message:
 	\begin{itemize}
 		\item \textit{Symmetrically Encrypted Data} Packet (Tag 9)
 		\item \textit{Symmetrically Encrypted Integrity Protected Data} Packet (Tag 18)
-		\item \textit{Modification Detection} Code Packet (Tag 19)
+		\item \textit{Modification Detection Code} Packet (Tag 19)
 		\item \textit{Literal Data} Packet (Tag 11)
 	\end{itemize}
 	
 	\item Signature:
 	\begin{itemize}
 		\item \textit{Signature} Packet (Tag 2)
-		\item \textit{One-Pass Signature} Packets (Tag 4)
+		\item \textit{One-Pass Signature} Packet (Tag 4)
 	\end{itemize}
 \end{itemize}
 
@@ -95,38 +103,41 @@ To illustrate the described structures, TODO shows the structure of a version 4 
 \end{figure}
 
 
-\subsection{Transferables}
+\section{Transferables}
+\label{section:messageformat:transferables}
 
-In this section we give an overview of the higher-level data structures used by openPGP, called Transferables.  \\
+In this section we give an overview of the higher-level data structures used by openPGP, called Transferables. In addition we introduce the four Transferables used by openPGP, public key, private key, message and detached signature.  \\
 
 Packets are representations of very basic data structures. To create openPGP messages and keys some of this Packets are composed in a meaningful way.
 
 A (defined) composition of Packets is called Transferable, since its purpose is to be transfered from one openPGP implementation to another or just to be stored and used later. \\
 
-OpenPGP defines four different Transferable types [RFC4880]. \\
+OpenPGP defines four different Transferable types \todo{RFC4880}. \\
 
-First of all it is necessary to export public and secret keys in form of Transferable Public Keys and Transferable Private Keys. This enables storing the keys in keyrings while the openPGP implementation is halted. Additionally it is necessary to transmit the public key to other parties of the communication, as described in section ??.  \\
+First of all it is necessary to export public and secret keys in form of \textit{Transferable Public Keys} and \textit{Transferable Private Keys}. This enables storing the keys in keyrings while the openPGP implementation is halted. Additionally it is necessary to transmit the public key to other parties of the communication, as described in section \ref{section:openpgp:functionality}. The structure of Transferable keys is explained in section \ref{section:messageformat:keys}.  \\
 
-The core functionality of openPGP is to securely transmit data. The third type of Transferables therefore is a composition of Packets representing such a OpenPGP Message. \\
+The core functionality of openPGP is to securely transmit data. The third type of Transferables therefore is a composition of Packets representing such a OpenPGP Message. The structure of Transferable messages is explained in section \ref{section:messageformat:messages}. \\
 
 Furthermore it is possible to transmit signatures separated from the actual signed data, so called Detached Signatures.
 
 \section{Keys}
+\label{section:messageformat:keys}
 
 In this section we given an overview of openPGP keys. We describe what an openPGP key-pair is and explain how multiple keys and identifying metadata are stored in one openPGP key. \\
 
-A openPGP key is a composition of multiple keys, identity information and other metadata. OpenPGP organizes key material in primary-key and subkeys. The primary key is a signing key used to issue signatures of data. Furthermore the primary key is used to sign (certify) all other (critical) key parts. A primary key can be used for encryption. If the primary key is only used for  signing but data encryption is still needed subkeys are required. Subkeys are additional keys inside the openPGP key. 
+An \textit{openPGP key} is a composition of multiple keys, identity information and other metadata. OpenPGP organizes key material in \textit{primary-key} and \textit{subkeys}. The primary key is a signing key used to issue signatures of data. Furthermore the primary key is used to sign (certify) all other (critical) key parts. In addition the primary key can be used to issue certifications of other keys, as explained in chapter \ref{section:messageformat:cert}. A primary key can be used for encryption. If the primary key is only used for  signing but data encryption is still needed subkeys are required. Subkeys are additional keys inside the openPGP key. 
 
-Identity information is stored in the openPGP key in form of a simple string. The identifying information is called User ID. Additionally it is possible to include images, so called User Attributes.
-
-Thanks to its asymmetric nature at last one key-pair is needed for every openPGP secured communication. A openPGP key-pair consists of a Transferable Public Key and it's corresponding Transferable Secret Key. 
+In addition to primary key and subkey identity information is stored in the openPGP key in form of simple strings. The identifying information is called \textit{User ID}. Furthermore it is possible to include images, so called \textit{User Attributes}. 
 
 Table \ref{fig:transferable-key} shows the structure of a Transferable Public Key to illustrate this. \\
 
-Since the public key is share over possibly insecure channels it needs to be protected. This is done by using the primary key to issue signatures over other key parts and appending the signatures to the key. The parts to protect are subkeys, User IDs and User Attributes. \\
+Because of the  asymmetric nature of openPGP at last one key-pair is needed for every openPGP secured communication. An openPGP key-pair consists of a Transferable Public Key and it's corresponding Transferable Secret Key. Both Transferable keys contain one or more keys. 
 
 
-In addition it is possible to revoke a key or certain parts of it. This is done by signing the part and appending the signature of a certain type. It is possible to revoke a subkey, the User ID, a User Attribute or the whole openPGP key.
+Since the public key is shared over possibly insecure channels it needs to be protected. This is done by using the primary key to issue signatures over other key parts and appending the signatures to the key. The parts to protect are subkeys, User IDs and User Attributes. Certification is explained in section \ref{section:messageformat:cert}. \\
+
+
+In addition it is possible to revoke a key or certain parts of it. This is done by signing the part and appending the signature of a certain type. It is possible to revoke a subkey, the User ID, a User Attribute or the whole openPGP key. Revocation is explained in section \ref{section:messageformat:cert}.
 
 \begin{figure}[h]
 	\centering
@@ -136,10 +147,11 @@ In addition it is possible to revoke a key or certain parts of it. This is done 
 \end{figure}
 
 \section{Messages}
+\label{section:messageformat:messages}
 
-In this section we given an overview of the structure of openPGP messages. We explain how various Packets are composed together to form a openPGP message. Furthermore we show how a openPGP Transferable is constructed during encryption and decryption of a openPGP message. \\
+In this section we given an overview of the structure of openPGP messages. We explain how various Packets are composed together to form an openPGP message. Furthermore we show how an openPGP Transferable is constructed during encryption and decryption of an openPGP message. \\
 
-An openPGP Message is a composition of different Packets. The actual data is contained in a Literal Data Packet. It is possible to compress and sign the data. In addition openPGP provides the functionality to encrypt the data and to ensure the integrity of the encrypted data.
+An openPGP Message is a composition of different Packets. The actual data is contained in a \textit{Literal Data Packet}. It is possible to compress and sign the data. In addition openPGP provides the functionality to encrypt the data and to ensure the integrity of the encrypted data.
 
 OpenPGP does not specify a precise structure of an openPGP Message, allowing various combinations of the involved Packets. For example it is not defined whether to sign the literal data and then compress or compress the data first and then sign the compressed data. In addition it is not defined whether sign-then-encrypt or encrypt-then-sign has to be performed. Thus the example shown in table \ref{fig:transferable-msg} shows only one possibility.
 
@@ -160,7 +172,7 @@ OpenPGP does not specify a precise structure of an openPGP Message, allowing var
 \end{figure}
 
 
-The process of encryption and decryption is shown in figure \ref{fig:encryption}. In table \ref{fig:transferable-msg} the data is encapsulated in a Literal Data Packet. This Data Packet is compressed, resulting in a Compressed Data Packet. The Compressed Data Packet is signed using the One-Pass mechanism. The three resulting Packets are encrypted using a symmetric cipher and a randomly generated session-key, resulting in a Symmetrically Encrypted Data Packet. The session-key is encrypted twice using two different public-keys, resulting in two Public-Key Encrypted Session Key Packets. \\
+The process of encryption and decryption is shown in figure \ref{fig:encryption}. In table \ref{fig:transferable-msg} the data is encapsulated in a\textit{ Literal Data Packet}. This Literal Data Packet is compressed, resulting in a \textit{Compressed Data Packet}. The Compressed Data Packet is signed using the \textit{One-Pass} mechanism. The three resulting Packets are encrypted using a symmetric cipher and a randomly generated session-key, resulting in a \textit{Symmetrically Encrypted Data Packet}. In this example the session-key is encrypted twice using two different public-keys, resulting in two \textit{Public-Key Encrypted Session Key Packets}. \\
 
 
 To decrypt the receiver first finds the Public-Key Encrypted Session Key Packet encrypted using their public key and uses their private key to decrypt the session-key. Afterward the session-key is used to decrypt the three Packets. The One-Pass Signature Packets holds the information needed to calculate the hash while decompressing the Compressed Data Packet. The resulting hash and the sender's public key are then used to verify the signature contained in the Signature Packet. 
@@ -168,19 +180,20 @@ To decrypt the receiver first finds the Public-Key Encrypted Session Key Packet 
 Afterward the Literal Data Packet can be used. This process can be seen on the right side of figure \ref{fig:encryption}.
 
 \section{Key Certification}
+\label{section:messageformat:cert}
 
-In this section we given an overview of how openPGP solves the problem of sender key exchange using insecure channels. We explain how the integrity of openPGP keys is protected. In addition we show how the binding between identity and key is ensured. Furthermore we describe how openPGP handles the revocation of keys. \\
+In this section we given an overview of how openPGP solves the problem of key exchange using insecure channels. We explain how the integrity of openPGP keys is protected. In addition we show how the binding between identity and key is ensured. Furthermore we describe how openPGP handles the revocation of keys. \\
 
 OpenPGP keys are typically exchanged over an insecure channel like the Internet. During transmission all parts of the key are subject to change by an attacker. Furthermore it is possible that an attacker creates a key on their own claiming a specific identity. Therefore it is necessary to authenticate a key before using it to encrypt data or verify signatures.
-This means it is required to verify the relationship between the identity information contained in an openPGP key and the actual key. In addition it is required to confirm the integrity of a key. \\
+This means it is required to verify the relationship between the identity information contained in an openPGP key and the actual key. In addition it is required to confirm the integrity of a key. This means ensuring that no part of the key has been changed during transmission. \\
 
-To enable this openPGP uses digital signatures in two ways. Self signatures are used to bind the different parts of a key together. Furthermore signatures by other keys are used to confirm the identity stored in the key. All signatures are formed by computing a hash-digest of the data to be signed, and then signing this hash.
+To enable this openPGP uses digital signatures in two ways. Self signatures are used to bind the different parts of a key together. Furthermore signatures by other keys are used to confirm the identity stored in the key, so called certifications. All signatures are formed by computing a hash-digest of the data to be signed, and then signing this hash. \\
 
-As shown in table TODO an openPGP key consists of different parts. The most important parts are the primary-key Packet, User ID Packets and Subkeys. To cryptographically bind those parts together signatures are used. A binding signature is formed over the Packet to bind and the key to bind the Packet to. Additionally some control bytes and a trailer containing metadata are appended.  \\
+\textbf{Binding signatures:} As shown in figure \ref{fig:transferable-key} an openPGP key consists of different parts. The most important parts are the primary-key, User ID  and Subkeys. To cryptographically bind those parts together signatures are used. A binding signature is formed over the Packet to bind and the key to bind the Packet to. Additionally some control bytes and a trailer containing metadata are appended.  \\
 
 The following list illustrates the structure of the hashed data for a User ID binding.
 
-\begin{itemize}
+\begin{itemize} \label{listing:signature}
 	\item Key to bind data to:
 	\begin{itemize}
 		\item $0x99$ (1 octet)
@@ -208,21 +221,22 @@ The following list illustrates the structure of the hashed data for a User ID bi
 	\end{itemize}
 \end{itemize}
 
-To ensure the integrity of a openPGP key self signatures are used to bind all key parts to the primary key. This is done by signing each key part together with the primary key using the primary key. Afterward the resulting signature is appended to the key part.
+To ensure the integrity of an openPGP key self signatures are used to bind all key parts to the primary key. This is done by signing each key part together with the primary key using the primary key. Afterward the resulting signature is appended to the key part as shown in figure \ref{fig:transferable-key}. \\
 
-Certification signatures are binding signatures issued by other keys. They confirm the authenticity of the signed key part. Specifically a signature over a User ID and a key means that the issuer of the signature endorses the relation between the key, the User ID and the real identity of the entity.
+\textbf{Certification signatures} are binding signatures issued by other keys. They confirm the authenticity of the signed key part. Specifically a signature over a User ID and a key means that the issuer of the signature endorses the relation between the key, the User ID and the real identity of the entity.
 
-The meaning of a certification is not defined by openPGP. More specifically it is not defined by what means the verification of the identity has to be performed. Thus it is possible that different openPGP users use certifications in a different way. \\
+The meaning of a certification is not defined by openPGP. More specifically it is not defined by what means the verification of the identity has to be performed. Thus it is possible that different openPGP users use certifications in a different way. This is further discussed in section \ref{section:concerns:usability}. \\
 
 To verify the integrity of an openPGP key an openPGP implementation has to verify the respective self-signed binding signatures. 
 
-To authenticate the identity information contained in a openPGP key an openPGP implementation has to verify a signature issued be an other key. To do so it is required to find a trust path from the own key to one of the binding signatures on the key. In addition it is necessary to verify all signatures contained in the path. The theory of Web of Trust was out of scope of this thesis. \\
+To authenticate the identity information contained in a openPGP key an openPGP implementation has to verify a signature issued be an other key. For this it uses the trust model called \textit{Web of Trust}. To do so it is required to find a trust path from the own key to one of the binding signatures on the key. In addition it is necessary to verify all signatures contained in the path. The Web of Trust is further discussed in chapter \ref{section:openpgp:functionality}. \\
 
-Furthermore openPGP provides the functionality to revoke signatures. This can be used to revoke parts of an openPGP key, for example to replace it. This is done by appending a signature of a certain type to the part to be revoked. An implementation checks if such a signature exists on the part it wants to process. The existence of such a signature invalidates the revoked part of the key. Thus the implementation is not using it. A reason for the revocation can be included into the signature's metadata. 
+Furthermore openPGP provides the functionality to \textbf{revoke signatures}. This can be used to revoke parts of an openPGP key, for example to replace it. This is done by appending a signature of a certain type to the part to be revoked, as shown in figure \ref{fig:transferable-key}. An implementation checks if such a signature exists on the part it wants to process. The existence of such a signature invalidates the revoked part of the key. Thus the implementation is not using it. A reason for the revocation can be included into the signature's metadata. 
 
-In general only the primary key is allowed to issue revocation signatures for it's parts. A revocation signature issued by another key does not provide any information. The only exceptions are keys who are allowed to issue revocation on the key. This is done by adding the key ID of a key to the key's metadata. An implementation checks whether the revocation signature has been issued by either the primary key or a key mentioned in the metadata. If this is not the case the revocation signature is ignored.
+In general only the primary key is allowed to issue revocation signatures for its own parts. A revocation signature issued by another key does not provide any information. The only exceptions are keys who are allowed to issue revocation on the key. This is done by adding the key ID of a key to the key's metadata. An implementation checks whether the revocation signature has been issued by either the primary key or a key mentioned in the metadata. If this is not the case the revocation signature is ignored.
 
-\subsection{Representation}
+\section{Representation}
+\label{section:messageformat:asciia}
 
 In this section we show how openPGP Transferables can be represented. We show how a key and a message look like while transferred. \\
 
