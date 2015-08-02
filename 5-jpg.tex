@@ -1,16 +1,16 @@
 \chapter{The \textit{Java Privacy Guard}} \label{chapter:jpg}
 
-In this chapter we given a brief overview of our implementation of the openPGP message format in Java. We show how we implemented the structures described in chapter 4. We illustrate the structure of our implementation. Furthermore we give an introduction of our API.
-Additionally we give discuss the implementation security and possible attacks on the implementation.  \\
+In this chapter we give a brief overview of our implementation of the openPGP message format in Java. We show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore we give an introduction of our API.
+Additionally we discuss the implementation security and possible attacks.  \\
 
 
-As practical part of this thesis we did an implementation of the openPGP message format [RFC4880] in the Java programing language, creating a library workingtitled Java Privacy Guard.
+As practical part of this thesis we did an implementation of the openPGP message format \todo{RFC4880} in the \textit{Java} programing language, creating a library workingtitled \textbf{Java Privacy Guard}.
 
-For cryptographic primitives like basic data types, encryption and digest algorithms we used the IAIK-JCE library. \\
+For cryptographic primitives like basic data types, encryption and digest algorithms we used the \textit{IAIK-JCE} library. \\
 
-The Packet- and Transferable-structure as described in chapter 4 represents the base-structure of our implementation. All Packets defined in [RFC4880] are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in [RFC4880]. \\
+The Packet- and Transferable-structure as described in chapter \ref{chapter:messageformat} represents the base-structure of our implementation. All Packets defined in \todo{RFC4880} are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in \todo{RFC4880}. \\
 
-Parsing and constructing of Transferables and other internal data processing heavily rely on Java's stream Architecture. This allows a fast and memory-saving flow of data. \\
+Parsing and constructing of Transferables and other internal data processing heavily rely on Java's stream architecture. This allows a fast and memory-saving flow of data. \\
 
 To facilitate the use of our implementation we crated two APIs for access to the library functionality. The APIs are explained in the following section.
 
@@ -20,13 +20,13 @@ In this section we given an overview of our two APIs. We highlight the differenc
 
 The high-level API represents the interface used by users of our library. It mostly consists of Transferable-classes and related toolbox-classes.
 
-The low-level API represents the inner working of the library. It is made up of all Packet-classes and toolbox-classes needed to work with them. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API.
+The low-level API represents the inner working of the library. It consists of all Packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API.
 
 \todo{Klassendiagramm ohne helper?) gives an overview of the main parts our library.}
 
 To illustrate the high-level API figure \ref{fig:jpg:key} shows how to load an openPGP key. In this example an keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
 
-Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's Stream-Architecture it is possible to process the ciphertext or just store it.
+Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's stream architecture it is possible to process the ciphertext or just store it.
 
 \begin{figure}[p]
 	\centering
@@ -56,13 +56,15 @@ Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data
 %
 %\subsection{GnuPG}
 
+\newpage
+
 \section{Implementation Security}
 In this section, we give an overview of the security measures of our implementation. 
-Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter 6 and in [RFC4880].  \\
+Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter \ref{cha:abstract} and in \todo{RFC4880}.  \\
 
-Basic security measures like constant-time implementations are taken into account by our implementation.  \\
+Basic security measures like constant-time implementations are taken into account by our implementation. 
 
-We use the IAIK-JCE toolbox to perform cryptographic operations and some other tasks. The toolbox is developed with a focus on security and well tested. No other external libraries are used. \\
+We use the IAIK-JCE toolbox to perform cryptographic operations and some other tasks. The toolbox is developed with a focus on security and well tested. No other external libraries are used. 
 
 Another issue are weak defaults for ciphers and other algorithms. Because of the generic nature of a library our implementation does not set any defaults. Thus the issue of bad defaults is shifted to the user of the library. \\
 
