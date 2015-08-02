@@ -240,20 +240,20 @@ In general only the primary key is allowed to issue revocation signatures for it
 
 In this section we show how openPGP Transferables can be represented. We show how a key and a message look like while transferred. \\
 
-Since openPGP defines the structure of Packets as a sequence of arbitrary bytes, the primary representation of a Transferable is also in byte format.
+Since openPGP defines the structure of Packets as a sequence of bytes, the primary representation of a Transferable is also in byte format.
 
-For many use-cases it is sufficient to store and transmit a Transferable in binary form. For example for storing the keys on a user's keychain or for transmitting over a channel which is able to transfer raw bytes. \\
+For many use-cases it is sufficient to store and transmit a Transferable in binary form. For example for storing the keys on a user's keyring or for transmitting over a channel which is able to transfer raw bytes. \\
 
 
-Since there are channel with are not able to transfer raw bytes there is a second way to represent openPGP Transferables. It is possible to convert a binary Transferable to ASCII-format. Such a representation of a binary openPGP Transferable is called ASCII-armored.
+Since there are channel with are not able to transfer raw bytes there is a second way to represent openPGP Transferables. It is possible to convert a binary Transferable to ASCII-format. Such a representation of a binary openPGP Transferable is called \textbf{ASCII-armored}.
 
-A ASCII-armored openPGP Transferable converts the raw bytes of a transferable to ASCII using the base64 algorithm [TODO: referenz]. In addition a crc24 [TODO: referenz] checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
+A ASCII-armored openPGP Transferable converts the raw bytes of a transferable to ASCII using the base64 algorithm \todo{TODO: referenz}. In addition a crc24 \todo{TODO: referenz} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
 
-Figure \ref{fig:key} shows a sample openPGP Transferable Public Key. (A short key was used for demonstration purposes.) The internal structure of this key is explained in table \ref{fig:transferable-key}
+Figure \ref{fig:key} shows a sample openPGP Transferable Public Key. The internal structure of this key is explained in table \ref{fig:transferable-key}
 
 A ASCII-armored openPGP Message encrypted with the subkey contained in the Transferable Public Key shown in figure \ref{fig:key} is shown in figure \ref{fig:msg}. The internal structure of this message is explained in table \ref{fig:transferable-msg}. \\
 
-\begin{figure}][p]
+\begin{figure}[p]
 	\centering
 	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/key-ecc.asc}
 	\caption{Sample ASCII-armored transferable openPGP public-key}
@@ -267,7 +267,7 @@ A ASCII-armored openPGP Message encrypted with the subkey contained in the Trans
 	\label{fig:msg}
 \end{figure}
 
-To process the actual Transferable a OpenPGP implementation first needs to remove the header and footer. Afterward a base64 parser can be used to recover the Packet bytes while calculating the crc24 checksum. Finally a (optional) comparison with the appended checksum is possible.
+To process the actual Transferable a OpenPGP implementation first removes the header and footer. Afterward a base64 parser is used to recover the Packet bytes while calculating the crc24 checksum. Finally a (optional) comparison with the appended checksum is performed.
 
 
 
