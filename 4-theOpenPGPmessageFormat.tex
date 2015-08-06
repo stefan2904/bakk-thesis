@@ -31,7 +31,7 @@ In chapter \ref{section:messageformat:messages} we discuss how encryption and de
 \section{Packets}
 \label{section:messageformat:packets}
 
-In this section we give an overview of the basic building blocks of openPGP called \textit{Packets}\todo{RFC4880}. We describe how openPGP organizes data on it's lowest level. We list and describe some important Packets. Furthermore we show the structure of a Packet by example.  \\
+In this section we give an overview of the basic building blocks of openPGP called \textit{Packets} \cite[section 5]{RFC4880}. We describe how openPGP organizes data on it's lowest level. We list and describe some important Packets. Furthermore we show the structure of a Packet by example.  \\
 
 Packets are composed to form the openPGP data structures, called Transferables. This is described in section \ref{section:messageformat:transferables}. \\
 
@@ -44,7 +44,7 @@ The structure of the Packet body is depended on the type of the Packet. \\
 
 OpenPGP defines two different versions of Packets (version 3 and 4). The main difference between the version is the structure of the packet-header. The new version allows 64 different Packet types. The old version reserves only 4 bit for the Packet type and therefore allows a maximum of 16 different Packet types.
 
-OpenPGP currently defines 17 different Packet types. The following paragraph gives an overview of the important Packet types. A detailed description can be found in \todo{RFC4880}. \\ 
+OpenPGP currently defines 17 different Packet types. The following paragraph gives an overview of the important Packet types. A detailed description can be found in \cite[section 5]{RFC4880}. \\ 
 
 
 \textbf{Key related Packets} contain the cryptographic primitives used by openPGP. They hold and structure the actual key-bytes used by the different ciphers. In addition they hold metadata such as the identifying User-ID and information about the used algorithms.
@@ -112,7 +112,7 @@ Packets are representations of very basic data structures. To create openPGP mes
 
 A (defined) composition of Packets is called Transferable, since its purpose is to be transfered from one openPGP implementation to another or just to be stored and used later. \\
 
-OpenPGP defines four different Transferable types \todo{RFC4880}. \\
+OpenPGP defines four different Transferable types \cite[section 11]{RFC4880}. \\
 
 First of all it is necessary to export public and secret keys in form of \textit{Transferable Public Keys} and \textit{Transferable Private Keys}. This enables storing the keys in keyrings while the openPGP implementation is halted. Additionally it is necessary to transmit the public key to other parties of the communication, as described in section \ref{section:openpgp:functionality}. The structure of Transferable keys is explained in section \ref{section:messageformat:keys}.  \\
 
@@ -247,7 +247,7 @@ For many use-cases it is sufficient to store and transmit a Transferable in bina
 
 Since there are channel with are not able to transfer raw bytes there is a second way to represent openPGP Transferables. It is possible to convert a binary Transferable to ASCII-format. Such a representation of a binary openPGP Transferable is called \textbf{ASCII-armored}.
 
-A ASCII-armored openPGP Transferable converts the raw bytes of a transferable to ASCII using the base64 algorithm \todo{TODO: referenz}. In addition a crc24 \todo{TODO: referenz} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
+A ASCII-armored openPGP Transferable converts the raw bytes of a Transferable to ASCII using the Base64 algorithm \citep{RFC4648}. In addition a CRC-24 \cite[section 6.1]{RFC4880} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
 
 Figure \ref{fig:key} shows a sample openPGP Transferable Public Key. The internal structure of this key is explained in table \ref{fig:transferable-key}
 
@@ -267,7 +267,7 @@ A ASCII-armored openPGP Message encrypted with the subkey contained in the Trans
 	\label{fig:msg}
 \end{figure}
 
-To process the actual Transferable a OpenPGP implementation first removes the header and footer. Afterward a base64 parser is used to recover the Packet bytes while calculating the crc24 checksum. Finally a (optional) comparison with the appended checksum is performed.
+To process the actual Transferable a OpenPGP implementation first removes the header and footer. Afterward a Base64 parser is used to recover the Packet bytes while calculating the CRC-24 checksum. Finally a (optional) comparison with the appended checksum is performed.
 
 
 

@@ -1,14 +1,14 @@
 \chapter{The \textit{Java Privacy Guard}} \label{chapter:jpg}
 
-In this chapter we give a brief overview of our implementation of the openPGP message format in Java. We show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore we give an introduction of our API.
-Additionally we discuss the implementation security and possible attacks.  \\
+In this chapter we give a brief overview of our implementation of the openPGP message format in Java. We show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore we give an introduction of our API. \\
+%Additionally we discuss the implementation security and possible attacks.  \\
 
 
-As practical part of this thesis we did an implementation of the openPGP message format \todo{RFC4880} in the \textit{Java} programing language, creating a library workingtitled \textbf{Java Privacy Guard}.
+As practical part of this thesis we did an implementation of the openPGP message format \cite{RFC4880} in the \textit{Java} programing language, creating a library workingtitled \textbf{Java Privacy Guard}.
 
 For cryptographic primitives like basic data types, encryption and digest algorithms we used the \textit{IAIK-JCE} library. \\
 
-The Packet- and Transferable-structure as described in chapter \ref{chapter:messageformat} represents the base-structure of our implementation. All Packets defined in \todo{RFC4880} are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in \todo{RFC4880}. \\
+The Packet- and Transferable-structure as described in chapter \ref{chapter:messageformat} represents the base-structure of our implementation. All Packets defined in \cite[section 5]{RFC4880} are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in \cite[section 11]{RFC4880}. \\
 
 Parsing and constructing of Transferables and other internal data processing heavily rely on Java's stream architecture. This allows a fast and memory-saving flow of data. \\
 
@@ -72,7 +72,7 @@ Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data
 
 \section{Implementation Security}
 In this section, we give an overview of the security measures of our implementation. 
-Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter \ref{cha:abstract} and in \todo{RFC4880}.  \\
+Security concerns, as long as they affect the actual design of the openPGP standard, are discussed in chapter \ref{chapter:concerns} and in \cite[section 14]{RFC4880}.  \\
 
 Basic security measures like constant-time implementations are taken into account by our implementation. 
 
@@ -80,9 +80,9 @@ We use the IAIK-JCE toolbox to perform cryptographic operations and some other t
 
 Another issue are weak defaults for ciphers and other algorithms. Because of the generic nature of a library our implementation does not set any defaults. Thus the issue of bad defaults is shifted to the user of the library. \\
 
-Since all openPGP implementations can be used as oracle [TODO schneier paper] it is recommended not to use openPGP in an unprotected and interactive mode. Due to the non-interactive nature of common applications (email) this was not taken into account.
+%Since all openPGP implementations can be used as oracle [TODO schneier paper] it is recommended not to use openPGP in an unprotected and interactive mode. Due to the non-interactive nature of common applications (email) this was not taken into account.
 
-\todo{list attacks and show how our implementation reacts to it?}
+%\todo{list attacks and show how our implementation reacts to it?}
 
 
 

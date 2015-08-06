@@ -47,14 +47,14 @@ In this chapter we discuss the security of the algorithms used by openPGP.  \\
 
 %TODO: Never say things like "SSL is considered to be secure" without stating who is doing the considering.
 
-Most of the algorithms used by openPGP are still considered secure. \todo{Referenz?}
-The two exceptions are the \textit{MD5} and \textit{SHA-1} algorithms used for digital signatures and message authentication. 
+Most of the algorithms used by openPGP are still considered secure. 
+The two exceptions are the \textit{MD5} \citep{XieLF13} and \textit{SHA-1} \citep{stevens2012attacks} algorithms used for digital signatures and message authentication. 
 
 \textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}.   \\
 
 OpenPGP is not using authenticated ciphers to detect modifications to encrypted messages.
 Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
-Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{SHA1attack} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The openPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
+Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stevens2012attacks} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The openPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
 
 %TODO: "Incorporating a new hash function in OpenPGP and SSL/TLS"
 
