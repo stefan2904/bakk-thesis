@@ -16,15 +16,27 @@ To facilitate the use of our implementation we crated two APIs for access to the
 
 \section{The APIs}
 
-In this section we given an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the openPGP message format. Furthermore we show how the high-level API can be used to perform basic openPGP operations. \\
+In this section we given an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the openPGP message format. Furthermore we show how the high-level API can be used to perform basic openPGP operations. Figure \ref{fig:transferablehierarchy} illustrates the structure of the high-level API. \\
 
 The high-level API represents the interface used by users of our library. It mostly consists of Transferable-classes and related toolbox-classes.
 
-The low-level API represents the inner working of the library. It consists of all Packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API.
+The low-level API represents the inner working of the library. It consists of all Packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API. Figure \ref{fig:packethierarchy} illustrates the structure of the low-level API.
 
-\todo{Klassendiagramm ohne helper?) gives an overview of the main parts our library.}
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/TransferableHierarchy.pdf}
+	\caption[]{The high-level API: Transferable hierarchy }
+	\label{fig:transferablehierarchy}
+\end{figure}
 
-To illustrate the high-level API figure \ref{fig:jpg:key} shows how to load an openPGP key. In this example an keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=1\linewidth]{figures/PacketHierarchy.pdf}
+	\caption[]{The low-level API: Packet hierarchy }
+	\label{fig:packethierarchy}
+\end{figure}
+
+To illustrate the functionality of the high-level API figure \ref{fig:jpg:key} shows how to load an openPGP key. In this example an keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
 
 Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's stream architecture it is possible to process the ciphertext or just store it.
 
