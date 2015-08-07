@@ -1,6 +1,26 @@
 \chapter{Introduction}
 
-It is \textit{Year 1 after Snowden} and we lost trust in every single component of digital communication. In every single one? No! A tiny standard resists the pressure and keeps our secrets what they should be, secret. I proudly introduce: openPGP!
+It is \textit{Year 2 after Snowden} and we lost trust in every single component of digital communication. In every single one? No! A tiny standard resists the pressure and keeps our secrets what they should be, secret. I proudly introduce: openPGP! \\
+
+
+On open networks like the Internet it is possible for everyone eavesdropping on the communication to read the transmitted message. In addition it is possible to change the content of such a message. furthermore an attacker can spoof a message, claiming the identity of a third party.
+To securely exchange messages using insecure networks like the Internet it is therefore required to protect the transmitted message. The favored properties of such a protection are thus Confidentiality, Integrity and Authenticity. \\
+
+
+% 3 ... openpgp
+The \textit{openPGP Message Protocol} is an Internet standard providing exactly those properties.  This is done by combining several algorithms to encrypt messages ahead of transmitting them. In addition digital signatures are used to provide integrity. OpenPGP provides an end-to-end protection of messages. It is therefore possible to use untrusted communication components for transmission.
+In chapter \ref{chapter:openpgp} of this thesis we give an overview of the openPGP Message Protocol and its ecosystem. \\
+
+% 4 ... message format / data / algorithms
+OpenPGP achieves the mentioned properties by defining a structure for data and various procedures. The details of openPGP's data structures and how they are used by the algorithms are discussed in chapter \ref{chapter:messageformat}. \\
+
+
+% 5 ... jpg
+We used the \textit{IAIK-JCE} toolkit for the Java programming language to do our own implementation of openPGP. Doing so we implemented the data structures defined in the openPGP standard. Furthermore we used the IAIK-JCE to provide the required procedures. We implemented encryption, signing and key management. Our implementation is based on the Java stream architecture. We present this implementation, the \textit{Java Privacy Guard}, in chapter \ref{chapter:jpg}. \\
+
+% 6 ... concerns
+One concern of the openPGP standard affects the used algorithms. Since various algorithms are used in openPGP its secrity depends on the security of those algorithms. In addition it is required to take care of the parameters of those algorithms. Another concern applies to the usability of openPGP implementations. Since openPGP is used in an non-interactive way it requires a lot of user interaction.
+Chapter \ref{chapter:concerns} covers general security and usability concerns.
 
 %
 %The introduction is your entire thesis in, say, 1-2 pages. If someone reads
