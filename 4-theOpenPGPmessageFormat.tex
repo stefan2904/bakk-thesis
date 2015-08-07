@@ -31,7 +31,7 @@ In chapter \ref{section:messageformat:messages} we discuss how encryption and de
 \section{Packets}
 \label{section:messageformat:packets}
 
-In this section we give an overview of the basic building blocks of openPGP called \textit{Packets} \cite[section 5]{RFC4880}. We describe how openPGP organizes data on it's lowest level. We list and describe some important Packets. Furthermore we show the structure of a Packet by example.  \\
+In this section we give an overview of the basic building blocks of openPGP called \textit{Packets} \cite[section 5]{RFC4880}. We describe how openPGP organizes data on its lowest level. We list and describe some important Packets. Furthermore we show the structure of a Packet by example.  \\
 
 Packets are composed to form the openPGP data structures, called Transferables. This is described in section \ref{section:messageformat:transferables}. \\
 
@@ -131,7 +131,7 @@ In addition to primary key and subkey identity information is stored in the open
 
 Table \ref{fig:transferable-key} shows the structure of a Transferable Public Key to illustrate this. \\
 
-Because of the  asymmetric nature of openPGP at last one key-pair is needed for every openPGP secured communication. An openPGP key-pair consists of a Transferable Public Key and it's corresponding Transferable Secret Key. Both Transferable keys contain one or more keys. 
+Because of the  asymmetric nature of openPGP at last one key-pair is needed for every openPGP secured communication. An openPGP key-pair consists of a Transferable Public Key and its corresponding Transferable Secret Key. Both Transferable keys contain one or more keys. 
 
 
 Since the public key is shared over possibly insecure channels it needs to be protected. This is done by using the primary key to issue signatures over other key parts and appending the signatures to the key. The parts to protect are subkeys, User IDs and User Attributes. Certification is explained in section \ref{section:messageformat:cert}. \\
