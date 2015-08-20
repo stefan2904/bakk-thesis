@@ -2,7 +2,7 @@
 
 %\subsection{Security Evaluation Of Cryptographic Schemes}
 
-In this chapter we give an overview of known concerns with the openPGP standard. A detailed security evaluation of openPGP was out of scope of this thesis. We give an overview of current keylength recommendations. Furthermore we discuss the security of algorithms used by openPGP. In addition we highlight some complicacy concerning the security of keys itself. Finally we discuss the usability of openPGP. \\
+In this chapter we give an overview of known concerns about the OpenPGP standard. A detailed security evaluation of OpenPGP was out of scope of this thesis. We give an overview of current keylength recommendations. Furthermore we discuss the security of algorithms used by OpenPGP. In addition we highlight some complicacy concerning the security of keys itself. Finally we discuss the usability of OpenPGP. \\
 
 It should be noted that at the time of writing of this thesis the used schemes were undergoing a security evaluation \citep{TUB2015}.
 
@@ -14,9 +14,9 @@ It should be noted that at the time of writing of this thesis the used schemes w
 
 The following section gives a brief overview of the question of key lengths. It furthermore summarizes the current recommendations for keylengths. 
 
-Various algorithms are used in openPGP, whose strengths are not strictly defined in the standard. 
+Various algorithms are used in OpenPGP, whose strengths are not strictly defined in the standard. 
 Only a recommendation of hash sizes and key lengths is given \citep[section 14]{RFC4880}.
-The recommended values at the time of writing of the openPGP standard are shown in table \ref{tab:keylengths}.
+The recommended values at the time of writing of the OpenPGP standard are shown in table \ref{tab:keylengths}.
 
 \begin{table}[h]
 	\centering
@@ -29,15 +29,15 @@ The recommended values at the time of writing of the openPGP standard are shown 
 		\hline $>>>$ 2030     & 15360 & 512 & 256 \\ 
 		\hline 
 	\end{tabular}
-	\label{tab:keylengths}
 	\caption{Strengths for algorithms as recommended in \citep[section 14]{RFC4880}} 
+		\label{tab:keylengths}
 \end{table}
 
 The current NIST and BSI recommendations for cipher and hash strengths confirm the recommendations given \cite{keylenNIST} \cite{KeylenBSI}. 
 
 \section{Algorithms}
 
-In this chapter we discuss the security of the algorithms used by openPGP.  \\
+In this chapter we discuss the security of the algorithms used by OpenPGP.  \\
 
 % MD5: deprecated
 
@@ -47,14 +47,14 @@ In this chapter we discuss the security of the algorithms used by openPGP.  \\
 
 %TODO: Never say things like "SSL is considered to be secure" without stating who is doing the considering.
 
-Most of the algorithms used by openPGP are still considered secure. 
+Most of the algorithms used by OpenPGP are still considered secure. 
 The two exceptions are the \textit{MD5} \citep{XieLF13} and \textit{SHA-1} \citep{stevens2012attacks} algorithms used for digital signatures and message authentication. 
 
-\textit{MD5} is already deprecated in the current openPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}.   \\
+\textit{MD5} is already deprecated in the current OpenPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}.   \\
 
 OpenPGP is not using authenticated ciphers to detect modifications to encrypted messages.
 Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
-Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stevens2012attacks} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The openPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
+Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stevens2012attacks} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The OpenPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
 
 %TODO: "Incorporating a new hash function in OpenPGP and SSL/TLS"
 
@@ -71,15 +71,15 @@ Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stev
 
 \section{The Case On Usability} \label{section:concerns:usability}
 
-In this section we discuss the usability of openPGP implementations. Furthermore we review the implications the openPGP standard itself brings in point of usability. \\
+In this section we discuss the usability of OpenPGP implementations. Furthermore we review the implications the OpenPGP standard itself brings in terms of usability. \\
 
 % KEY EXCHANGE
 
-The usability of openPGP implementations is a critical factor. As usability evaluations of such implementations \cite{Whitten1999} have shown, ``effective security requires a different usability standard, and will not be achieved through the user interface design techniques appropriate to other types of consumer software''.
+The usability of OpenPGP implementations is a critical factor. As usability evaluations of such implementations \cite{Whitten1999} have shown, ``effective security requires a different usability standard, and will not be achieved through the user interface design techniques appropriate to other types of consumer software''.
 
-This is often hard to achieve due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, since the sender's and receiver's openPGP implementations never directly talk to each other. \\
+This is often hard to achieve due to the nature of non-transparent encryption and asynchronous communication \citep[section 2.1]{RFC4880}, since the sender's and receiver's OpenPGP implementations never directly talk to each other. \\
 
-To establish a end to end encrypted communication it is therefor necessary to manually create the key-pairs and to establish a manual key exchange as describe in section \ref{section:openpgp:functionality}. This results in a number of security and usability problems.  \\
+To establish an end to end encrypted communication it is therefore necessary to manually create the key-pairs and to establish a manual key exchange as describe in section \ref{section:openpgp:functionality}. This results in a number of security and usability problems.  \\
 
 % TRUST / WEB OF TRUST
 
@@ -89,13 +89,13 @@ One way of doing this is by transmitting the key's fingerprint over a trusted ch
 
 Another way of doing this is the \textit{Web of Trust}, as described in chapter \ref{section:openpgp:functionality}. \\
 
-An issue of the Web of Trust concerns the definition of trust. Since the openPGP standard \cite{RFC4880} does not specify the precise meaning of a certification it is unclear what means of identity-verification have to be performed before issuing a certification. A possible solution to this problem is the publication of textual description of one's certification policy. In addition it is suggested to always follow common best practice.   \\
+An issue of the Web of Trust concerns the definition of trust. Since the OpenPGP standard \cite{RFC4880} does not specify the precise meaning of a certification it is unclear what means of identity-verification have to be performed before issuing a certification. A possible solution to this problem is the publication of textual description of one's certification policy. In addition it is suggested to always follow common best practice.   \\
 
-Another issue of the Web of Trust is the fact that it reveals the social structures of openPGP users. A suggested countermeasure is to certify keys of unrelated people. In the FLOSS community this is done at so called keysigning parties.  \\
+Another issue of the Web of Trust is the fact that it reveals the social structures of OpenPGP users. A suggested countermeasure is to certify keys of unrelated people. In the FLOSS community this is done at so called keysigning parties.  \\
 
-All suggested measures and the Web of Trust itself require interaction by the user. This makes using openPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
+All suggested measures and the Web of Trust itself require interaction by the user. This makes using OpenPGP harder and has a strong effect on its adoption-rate, compared to transparent encryption systems \cite{Green2014}. \\
 
-Another usability issue applies to the fact that many modern e-mail clients are web-based. Since openPGP implementations are programs running on the client, access from web-applications is limited. webbrowser-integrations are a possible solution to this problem. 
+Another usability issue applies to the fact that many modern e-mail clients are web-based. Since OpenPGP implementations are programs running on the client, access from web-applications is limited. Webbrowser integrations are a possible solution to this problem. 
 
 % SIDECHANNEL: KeyServer knows whick keys you requested, MITM possible if HTTP and not HTTPS
 
@@ -126,7 +126,7 @@ Another usability issue applies to the fact that many modern e-mail clients are 
 % * unsupported features
 % * JCA integration? / keystore
 
-%TODO: future work, re openPGP
+%TODO: future work, re OpenPGP
 % * security evaluation
 % * new ciphers
 % * usability evaluation (also security usability in general -> concepts, interaction/transparent, mobile ...)

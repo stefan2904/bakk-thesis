@@ -1,12 +1,12 @@
 \chapter{Preliminaries}
 \label{chapter:pre}
 
-In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between Symmetric and Asymmetric Cryptography. In addition we describe the meaning of Key ID, Fingerprint and Keyring. Furthermore we show the principles of cryptography in Java and the library we used for our implementation.
+In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between symmetric and asymmetric cryptography. In addition we describe the meaning of key id, fingerprint and keyring. Furthermore we show the principles of cryptography in Java and the library we used for our implementation.
 
 \section{Symmetric Cryptography} \label{section:pre:symcrypto}
 
 
-A encryption function (cipher) is a transformation in the sense that it transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{Symmetric Cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}.
+An encryption function (cipher) is a transformation which transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{Symmetric Cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}. Equations \ref{eq:skencrypt} and \ref{eq:skdecrypt} illustrate this process.
 
 \begin{equation} \label{eq:skencrypt}
 	cipherText = encryptCipher(plainText, key)
@@ -42,9 +42,9 @@ In contrast to  {Symmetric Cryptography}, \textit{Public-Key Cryptography} refer
 \section{Key ID \&{} Fingerprint}
 \label{section:pre:keyid}
 
-A Fingerprint is a character or byte sequence which is used to identify a key.
-A \textit{Key ID} is the short form of a Fingerprint.
-For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the Key ID are the low-order 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
+A fingerprint is a character or byte sequence which is used to identify a key.
+A \textit{key id} is the short form of a fingerprint.
+For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the key id are the low-order 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
 This is further explained in \cite[section 12.2]{RFC4880}.
 
 %\section{Message Integrity Protection}
@@ -52,9 +52,9 @@ This is further explained in \cite[section 12.2]{RFC4880}.
 \section{Keyring}
 \label{section:pre:keyring}
 
-A \textit{Keyring} is a persistent collection of keys. 
+A \textit{keyring} is a persistent collection of keys. 
 In general a Keyring is a list of public- and private-keys. It can be saved to a disc or stored otherwise. 
-A Keyring stores all the keys used by a cryptographic software.
+A keyring stores all the keys used by a cryptographic software.
 This is further explained in \cite[section 3.6]{RFC4880}.
 
 %\section{SSL / TLS}
@@ -67,7 +67,7 @@ This is further explained in \cite[section 3.6]{RFC4880}.
 
 \section{Java Crypto Architecture} \label{section:pre:jca}
 
-The \textit{Java Crypto Architecture} (JCA) provides a basic framework for working with cryptographic primitives in Java \cite{JCA}. Furthermore it defined an API for working with encryption and other more advanced cryptographic primitives.
+The \textit{Java Crypto Architecture} (JCA) provides a basic framework for working with cryptographic primitives in Java \cite{JCA}. Furthermore it defines an API for working with encryption and other more advanced cryptographic primitives.
 The \textit{Java Cryptography Extension} (JCE) provides implementation of cryptographic algorithms. JCE implements the API defined by JCA. 
 
 \section{IAIK-JCE} \label{section:pre:jce} 
