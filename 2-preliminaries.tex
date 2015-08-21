@@ -6,7 +6,7 @@ In this chapter we explain the basic concepts required to understand this thesis
 \section{Symmetric Cryptography} \label{section:pre:symcrypto}
 
 
-An encryption function (cipher) is a transformation which transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{Symmetric Cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}. Equations \ref{eq:skencrypt} and \ref{eq:skdecrypt} illustrate this process.
+An encryption function (cipher) is a transformation which transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{symmetric cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}. Equations \ref{eq:skencrypt} and \ref{eq:skdecrypt} illustrate this process.
 
 \begin{equation} \label{eq:skencrypt}
 	cipherText = encryptCipher(plainText, key)
@@ -20,7 +20,7 @@ An encryption function (cipher) is a transformation which transfers a given \tex
 \section{Public-Key Cryptography}
 \label{section:pre:publiccrypto}
 
-In contrast to  {Symmetric Cryptography}, \textit{Public-Key Cryptography} references a class of cryptographic algorithms which require two different keys \citep[section 1.8]{HAC}. The so called public key is used to encrypt a message. On the other hand, a private key is needed to decrypt the message. Therefore Public-key cryptography is also called \textit{Asymmetric Cryptography}.  The process principle is illustrated in equations \ref{eq:pkencrypt} and \ref{eq:pkdecrypt}. 
+In contrast to  {symmetric cryptography}, \textit{public-key cryptography} references a class of cryptographic algorithms which require two different keys \citep[section 1.8]{HAC}. The so called public key is used to encrypt a message. On the other hand, a private key is needed to decrypt the message. Therefore public-key cryptography is also called \textit{asymmetric cryptography}.  The process principle is illustrated in equations \ref{eq:pkencrypt} and \ref{eq:pkdecrypt}. 
 
 \begin{equation} \label{eq:pkencrypt}
 	cipherText = encryptCipher(plainText, publicKey)
@@ -44,7 +44,7 @@ In contrast to  {Symmetric Cryptography}, \textit{Public-Key Cryptography} refer
 
 A fingerprint is a character or byte sequence which is used to identify a key.
 A \textit{key id} is the short form of a fingerprint.
-For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the key id are the low-order 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
+For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the key id are the lower 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
 This is further explained in \cite[section 12.2]{RFC4880}.
 
 %\section{Message Integrity Protection}
@@ -53,7 +53,7 @@ This is further explained in \cite[section 12.2]{RFC4880}.
 \label{section:pre:keyring}
 
 A \textit{keyring} is a persistent collection of keys. 
-In general a Keyring is a list of public- and private-keys. It can be saved to a disc or stored otherwise. 
+In general a keyring is a list of public- and private-keys. It can be saved to a disc or stored otherwise. 
 A keyring stores all the keys used by a cryptographic software.
 This is further explained in \cite[section 3.6]{RFC4880}.
 
