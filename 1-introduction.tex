@@ -3,12 +3,12 @@
 %It is \textit{Year 2 after Snowden} and we lost trust in every single component of digital communication. In every single one? No! A tiny standard resists the pressure and keeps our secrets what they should be, secret. I proudly introduce: OpenPGP! \\
 
 
-On insecure networks like the Internet it is possible for everyone eavesdropping on the communication to read the transmitted message. In addition it is possible to change the content of such a message. Furthermore an attacker can spoof a message, claiming the identity of a third party.
+On insecure networks like the Internet it is possible for everyone eavesdropping on the communication to read the transmitted message. In addition, it is possible to change the content of such a message. Furthermore, an attacker can spoof a message, claiming the identity of a third party.
 To securely exchange messages using insecure networks like the Internet it is therefore required to protect the transmitted message. The favored properties of such a protection are thus confidentiality, integrity and authenticity. \\
 
 
 % 3 ... openpgp
-The \textit{OpenPGP Message Protocol} is an Internet standard providing exactly those properties.  This is done by combining several algorithms to encrypt messages ahead of transmitting them. In addition digital signatures are used to provide integrity. OpenPGP provides an end-to-end protection of messages. It is therefore possible to use untrusted communication components for transmission.
+The \textit{OpenPGP Message Protocol} is an Internet standard providing exactly those properties.  This is done by combining several algorithms to encrypt messages ahead of transmitting them. In addition, digital signatures are used to provide integrity. OpenPGP provides an end-to-end protection of messages. It is therefore possible to use untrusted communication components for transmission.
 In chapter \ref{chapter:openpgp} of this thesis we give an overview of the OpenPGP Message Protocol and its ecosystem. \\
 
 % 4 ... message format / data / algorithms
@@ -16,10 +16,10 @@ OpenPGP achieves the properties mentioned by defining a structure for data and v
 
 
 % 5 ... jpg
-We used the \myacro{IAIK-JCE} toolkit for the Java programming language in our own implementation of OpenPGP. Doing so we implemented the data structures defined in the OpenPGP standard. Furthermore we used the IAIK-JCE to provide the required procedures specified by the OpenPGP standard. We implemented encryption, signing and key management. Our implementation is based on the Java stream architecture. We present this implementation, the \textit{Java Privacy Guard}, in chapter \ref{chapter:jpg}. \\
+We used the \myacro{IAIK-JCE} toolkit for the Java programming language in our own implementation of OpenPGP. Doing so we implemented the data structures defined in the OpenPGP standard. Furthermore, we used the IAIK-JCE to provide the required procedures specified by the OpenPGP standard. We implemented encryption, signing and key management. Our implementation is based on the Java stream architecture. We present this implementation, the \textit{Java Privacy Guard}, in chapter \ref{chapter:jpg}. \\
 
 % 6 ... concerns
-One concern of the OpenPGP standard affects the used algorithms. Since various algorithms are used in OpenPGP its security depends on the security of those algorithms. In addition it is required to carefully pick values for the parameters of those algorithms. Another concern applies to the usability of OpenPGP implementations. Since OpenPGP is used in a non-transparent way, it requires a lot of user interaction.
+One concern of the OpenPGP standard affects the used algorithms. Since various algorithms are used in OpenPGP its security depends on the security of those algorithms. In addition, it is required to carefully pick values for the parameters of those algorithms. Another concern applies to the usability of OpenPGP implementations. Since OpenPGP is used in a non-transparent way, it requires a lot of user interaction.
 Chapter \ref{chapter:concerns} covers general security and usability concerns.
 
 %

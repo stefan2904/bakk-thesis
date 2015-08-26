@@ -1,7 +1,7 @@
 \chapter{Preliminaries}
 \label{chapter:pre}
 
-In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between symmetric and asymmetric cryptography. In addition we describe the meaning of key id, fingerprint and keyring. Furthermore we show the principles of cryptography in Java and the library we used for our implementation.
+In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between symmetric and asymmetric cryptography. In addition we describe the meaning of key ID, fingerprint and keyring. Furthermore we show the principles of cryptography in Java and the library we used for our implementation.
 
 \section{Symmetric Cryptography} \label{section:pre:symcrypto}
 
@@ -9,25 +9,25 @@ In this chapter we explain the basic concepts required to understand this thesis
 An encryption function (cipher) is a transformation which transfers a given \textit{plaintext} so that its meaning cannot be understood anymore \citep[section 1.4]{HAC}. In the context of \textit{symmetric cryptography} this transfer is parametrized by a so called \textit{encryption key}  \citep[section 1.5]{HAC}. Equations \ref{eq:skencrypt} and \ref{eq:skdecrypt} illustrate this process.
 
 \begin{equation} \label{eq:skencrypt}
-	cipherText = encryptCipher(plainText, key)
+	\text{cipherText} = \text{encryptCipher}(\text{plainText}, \text{key})
 \end{equation}
 
 \begin{equation} \label{eq:skdecrypt}
-	plainText = decryptCipher(cipherText, key)
+	\text{plainText} = \text{decryptCipher}(\text{cipherText}, \text{key})
 \end{equation}
 
 
 \section{Public-Key Cryptography}
 \label{section:pre:publiccrypto}
 
-In contrast to  {symmetric cryptography}, \textit{public-key cryptography} references a class of cryptographic algorithms which require two different keys \citep[section 1.8]{HAC}. The so called public key is used to encrypt a message. On the other hand, a private key is needed to decrypt the message. Therefore public-key cryptography is also called \textit{asymmetric cryptography}.  The process principle is illustrated in equations \ref{eq:pkencrypt} and \ref{eq:pkdecrypt}. 
+In contrast to  {symmetric cryptography}, \textit{public-key cryptography} references a class of cryptographic algorithms which require two different keys \citep[section 1.8]{HAC}. The so called public key is used to encrypt a message. On the other hand, a private key is needed to decrypt the message. Therefore, public-key cryptography is also called \textit{asymmetric cryptography}.  The process principle is illustrated in equations \ref{eq:pkencrypt} and \ref{eq:pkdecrypt}. 
 
 \begin{equation} \label{eq:pkencrypt}
-	cipherText = encryptCipher(plainText, publicKey)
+	\text{cipherText} = \text{encryptCipher}(\text{plainText}, \text{publicKey})
 \end{equation}
 
 \begin{equation} \label{eq:pkdecrypt}
-	plainText = decryptCipher(cipherText, privateKey)
+	\text{plainText} = \text{decryptCipher}(\text{cipherText}, \text{privateKey})
 \end{equation}
 
 %\section{Public Key Infrastructure \&{} X.509}
@@ -43,7 +43,7 @@ In contrast to  {symmetric cryptography}, \textit{public-key cryptography} refer
 \label{section:pre:keyid}
 
 A fingerprint is a character or byte sequence which is used to identify a key.
-A \textit{key id} is the short form of a fingerprint.
+A \textit{key ID} is the short form of a fingerprint.
 For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the key id are the lower 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
 This is further explained in \cite[section 12.2]{RFC4880}.
 
@@ -73,7 +73,7 @@ The \textit{Java Cryptography Extension} (JCE) provides implementation of crypto
 \section{IAIK-JCE} \label{section:pre:jce} 
 
 
-\textit{IAIK-JCE} is the \textit{Java Cryptography Extension} (\myacro{JCE})  implementation of the \textit{Institute of Applied Information Processing and Communications} (IAIK). It is ``a set of APIs and implementations of cryptographic functionality, including hash functions, message authentication codes, symmetric, asymmetric, stream, and block encryption, key and certificate management'' \cite{IAIKJCE}.
+\textit{IAIK-JCE} is the \textit{Java Cryptography Extension} (\myacro{JCE})  implementation of the \textit{Institute of Applied Information Processing and Communications} (IAIK). It is ``a set of APIs and implementations of cryptographic functionality, including hash functions, message authentication codes, symmetric, asymmetric, stream, and block encryption, key, and certificate management'' \cite{IAIKJCE}.
 
 
 

@@ -1,6 +1,6 @@
 \chapter{OpenPGP} \label{chapter:openpgp}
 
-In this chapter we give an introduction to OpenPGP. We given an overview of the history and functionality provided by OpenPGP. Furthermore we explain how the provided functionality is realized by OpenPGP. In addition we list some common use-cases of OpenPGP implementations and compare OpenPGP with the related S/MIME protocol. 
+In this chapter we give an introduction to OpenPGP. We given an overview of its history and the provided functionality. Furthermore we explain how the provided functionality is realized by OpenPGP. In addition we list some common use-cases of OpenPGP implementations and compare OpenPGP with the related S/MIME protocol. 
 
 % explain what it is, what it does and how it does it
 % dont explain packet stuff in this chapter!
@@ -25,7 +25,7 @@ and authentication. Furthermore we introduce OpenPGP's trust mode, the Web of Tr
 % mention passphrase?
 
 
-Software based on the OpenPGP Message Format standard can be used to encrypt and decrypt data, as described in \cite[section 2]{RFC4880}. Furthermore it is possible to sign data and verify those signatures. In addition OpenPGP allows sender (and therefore message) authentication by defining its own trust model, called the Web of Trust. 
+Software based on the OpenPGP Message Format standard can be used to encrypt and decrypt data as described in \cite[section 2]{RFC4880}. Furthermore it is possible to sign data and verify those signatures. In addition OpenPGP allows sender (and therefore message) authentication by defining its own trust model, called the Web of Trust. 
 
 To do so OpenPGP combines asymmetric cryptosystems with symmetric cryptosystems. Asymmetric cryptosystems are used to provide message integrity by digitally signing data. Additionally they are used to exchange the keys used by symmetric cryptosystems. Symmetric cryptosystems are used to provide message confidentiality by encrypting data. OpenPGP allows the usage of various symmetric and asymmetric algorithms. \\
 
