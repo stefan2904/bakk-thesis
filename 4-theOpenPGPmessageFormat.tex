@@ -89,7 +89,7 @@ Furthermore they hold the encrypted session key used to encrypt the data, used f
 	\end{itemize}
 \end{itemize}
 
-To encode large numbers (e.g. key material) OpenPGP defines a structure called Multi Precision Integer (MPI). A MPI consists of 2 octets holding the length of the Integer (in bits) followed by the actual integer. \\
+To encode large numbers (e.g. key material) OpenPGP defines a structure called Multi Precision Integer (\myacro{MPI}). A MPI consists of 2 octets holding the length of the Integer (in bits) followed by the actual integer. \\
 
 
 To illustrate the described structures, \ref{fig:packet-key} shows the structure of a version 4 RSA key packet as an example. In addition to the Packet header the Packet holds metadata and the actual public-key material. The structure of the key material is depended on the given Algorithm ID.
@@ -247,7 +247,7 @@ For many use-cases it is sufficient to store and transmit a Transferable in bina
 
 Since there are channels with are not able to transfer raw bytes there is a second way to represent OpenPGP Transferables. It is possible to convert a binary Transferable to ASCII-format. Such a representation of a binary OpenPGP Transferable is called \textbf{ASCII-armored} \cite[section 6]{RFC4880}.
 
-An ASCII-armored OpenPGP Transferable converts the raw bytes of a Transferable to ASCII using the Base64 algorithm \citep{RFC4648}. In addition a CRC-24 \cite[section 6.1]{RFC4880} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
+An \myacro{ASCII}-armored OpenPGP Transferable converts the raw bytes of a Transferable to ASCII using the Base64 algorithm \citep{RFC4648}. In addition a \myacro{CRC-24} \cite[section 6.1]{RFC4880} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
 
 Figure \ref{fig:key} shows a sample OpenPGP Transferable Public Key. The internal structure of this key is explained in figure \ref{fig:transferable-key}
 

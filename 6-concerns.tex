@@ -33,7 +33,7 @@ The recommended values at the time of writing of the OpenPGP standard are shown 
 		\label{tab:keylengths}
 \end{table}
 
-The current NIST and BSI recommendations for cipher and hash strengths confirm the recommendations given \cite{keylenNIST} \cite{KeylenBSI}. 
+The current \myacro{NIST} and \myacro{BSI} recommendations for cipher and hash strengths confirm the recommendations given \cite{keylenNIST} \cite{KeylenBSI}. 
 
 \section{Algorithms}
 
@@ -48,13 +48,13 @@ In this chapter we discuss the security of the algorithms used by OpenPGP.  \\
 %TODO: Never say things like "SSL is considered to be secure" without stating who is doing the considering.
 
 Most of the algorithms used by OpenPGP are still considered secure. 
-The two exceptions are the \textit{MD5} \citep{XieLF13} and \textit{SHA-1} \citep{stevens2012attacks} algorithms used for digital signatures and message authentication. 
+The two exceptions are the \myacro{MD5} \citep{XieLF13} and \myacro{SHA-1} \citep{stevens2012attacks} algorithms used for digital signatures and message authentication. 
 
-\textit{MD5} is already deprecated in the current OpenPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \textit{MD5}.   \\
+\myacro{MD5} is already deprecated in the current OpenPGP standard \citep[section 14]{RFC4880} and implementations are not allowed to create signatures using \myacro{MD5}.   \\
 
 OpenPGP is not using authenticated ciphers to detect modifications to encrypted messages.
-Instead a own scheme is used, supporting only the \textit{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
-Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stevens2012attacks} it should be considered to upgrade this scheme to a hash algorithm of the \textit{SHA-2} family or \textit{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The OpenPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
+Instead a own scheme is used, supporting only the \myacro{SHA-1} hash algorithm \citep[section 5.13]{RFC4880}. 
+Following the finding of sufficient serious attacks on \textit{SHA-1} \cite{stevens2012attacks} it should be considered to upgrade this scheme to a hash algorithm of the \myacro{SHA-2} family or \myacro{SHA-3}, or by using a mode of operation to achieve authenticated encryption. The OpenPGP standard makes some suggestions to allow such extensions \citep[section 13.11]{RFC4880} but fails to suggest authenticated ciphers or modes of operation.
 
 %TODO: "Incorporating a new hash function in OpenPGP and SSL/TLS"
 

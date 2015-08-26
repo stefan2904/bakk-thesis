@@ -10,7 +10,7 @@ In this chapter we give an introduction to OpenPGP. We given an overview of the 
 In this section we give a short overview of the history of the OpenPGP standard and its most important implementations. \\
 
 
-The Pretty Good Privacy (PGP) software was developed by Philip Zimmermann in 1991 \cite{PGP1} as a tool for human rights activists \cite{PGP2}. PGP was intended to be used to securely communicate via bulletin board systems, Usenet and email, but it can be used to encrypt and sign all kinds of data.
+The Pretty Good Privacy (\myacro{PGP}) software was developed by Philip Zimmermann in 1991 \cite{PGP1} as a tool for human rights activists \cite{PGP2}. PGP was intended to be used to securely communicate via bulletin board systems, Usenet and email, but it can be used to encrypt and sign all kinds of data.
 
 To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the OpenPGP Message Format. \\
 
@@ -74,7 +74,7 @@ Although OpenPGP was designed to secure communication on bulletin boards it can 
 In general terms software implementing the OpenPGP standard can be used to encrypt and sign data \cite[section 2]{RFC4880}. It does not limit the means of which the data has to be stored or transmitted. This allows to process generic files, for example to be securely stored on disk, transferred over the internet or printed on paper. In addition it is possible to use the \textit{Web of Trust} to authenticate entities. \\  
 
 
-The main application of OpenPGP is to \textbf{secure email communication}. This can be achieved in two different ways. The more intuitive approach is to use a software implementing the OpenPGP standard to encrypt and sign the body and attachments of the message. After doing so the ciphertexts are put in place of the original data. The receiver has to reverse that process by using a OpenPGP implementation to decrypt the message parts. This is possible without any changes to the email standard. The second approach uses an extension of the email standard called PGP/MIME \citep{RFC3156}. It utilizes special headers to structure the email data secured by OpenPGP.
+The main application of OpenPGP is to \textbf{secure email communication}. This can be achieved in two different ways. The more intuitive approach is to use a software implementing the OpenPGP standard to encrypt and sign the body and attachments of the message. After doing so the ciphertexts are put in place of the original data. The receiver has to reverse that process by using a OpenPGP implementation to decrypt the message parts. This is possible without any changes to the email standard. The second approach uses an extension of the email standard called \myacro{PGP/MIME} \citep{RFC3156}. It utilizes special headers to structure the email data secured by OpenPGP.
 
 Furthermore OpenPGP allows to only sign email messages without encrypting it \cite[section 7]{RFC4880}. This is also possible if the receiver is not using OpenPGP, resulting in the signature being displayed next to the message. This is an usability issue. To counteract this issue PGP/MIME hides the signature in its own email header. \\
 
@@ -85,7 +85,7 @@ OpenPGP is also used to digitally \textbf{sign software}, a very common practice
 
 Because the community providing the software already built a Web of Trust it is easy to use OpenPGP. The used approach provides better security compared to unauthorized hashes. Furthermore it allows automated processing by package managers. \\
 
-In addition it is possible to use OpenPGP keys for \textbf{Transport Layer Security} (TLS) authentication \cite{RFC6091}. This allows using a different trust model. Therefore it is possible to use the decentralized \textit{Web of Trust} instead of the hierarchical \textit{Public Key Infrastructure} \citep{RFC5280}. 
+In addition it is possible to use OpenPGP keys for \textbf{Transport Layer Security} (\myacro{TLS}) authentication \cite{RFC6091}. This allows using a different trust model. Therefore it is possible to use the decentralized \textit{Web of Trust} instead of the hierarchical \textit{Public Key Infrastructure} \citep{RFC5280}. 
 
 \section{Related Protocol} \label{section:openpgp:smime}
 
@@ -97,7 +97,7 @@ The main difference between OpenPGP and S/MIME is the structure of the used trus
 
 The \textbf{OpenPGP} protocol provides sender and key authentication via a decentralized trust mode. It uses a \textit{Web of Trust} to bind the identity of an entity to a key. This allows a trust model without any central authority. Every user of OpenPGP is able to issue a trust certification for every other OpenPGP key. This model is explained in section \ref{section:openpgp:functionality}. The downside of this approach is a lack of usability. To securely authenticate a key it is required to find a cryptographic trust path to the receiver's key. Another issue is that it is not defined what the meaning of an OpenPGP certification is. Every user decides for themselves about the requirements for a certification. The topic of usability is further discussed in chapter \ref{section:concerns:usability}. \\
 
-In contrast to this the S/MIME standard \citep{RFC5751} provides sender authentication by setting up a tree-like trust hierarchy. S/MIME uses the \textit{X.509 public key infrastructure (PKI)} \citep{RFC5280} as trust model. Trust is issued by central Certificate Authorities (CAs). A CA uses their private key to digitally sign the receiver's key. The resulting signature plus the certified identity information is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted CA to the receiver's key. There are multiple ways to ensure if a CA is trusted. One was is to install the CA's certificate (containing its public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. Such a CA is called \textit{root CA}. Another way to ensure trust in the CA is to sign the CA's certificate itself. This creates a trust hierarchy. \\
+In contrast to this the S/MIME standard \citep{RFC5751} provides sender authentication by setting up a tree-like trust hierarchy. S/MIME uses the \textit{X.509 public key infrastructure (PKI)} \citep{RFC5280} as trust model. Trust is issued by central Certificate Authorities (\myacro{CAs}). A CA uses their private key to digitally sign the receiver's key. The resulting signature plus the certified identity information is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted CA to the receiver's key. There are multiple ways to ensure if a CA is trusted. One was is to install the CA's certificate (containing its public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. Such a CA is called \textit{root CA}. Another way to ensure trust in the CA is to sign the CA's certificate itself. This creates a trust hierarchy. \\
 
 Figure \ref{fig:pkiwot} shows the difference in terms of structure of the two mentioned trust models.
 
@@ -106,13 +106,13 @@ Figure \ref{fig:pkiwot} shows the difference in terms of structure of the two me
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{figures/PKI}
-		\caption{ Public Key Infrastructure (PKI)}
+		\caption{ Public Key Infrastructure (\myacro{PKI})}
 		\label{fig:pki}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{figures/WOT}
-		\caption{ Web of Trust (WOT)}
+		\caption{ Web of Trust (\myacro{WOT})}
 		\label{fig:wot}
 	\end{subfigure}
 	\caption{Comparison of PKI and WoT}

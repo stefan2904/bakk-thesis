@@ -16,7 +16,7 @@ OpenPGP achieves the properties mentioned by defining a structure for data and v
 
 
 % 5 ... jpg
-We used the \textit{IAIK-JCE} toolkit for the Java programming language in our own implementation of OpenPGP. Doing so we implemented the data structures defined in the OpenPGP standard. Furthermore we used the IAIK-JCE to provide the required procedures specified by the OpenPGP standard. We implemented encryption, signing and key management. Our implementation is based on the Java stream architecture. We present this implementation, the \textit{Java Privacy Guard}, in chapter \ref{chapter:jpg}. \\
+We used the \myacro{IAIK-JCE} toolkit for the Java programming language in our own implementation of OpenPGP. Doing so we implemented the data structures defined in the OpenPGP standard. Furthermore we used the IAIK-JCE to provide the required procedures specified by the OpenPGP standard. We implemented encryption, signing and key management. Our implementation is based on the Java stream architecture. We present this implementation, the \textit{Java Privacy Guard}, in chapter \ref{chapter:jpg}. \\
 
 % 6 ... concerns
 One concern of the OpenPGP standard affects the used algorithms. Since various algorithms are used in OpenPGP its security depends on the security of those algorithms. In addition it is required to carefully pick values for the parameters of those algorithms. Another concern applies to the usability of OpenPGP implementations. Since OpenPGP is used in a non-transparent way, it requires a lot of user interaction.
