@@ -1,7 +1,7 @@
 \chapter{Preliminaries}
 \label{chapter:pre}
 
-In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between symmetric and asymmetric cryptography. In addition we describe the meaning of key ID, fingerprint and keyring. Furthermore we show the principles of cryptography in Java and the library we used for our implementation.
+In this chapter we explain the basic concepts required to understand this thesis. We explain the difference between symmetric and asymmetric cryptography. In addition, we describe the meaning of key ID, fingerprint and keyring. Furthermore, we show the principles of cryptography in Java and the library we used for our implementation.
 
 \section{Symmetric Cryptography} \label{section:pre:symcrypto}
 
@@ -16,6 +16,9 @@ An encryption function (cipher) is a transformation which transfers a given \tex
 	\text{plainText} = \text{decryptCipher}(\text{cipherText}, \text{key})
 \end{equation}
 
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Something about MACs / Authenticated Encryption?
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 \section{Public-Key Cryptography}
 \label{section:pre:publiccrypto}
@@ -29,6 +32,10 @@ In contrast to  {symmetric cryptography}, \textit{public-key cryptography} refer
 \begin{equation} \label{eq:pkdecrypt}
 	\text{plainText} = \text{decryptCipher}(\text{cipherText}, \text{privateKey})
 \end{equation}
+
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Something about signing?
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 %\section{Public Key Infrastructure \&{} X.509}
 %\citep{RFC5280}

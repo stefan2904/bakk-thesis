@@ -1,6 +1,6 @@
 \chapter{The \textit{Java Privacy Guard}} \label{chapter:jpg}
 
-In this chapter we give a overview of our implementation of the OpenPGP message format in Java. We show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore we give an introduction of our API. \\
+In this chapter we give a overview of our implementation of the OpenPGP message format in Java. We show how we implemented the structures described in chapter \ref{chapter:messageformat}. We illustrate the structure of our implementation. Furthermore, we give an introduction of our API. \\
 %Additionally we discuss the implementation security and possible attacks.  \\
 
 
@@ -8,7 +8,7 @@ As practical part of this thesis an implementation of the OpenPGP message format
 
 For cryptographic primitives like basic data types, encryption and digest algorithms we used the \myacro{IAIK-JCE} library. \\
 
-The packet- and transferable-structure as described in chapter \ref{chapter:messageformat} represents the basic structure of our implementation. All packets defined in \cite[section 5]{RFC4880} are implemented as one or more Java-classes. Additionally all relevant packet-compositions are implemented in the form of transferable-classes as defined in \cite[section 11]{RFC4880}. \\
+The packet- and transferable-structure, as described in chapter \ref{chapter:messageformat}, represents the basic structure of our implementation. All packets defined in \cite[section 5]{RFC4880} are implemented as one or more Java-classes. Additionally, all relevant packet-compositions are implemented in the form of transferable-classes as defined in \cite[section 11]{RFC4880}. \\
 
 Parsing and constructing of transferables and other internal data processing heavily relies on Java's stream architecture. This allows a fast and memory-saving flow of data. \\
 
@@ -16,11 +16,11 @@ To facilitate the use of our implementation we crated two APIs for access to the
 
 \section{The APIs}
 
-In this section we give an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the OpenPGP message format. Furthermore we show how the high-level API can be used to perform basic OpenPGP operations. Figure \ref{fig:transferablehierarchy} illustrates the structure of the high-level API. \\
+In this section we give an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the OpenPGP message format. Furthermore, we show how the high-level API can be used to perform basic OpenPGP operations. Figure \ref{fig:transferablehierarchy} illustrates the structure of the high-level API. \\
 
 The high-level API represents the interface used by users of our library. It mostly consists of transferable-classes and related toolbox-classes.
 
-The low-level API represents the inner working of the library. It consists of all packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API. Figure \ref{fig:packethierarchy} illustrates the structure of the low-level API.
+The low-level API represents the inner working of the library. It consists of all packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore, it is possible to use it for behavior not covered by the high-level API. Figure \ref{fig:packethierarchy} illustrates the structure of the low-level API.
 
 \begin{figure}[p]
 	\centering
@@ -36,9 +36,9 @@ The low-level API represents the inner working of the library. It consists of al
 	\label{fig:packethierarchy}
 \end{figure}
 
-To illustrate the functionality of the high-level API figure \ref{fig:jpg:key} shows how to load an OpenPGP key. In this example a keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
+To illustrate the functionality of the high-level API, figure \ref{fig:jpg:key} shows how to load an OpenPGP key. In this example a keyring is loaded using the \textit{PGPReader} functionality. It automatically reads all keys from the file. In addition, it builds the class-structure needed to work with the keys. Afterwards it is possible to retrieve a specific \textit{PGPKeyPair} identified by User ID.
 
-Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's stream architecture it is possible to process the ciphertext or just store it.
+Figure \ref{fig:jpg:enc} shows how to encrypt and sign data. First the demo data is stored in a byte array. This allows processing of generic data. Afterwards, a \textit{PGPData} encrypter is created and configured. It is possible to encrypt the data for multiple keys. In addition, the symmetric algorithm has to be configured. The used asymmetric algorithm is derived from the type of the \textit{PGPKeyPair} objects. Furthermore, the signing process is configured.  In the end a \textit{PGPWriter} object is used to post-process the encrypted data. Thanks to Java's stream architecture it is possible to process the ciphertext or just store it.
 
 % TODO figure --> lstlisting ?
 \begin{figure}[p]
