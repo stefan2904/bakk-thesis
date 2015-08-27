@@ -8,9 +8,9 @@ As practical part of this thesis an implementation of the OpenPGP message format
 
 For cryptographic primitives like basic data types, encryption and digest algorithms we used the \myacro{IAIK-JCE} library. \\
 
-The Packet- and Transferable-structure as described in chapter \ref{chapter:messageformat} represents the basic structure of our implementation. All Packets defined in \cite[section 5]{RFC4880} are implemented as one or more Java-classes. Additionally all relevant Packet-compositions are implemented in the form of Transferable-classes as defined in \cite[section 11]{RFC4880}. \\
+The packet- and transferable-structure as described in chapter \ref{chapter:messageformat} represents the basic structure of our implementation. All packets defined in \cite[section 5]{RFC4880} are implemented as one or more Java-classes. Additionally all relevant packet-compositions are implemented in the form of transferable-classes as defined in \cite[section 11]{RFC4880}. \\
 
-Parsing and constructing of Transferables and other internal data processing heavily relies on Java's stream architecture. This allows a fast and memory-saving flow of data. \\
+Parsing and constructing of transferables and other internal data processing heavily relies on Java's stream architecture. This allows a fast and memory-saving flow of data. \\
 
 To facilitate the use of our implementation we crated two APIs for access to the library functionality. The APIs are explained in the section following.
 
@@ -18,9 +18,9 @@ To facilitate the use of our implementation we crated two APIs for access to the
 
 In this section we give an overview of our two APIs. We highlight the difference between the two APIs and describe how they implement the OpenPGP message format. Furthermore we show how the high-level API can be used to perform basic OpenPGP operations. Figure \ref{fig:transferablehierarchy} illustrates the structure of the high-level API. \\
 
-The high-level API represents the interface used by users of our library. It mostly consists of Transferable-classes and related toolbox-classes.
+The high-level API represents the interface used by users of our library. It mostly consists of transferable-classes and related toolbox-classes.
 
-The low-level API represents the inner working of the library. It consists of all Packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API. Figure \ref{fig:packethierarchy} illustrates the structure of the low-level API.
+The low-level API represents the inner working of the library. It consists of all packet-classes. This API is used heavily in our implementation, specifically in the high-level API. Furthermore it is possible to use it for behavior not covered by the high-level API. Figure \ref{fig:packethierarchy} illustrates the structure of the low-level API.
 
 \begin{figure}[p]
 	\centering
@@ -78,7 +78,7 @@ Security concerns, as long as they affect the actual design of the OpenPGP stand
 
 Basic security measures like constant-time implementations are taken into account by our implementation. 
 
-We use the \myacro{IAIK-JCE} toolbox to perform cryptographic operations and some other tasks. The toolbox is developed with a focus on security and well tested. No other external libraries are used. 
+We use the \myacro{IAIK-JCE} toolbox to perform cryptographic operations and some other tasks. The toolbox is developed with a focus on security and well tested. No other external libraries have been used. 
 
 Another issue are weak defaults for ciphers and other algorithms. Because of the generic nature of a library our implementation does not set any defaults. Thus the issue of bad defaults is shifted to the user of the library. \\
 

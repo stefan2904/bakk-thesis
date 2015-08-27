@@ -3,9 +3,10 @@
 %It is \textit{Year 2 after Snowden} and we lost trust in every single component of digital communication. In every single one? No! A tiny standard resists the pressure and keeps our secrets what they should be, secret. I proudly introduce: OpenPGP! \\
 
 
-On insecure networks like the Internet it is possible for everyone eavesdropping on the communication to read the transmitted message. In addition, it is possible to change the content of such a message. Furthermore, an attacker can spoof a message, claiming the identity of a third party.
-To securely exchange messages using insecure networks like the Internet it is therefore required to protect the transmitted message. The favored properties of such a protection are thus confidentiality, integrity and authenticity. \\
-
+%On insecure networks like the Internet it is possible for everyone eavesdropping on the communication to read the transmitted message. In addition, it is possible to change the content of such a message. Furthermore, an attacker can spoof a message, claiming the identity of a third party.
+Insecure networks, like the Internet, do not prevent eavesdropping, modifying the contents of messages, or impersonating other entities on the network.
+%To securely exchange messages using insecure networks like the Internet it is therefore required to protect the transmitted message. The favored properties of such a protection are thus confidentiality, integrity and authenticity. \\
+As such, secure message exchange over insecure networks requires protecting the transmitted messages. The favored properties of such a protection are confidentiality, integrity and authenticity.
 
 % 3 ... openpgp
 The \textit{OpenPGP Message Protocol} is an Internet standard providing exactly those properties.  This is done by combining several algorithms to encrypt messages ahead of transmitting them. In addition, digital signatures are used to provide integrity. OpenPGP provides an end-to-end protection of messages. It is therefore possible to use untrusted communication components for transmission.

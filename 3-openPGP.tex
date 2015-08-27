@@ -15,12 +15,11 @@ The Pretty Good Privacy (\myacro{PGP}) software was developed by Philip Zimmerma
 To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the OpenPGP Message Format. \\
 
 
-The OpenPGP standard is actively developed by the OpenPGP Working Group (WG) of the \textit{Internet Engineering Task Force} (\myacro{IETF}). The WG was reopened in 2015 as reaction to an emerging discussion about secure (and usable) digital messaging.
+The OpenPGP standard is actively developed by the OpenPGP Working Group (WG) of the \textit{Internet Engineering Task Force} (\myacro{IETF}). The WG was reopened in 2015 as a reaction to an emerging discussion about secure (and usable) digital messaging.
 
 \section{Functionality} \label{section:openpgp:functionality}
 
-In this section we give an overview of the functionality provided by OpenPGP. We explain how OpenPGP provides confidentiality, integrity
-and authentication. Furthermore we introduce OpenPGP's trust mode, the Web of Trust.  \\
+In this section we give an overview of the functionality provided by OpenPGP. We explain how OpenPGP provides confidentiality, integrity and authentication. Furthermore we introduce OpenPGP's trust model, the Web of Trust.  \\
 % mention expire/revoke?
 % mention passphrase?
 
@@ -30,8 +29,20 @@ Software based on the OpenPGP Message Format standard can be used to encrypt and
 To do so OpenPGP combines asymmetric cryptosystems with symmetric cryptosystems. Asymmetric cryptosystems are used to provide message integrity by digitally signing data. Additionally they are used to exchange the keys used by symmetric cryptosystems. Symmetric cryptosystems are used to provide message confidentiality by encrypting data. OpenPGP allows the usage of various symmetric and asymmetric algorithms. \\
 
 
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Please reword/expend. This is just here to give you an idea of what could be
+%  in that paragraph:
+% The use of such “hybrid” cryptosystems is a staple of modern cryptography (and
+% occurs in other protocols, such as TLS).  Crucially, this overcomes limitations
+% of (most) public-key cryptosystems, such as performance and length restrictions.
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 To provide the mentioned functionality every entity participating in a communication secured by OpenPGP needs (at least) one OpenPGP keypair. This key-pair consists of a public- and a private-key to be used by the asymmetric cryptosystem. An OpenPGP key is the composition of several cryptographic keys and meta-data. This composition is explained in detail in section \ref{section:messageformat:keys}. 
 
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Explain that certification and signing are separate roles in OpenPGP
+%  (that can be fullfiled by the same key)
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 OpenPGP uses different keys for different functionality. For example it uses a different keypair for digital signatures and for encryption. The signing keypair is used to provide integrity-protection and authentication of the key's meta-data. Furthermore it is the trust anchor in the Web of Trust. Therefore it is desired not to replace this keypair. This is enabled by allowing replacement of the encryption keypair while keeping the signing keypair (and thus the trust on it). The structure of an OpenPGP key is explained in more detail in section \ref{section:messageformat:keys}. \\
 
@@ -50,21 +61,33 @@ This system also allows non-repudiation, since signatures can only be issued by 
 To encrypt a message the OpenPGP public key of the designated receiver is needed. To verify the signature of a received message, the OpenPGP public key of the sender is needed, respectively. OpenPGP users therefore have to distribute their OpenPGP public keys. The easiest way to perform this key-exchange is by sending the OpenPGP public key along with every message or by publishing it on a website. Another way to distribute OpenPGP public keys is by publishing them to a designated key directory, a so called key-server.
 
 
-In the OpenPGP ecosystem it is assumed that it is not possible to transmit the OpenPGP public key via a secure channel. Therefore it is necessary to validate the integrity and authenticity of a public key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting using a public-key, respectively. In OpenPGP there are multiple ways to ensure \textbf{Sender Authentication}.
+%In the OpenPGP ecosystem it is assumed that it is not possible to transmit the OpenPGP public key via a secure channel. Therefore it is necessary to validate the integrity and authenticity of a public key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting using a public-key, respectively. In OpenPGP there are multiple ways to ensure \textbf{Sender Authentication}.
+
+However, one cannot assume that the channel over which the key is transmitted is
+secure: indeed, the goal of OpenPGP is to establish such a secure channel.
+Therefore it is necessary to validate the integrity and authenticity of a public key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting using a public-key, respectively. In OpenPGP there are multiple ways to ensure \textbf{Sender Authentication}.
 
 In the simplest case it is sufficient to hash the sensitive key-parts, forming the fingerprint of the key. Afterwards it is required to compare the fingerprint with the help of a secure channel (for example by phone or by printing it on a business card). In OpenPGP this hash over the public key is called a fingerprint \cite[section 12]{RFC4880}.
 
 
-In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. In that case a more sophisticated approach is needed. For such cases OpenPGP provides its own trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The \myacro{WoT} is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting trust relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain but a (directed) trust graph. \\
+In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. This is why OpenPGP provides a more sophisticated trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The \myacro{WoT} is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain, as in X.509, but a directed graph. \\
+
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Certification is not trust.
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Sender authentication is created by searching for at least one (directed) patch from the sender's keypair to the receiver's keypair. A directed edge in the trust graph is represented by a digital signature. To establish a cryptographic trust path it is therefore needed to sign other OpenPGP keys. Since the owners of those keys signed other keys too it is possible to reach those keys by traversing on the edges. Thus it is possible to establish a trust path to before-unknown keys.
 
 A detailed explanation of the Web of Trust approach and trust models in general was out of scope of this thesis. An analysis of the OpenPGP Web of Trust can be found in \cite{Ulrich2011}. \\
 
 
-Because of the persistence (longevity) of a keypair and the sensitivity of the private key it is necessary to be able to replace a keypair or parts of it. Thus it is necessary to be able to invalidate the old keypair. For this reasons OpenPGP provides the ability to set an \textbf{expiration date} for all public parts of an OpenPGP keypair. In addition it is possible to \textbf{revoke} the keypair or parts of it \cite[section 5.2]{RFC4880}. This is possible by adding a self-signature of a certain type to the OpenPGP key. This signals the invalidity to the OpenPGP implementation and requests not to use the specific key-part. \\
+Because of the longevity of a keypair and the sensitivity of the private key, it can be necessary to be able to replace a keypair or parts of it. Thus, it is necessary to be able to invalidate the old keypair. For this reasons OpenPGP provides the ability to set an \textbf{expiration date} for all public parts of an OpenPGP keypair. In addition it is possible to explicitely \textbf{revoke} the keypair or parts of it \cite[section 5.2]{RFC4880}. This is possible by adding a self-signature of a certain type to the OpenPGP key. This signals the invalidity to the OpenPGP implementation and requests not to use the specific key-part. \\
 
-In addition OpenPGP provides funcitonality to protect private key material by encrypting it symmetrically using a passphrase \cite[section 3.7]{RFC4880}. Therefore this passphrase is required in addition to the private key file to decrypt or sign data.
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Explain that expiration is not enough in the event of key compromise.
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+In addition, OpenPGP provides funcitonality to protect private key material by encrypting it symmetrically using a passphrase \cite[section 3.7]{RFC4880}. Therefore this passphrase is required in addition to the private key file to decrypt or sign data.
 
 \section{Applications} \label{section:openpgp:applications}
 
@@ -85,15 +108,19 @@ OpenPGP is also used to digitally \textbf{sign software}, a very common practice
 
 Because the community providing the software already built a Web of Trust it is easy to use OpenPGP. The used approach provides better security compared to unauthorized hashes. Furthermore it allows automated processing by package managers. \\
 
+% FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% Cite Monkeysphere too?
+% /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 In addition it is possible to use OpenPGP keys for \textbf{Transport Layer Security} (\myacro{TLS}) authentication \cite{RFC6091}. This allows using a different trust model. Therefore it is possible to use the decentralized \textit{Web of Trust} instead of the hierarchical \textit{Public Key Infrastructure} \citep{RFC5280}. 
 
 \section{Related Protocol} \label{section:openpgp:smime}
 
-In this section we give an overview of another protocol which provides the properties provided by OpenPGP: the Secure/Multipurpose Internet Mail Extensions (\myacro{S/MIME}). Additionally the main differences between \myacro{S/MIME} and OpenPGP are highlighted. \\
+In this section we give an overview of another protocol which provides the properties provided by OpenPGP: the Secure/Multipurpose Internet Mail Extensions (\myacro{S/MIME}). Additionally, the main differences between \myacro{S/MIME} and OpenPGP are highlighted. \\
 
 The Secure/Multipurpose Internet Mail Extensions (\myacro{S/MIME}) \citep{RFC5751} is a standard for secure communication. It uses techniques similar to those used by OpenPGP to provide confidentiality, message integrity and sender authentication. \myacro{S/MIME} was designed to secure email communication.  \\
 
-The main difference between OpenPGP and \myacro{S/MIME} is the structure of the used trust model.  \\
+The key difference between OpenPGP and \myacro{S/MIME} is the structure of the trust model.  \\
 
 The {OpenPGP} protocol provides sender and key authentication via a decentralized trust mode. It uses a \textit{Web of Trust} to bind the identity of an entity to a key. This allows a trust model without any central authority. Every user of OpenPGP is able to issue a trust certification for every other OpenPGP key. This model is explained in section \ref{section:openpgp:functionality}. The downside of this approach is a lack of usability. To securely authenticate a key it is required to find a cryptographic trust path to the receiver's key. Another issue is that it is not defined what the meaning of an OpenPGP certification is. Every user decides for themselves about the requirements for a certification. The topic of usability is further discussed in chapter \ref{section:concerns:usability}. \\
 
