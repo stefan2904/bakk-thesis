@@ -1,6 +1,6 @@
 \chapter{OpenPGP} \label{chapter:openpgp}
 
-In this chapter we give an introduction to OpenPGP. We given an overview of its history and the provided functionality. Furthermore we explain how the provided functionality is realized by OpenPGP. In addition we list some common use-cases of OpenPGP implementations and compare OpenPGP with the related S/MIME protocol. 
+In this chapter we give an introduction to OpenPGP. We given an overview of its history and the provided functionality. Furthermore we explain how the provided functionality is realized by OpenPGP. In addition we list some common use-cases of OpenPGP implementations and compare OpenPGP with the related \myacro{S/MIME} protocol. 
 
 % explain what it is, what it does and how it does it
 % dont explain packet stuff in this chapter!
@@ -10,12 +10,12 @@ In this chapter we give an introduction to OpenPGP. We given an overview of its 
 In this section we give a short overview of the history of the OpenPGP standard and its most important implementations. \\
 
 
-The Pretty Good Privacy (\myacro{PGP}) software was developed by Philip Zimmermann in 1991 \cite{PGP1} as a tool for human rights activists \cite{PGP2}. PGP was intended to be used to securely communicate via bulletin board systems, Usenet and email, but it can be used to encrypt and sign all kinds of data.
+The Pretty Good Privacy (\myacro{PGP}) software was developed by Philip Zimmermann in 1991 \cite{PGP1} as a tool for human rights activists \cite{PGP2}. \myacro{PGP} was intended to be used to securely communicate via bulletin board systems, Usenet and email, but it can be used to encrypt and sign all kinds of data.
 
 To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the OpenPGP Message Format. \\
 
 
-The OpenPGP standard is actively developed by the OpenPGP Working Group (WG) of the \textit{Internet Engineering Task Force} (IETF). The WG was reopened in 2015 as reaction to an emerging discussion about secure (and usable) digital messaging.
+The OpenPGP standard is actively developed by the OpenPGP Working Group (WG) of the \textit{Internet Engineering Task Force} (\myacro{IETF}). The WG was reopened in 2015 as reaction to an emerging discussion about secure (and usable) digital messaging.
 
 \section{Functionality} \label{section:openpgp:functionality}
 
@@ -55,7 +55,7 @@ In the OpenPGP ecosystem it is assumed that it is not possible to transmit the O
 In the simplest case it is sufficient to hash the sensitive key-parts, forming the fingerprint of the key. Afterwards it is required to compare the fingerprint with the help of a secure channel (for example by phone or by printing it on a business card). In OpenPGP this hash over the public key is called a fingerprint \cite[section 12]{RFC4880}.
 
 
-In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. In that case a more sophisticated approach is needed. For such cases OpenPGP provides its own trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The WoT is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting trust relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain but a (directed) trust graph. \\
+In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. In that case a more sophisticated approach is needed. For such cases OpenPGP provides its own trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The \myacro{WoT} is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting trust relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain but a (directed) trust graph. \\
 
 Sender authentication is created by searching for at least one (directed) patch from the sender's keypair to the receiver's keypair. A directed edge in the trust graph is represented by a digital signature. To establish a cryptographic trust path it is therefore needed to sign other OpenPGP keys. Since the owners of those keys signed other keys too it is possible to reach those keys by traversing on the edges. Thus it is possible to establish a trust path to before-unknown keys.
 
@@ -71,7 +71,7 @@ In addition OpenPGP provides funcitonality to protect private key material by en
 Although OpenPGP was designed to secure communication on bulletin boards it can be used in several different ways. In this section we give an overview of some of the possible applications. We explain how it can be used to secure email communication and what its limits are.  \\
 
 
-In general terms software implementing the OpenPGP standard can be used to encrypt and sign data \cite[section 2]{RFC4880}. It does not limit the means of which the data has to be stored or transmitted. This allows to process generic files, for example to be securely stored on disk, transferred over the internet or printed on paper. In addition it is possible to use the \textit{Web of Trust} to authenticate entities. \\  
+In general terms software implementing the OpenPGP standard can be used to encrypt and sign data \cite[section 2]{RFC4880}. It does not limit the means of which the data has to be stored or transmitted. This allows to process generic files, for example to be securely stored on disk, transferred over the Internet or printed on paper. In addition it is possible to use the \textit{Web of Trust} to authenticate entities. \\  
 
 
 The main application of OpenPGP is to \textbf{secure email communication}. This can be achieved in two different ways. The more intuitive approach is to use a software implementing the OpenPGP standard to encrypt and sign the body and attachments of the message. After doing so the ciphertexts are put in place of the original data. The receiver has to reverse that process by using a OpenPGP implementation to decrypt the message parts. This is possible without any changes to the email standard. The second approach uses an extension of the email standard called \myacro{PGP/MIME} \citep{RFC3156}. It utilizes special headers to structure the email data secured by OpenPGP.
@@ -89,15 +89,15 @@ In addition it is possible to use OpenPGP keys for \textbf{Transport Layer Secur
 
 \section{Related Protocol} \label{section:openpgp:smime}
 
-In this section we give an overview of another protocol which provides the properties provided by OpenPGP: the Secure/Multipurpose Internet Mail Extensions (S/MIME). Additionally the main differences between S/MIME and OpenPGP are highlighted. \\
+In this section we give an overview of another protocol which provides the properties provided by OpenPGP: the Secure/Multipurpose Internet Mail Extensions (\myacro{S/MIME}). Additionally the main differences between \myacro{S/MIME} and OpenPGP are highlighted. \\
 
-The Secure/Multipurpose Internet Mail Extensions (S/MIME) \citep{RFC5751} is a standard for secure communication. It uses techniques similar to those used by OpenPGP to provide confidentiality, message integrity and sender authentication. S/MIME was designed to secure email communication.  \\
+The Secure/Multipurpose Internet Mail Extensions (\myacro{S/MIME}) \citep{RFC5751} is a standard for secure communication. It uses techniques similar to those used by OpenPGP to provide confidentiality, message integrity and sender authentication. \myacro{S/MIME} was designed to secure email communication.  \\
 
-The main difference between OpenPGP and S/MIME is the structure of the used trust model.  \\
+The main difference between OpenPGP and \myacro{S/MIME} is the structure of the used trust model.  \\
 
-The \textbf{OpenPGP} protocol provides sender and key authentication via a decentralized trust mode. It uses a \textit{Web of Trust} to bind the identity of an entity to a key. This allows a trust model without any central authority. Every user of OpenPGP is able to issue a trust certification for every other OpenPGP key. This model is explained in section \ref{section:openpgp:functionality}. The downside of this approach is a lack of usability. To securely authenticate a key it is required to find a cryptographic trust path to the receiver's key. Another issue is that it is not defined what the meaning of an OpenPGP certification is. Every user decides for themselves about the requirements for a certification. The topic of usability is further discussed in chapter \ref{section:concerns:usability}. \\
+The {OpenPGP} protocol provides sender and key authentication via a decentralized trust mode. It uses a \textit{Web of Trust} to bind the identity of an entity to a key. This allows a trust model without any central authority. Every user of OpenPGP is able to issue a trust certification for every other OpenPGP key. This model is explained in section \ref{section:openpgp:functionality}. The downside of this approach is a lack of usability. To securely authenticate a key it is required to find a cryptographic trust path to the receiver's key. Another issue is that it is not defined what the meaning of an OpenPGP certification is. Every user decides for themselves about the requirements for a certification. The topic of usability is further discussed in chapter \ref{section:concerns:usability}. \\
 
-In contrast to this the S/MIME standard \citep{RFC5751} provides sender authentication by setting up a tree-like trust hierarchy. S/MIME uses the \textit{X.509 public key infrastructure (PKI)} \citep{RFC5280} as trust model. Trust is issued by central Certificate Authorities (\myacro{CAs}). A CA uses their private key to digitally sign the receiver's key. The resulting signature plus the certified identity information is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted CA to the receiver's key. There are multiple ways to ensure if a CA is trusted. One was is to install the CA's certificate (containing its public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. Such a CA is called \textit{root CA}. Another way to ensure trust in the CA is to sign the CA's certificate itself. This creates a trust hierarchy. \\
+In contrast to this the \myacro{S/MIME} standard \citep{RFC5751} provides sender authentication by setting up a tree-like trust hierarchy. \myacro{S/MIME} uses the \textit{X.509 public key infrastructure (\myacro{PKI})} \citep{RFC5280} as trust model. Trust is issued by central Certificate Authorities (\myacro{CA}s). A \myacro{CA} uses their private key to digitally sign the receiver's key. The resulting signature plus the certified identity information is called a certificate. To authenticate a key it is required to find a cryptographic trust path from a trusted \myacro{CA} to the receiver's key. There are multiple ways to ensure if a \myacro{CA} is trusted. One was is to install the \myacro{CA}'s certificate (containing its public key) on the receiver's system. This can be done by operating-system or browser vendors, IT departments or manually by the user. Such a CA is called \textit{root CA}. Another way to ensure trust in the \myacro{CA} is to sign the \myacro{CA}'s certificate itself. This creates a trust hierarchy. \\
 
 Figure \ref{fig:pkiwot} shows the difference in terms of structure of the two mentioned trust models.
 

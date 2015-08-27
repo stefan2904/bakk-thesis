@@ -245,29 +245,29 @@ Since OpenPGP defines the structure of Packets as a sequence of bytes, the prima
 For many use-cases it is sufficient to store and transmit a Transferable in binary form. For example for storing the keys on a user's keyring or for transmitting over a channel which is able to transfer raw bytes. \\
 
 
-Since there are channels with are not able to transfer raw bytes there is a second way to represent OpenPGP Transferables. It is possible to convert a binary Transferable to ASCII-format. Such a representation of a binary OpenPGP Transferable is called \textbf{ASCII-armored} \cite[section 6]{RFC4880}.
+Since there are channels with are not able to transfer raw bytes there is a second way to represent OpenPGP Transferables. It is possible to convert a binary Transferable to \myacro{ASCII}-format. Such a representation of a binary OpenPGP Transferable is called \textbf{ASCII-armored} \cite[section 6]{RFC4880}.
 
-An \myacro{ASCII}-armored OpenPGP Transferable converts the raw bytes of a Transferable to ASCII using the Base64 algorithm \citep{RFC4648}. In addition a \myacro{CRC-24} \cite[section 6.1]{RFC4880} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
+An \myacro{ASCII}-armored OpenPGP Transferable converts the raw bytes of a Transferable to \myacro{ASCII} using the Base64 algorithm \citep{RFC4648}. In addition a \myacro{CRC-24} \cite[section 6.1]{RFC4880} checksum is appended to detect transmission errors. The resulting character sequence is furthermore prefixed by a header indicating the type of the Transferable. Finally a footer is appended. \\
 
 Figure \ref{fig:key} shows a sample OpenPGP Transferable Public Key. The internal structure of this key is explained in figure \ref{fig:transferable-key}
 
-An ASCII-armored OpenPGP Message encrypted with the subkey contained in the Transferable Public Key shown in figure \ref{fig:key} is shown in figure \ref{fig:msg}. The internal structure of this message is explained in figure \ref{fig:transferable-msg}. \\
+An \myacro{ASCII}-armored OpenPGP Message encrypted with the subkey contained in the Transferable Public Key shown in figure \ref{fig:key} is shown in figure \ref{fig:msg}. The internal structure of this message is explained in figure \ref{fig:transferable-msg}. \\
 
 \begin{figure}[p]
 	\centering
 	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/key-ecc.asc}
-	\caption{Sample ASCII-armored transferable OpenPGP public-key}
+	\caption{Sample \myacro{ASCII}-armored transferable OpenPGP public-key}
 	\label{fig:key}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
 	\lstinputlisting[basicstyle=\ttfamily\footnotesize]{figures/msg-ecc.asc}
-	\caption{Sample ASCII-armored transferable OpenPGP message}
+	\caption{Sample \myacro{ASCII}-armored transferable OpenPGP message}
 	\label{fig:msg}
 \end{figure}
 
-To process the actual Transferable a OpenPGP implementation first removes the header and footer. Afterward a Base64 parser is used to recover the Packet bytes while calculating the CRC-24 checksum. Finally a (optional) comparison with the appended checksum is performed.
+To process the actual Transferable a OpenPGP implementation first removes the header and footer. Afterward a Base64 parser is used to recover the Packet bytes while calculating the \myacro{CRC-24} checksum. Finally a (optional) comparison with the appended checksum is performed.
 
 
 

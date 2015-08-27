@@ -44,7 +44,7 @@ In contrast to  {symmetric cryptography}, \textit{public-key cryptography} refer
 
 A fingerprint is a character or byte sequence which is used to identify a key.
 A \textit{key ID} is the short form of a fingerprint.
-For example the fingerprint can be the 160-bit SHA-1 hash of a key, while the key id are the lower 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
+For example the fingerprint can be the 160-bit \myacro{SHA-1} hash of a key, while the key id are the lower 64 bits of the fingerprint. Due to the nature of a hash function it is possible that collisions exist.
 This is further explained in \cite[section 12.2]{RFC4880}.
 
 %\section{Message Integrity Protection}
@@ -68,12 +68,12 @@ This is further explained in \cite[section 3.6]{RFC4880}.
 \section{Java Crypto Architecture} \label{section:pre:jca}
 
 The \textit{Java Crypto Architecture} (\myacro{JCA}) provides a basic framework for working with cryptographic primitives in Java \cite{JCA}. Furthermore it defines an API for working with encryption and other more advanced cryptographic primitives.
-The \textit{Java Cryptography Extension} (JCE) provides implementation of cryptographic algorithms. JCE implements the API defined by JCA. 
+The \textit{Java Cryptography Extension} (\myacro{JCE}) provides implementation of cryptographic algorithms. \myacro{JCE} implements the API defined by \myacro{JCA}. 
 
 \section{IAIK-JCE} \label{section:pre:jce} 
 
 
-\textit{IAIK-JCE} is the \textit{Java Cryptography Extension} (\myacro{JCE})  implementation of the \textit{Institute of Applied Information Processing and Communications} (IAIK). It is ``a set of APIs and implementations of cryptographic functionality, including hash functions, message authentication codes, symmetric, asymmetric, stream, and block encryption, key, and certificate management'' \cite{IAIKJCE}.
+\textit{IAIK-JCE} is the \textit{Java Cryptography Extension} (\myacro{JCE})  implementation of the \textit{Institute of Applied Information Processing and Communications} (\myacro{IAIK}). It is ``a set of APIs and implementations of cryptographic functionality, including hash functions, message authentication codes, symmetric, asymmetric, stream, and block encryption, key, and certificate management'' \cite{IAIKJCE}.
 
 
 
