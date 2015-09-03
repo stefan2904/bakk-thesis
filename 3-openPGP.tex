@@ -7,12 +7,12 @@ In this chapter we give an introduction to OpenPGP. We given an overview of its 
 
 \section{History}  \label{section:openpgp:history}
 
-In this section we give a short overview of the history of the OpenPGP standard and its most important implementations. \\
+%In this section we give a short overview of the history of the OpenPGP standard and its most important implementations. \\
 
 
 The Pretty Good Privacy (\myacro{PGP}) software was developed by Philip Zimmermann in 1991 \cite{PGP1} as a tool for human rights activists \cite{PGP2}. \myacro{PGP} was intended to be used to securely communicate via bulletin board systems, Usenet and email, but it can be used to encrypt and sign all kinds of data.
 
-To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the \textit{OpenPGP Message Format}. \\
+To allow interoperability with other programs the format used by PGP was standardized in 1997, forming the \textit{OpenPGP Message Format} \cite{RFC4880}. \\
 
 
 The OpenPGP standard is actively developed by the \textit{OpenPGP Working Group (WG)} of the \textit{Internet Engineering Task Force} (\myacro{IETF}). The WG was reopened in 2015 as a reaction to an emerging discussion about secure (and usable) digital messaging.
@@ -65,12 +65,12 @@ To encrypt a message the OpenPGP public key of the designated receiver is needed
 
 However, one cannot assume that the channel over which the key is transmitted is
 secure: indeed, the goal of OpenPGP is to establish such a secure channel.
-Therefore it is necessary to validate the integrity and authenticity of a public key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting using a public-key, respectively. In OpenPGP there are multiple ways to ensure \textbf{Sender Authentication}.
+Therefore it is also necessary to validate the integrity and authenticity of a public key before being able to use the key to validate the signature on a received message. It is necessary to validate this properties before encrypting using a public-key, respectively. In OpenPGP there are multiple ways to ensure \textbf{Authentication}.
 
-In the simplest case it is sufficient to hash the sensitive key-parts, forming the fingerprint of the key. Afterwards it is required to compare the fingerprint with the help of a secure channel (for example by phone or by printing it on a business card). In OpenPGP this hash over the public key is called a fingerprint \cite[section 12]{RFC4880}.
+In the simplest case it is sufficient to hash the sensitive key-parts, forming the fingerprint of the key. Afterwards it is required to compare the fingerprint with the help of an independent channel (for example by phone or by printing it on a business card). In OpenPGP this hash over the public key is called a fingerprint \cite[section 12]{RFC4880}.
 
 
-In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. This is why OpenPGP provides a more sophisticated trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The \myacro{WoT} is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain, as in X.509, but a directed graph. \\
+In some cases it is not possible to compare this fingerprint, for example when the communication parties do not know each other in advance. This is why OpenPGP provides a more sophisticated trust model, called the \textbf{Web of Trust (WoT)} \cite{PGP2manual}. The \myacro{WoT} is a trust-model without any central authorities. Binding between the identity of an entity and a keypair is done via cryptographic signatures. A user certifies (confirms) the authenticity of a keypair (its public key) by signing the identifying meta-data of the key with their own key. The resulting relation between the two keys is called certification. Since there exists no central certificate authority all OpenPGP users can issue certifications for all other OpenPGP keys. The result of this process is not a linear trust chain, as in \textit{X.509}, but a directed graph. This principle is shown in figure \ref{fig:pkiwot}. \\
 
 % FEEDBACK::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 % Certification is not trust.
@@ -91,7 +91,7 @@ In addition, OpenPGP provides funcitonality to protect private key material by e
 
 \section{Applications} \label{section:openpgp:applications}
 
-Although OpenPGP was designed to secure communication on bulletin boards, it can be used in several different ways. In this section we give an overview of some of the possible applications. We explain how it can be used to secure email communication, and what its limits are.  \\
+Although OpenPGP was designed to secure communication on bulletin boards, it can be used in several different ways. In this section we give an overview of some of the possible applications. We explain how OpenPGP can be used to secure email communication, and what its limits are.  \\
 
 
 In general, terms software implementing the OpenPGP standard can be used to encrypt and sign data \cite[section 2]{RFC4880}. It does not limit the means of which the data has to be stored or transmitted. This allows to process generic files, for example to be securely stored on disk, transferred over the Internet or printed on paper. In addition, it is possible to use the \textit{Web of Trust} to authenticate entities. \\  
@@ -102,7 +102,7 @@ The main application of OpenPGP is to \textbf{secure email communication}. This 
 Furthermore, OpenPGP allows to only sign email messages without encrypting it \cite[section 7]{RFC4880}. This is also possible if the receiver is not using OpenPGP, resulting in the signature being displayed next to the message. This is an usability issue. To counteract this issue PGP/MIME hides the signature in its own email header. \\
 
 
-The main limitation of both approaches is the fact that meta data is not signed \cite{Green2014}. In the email system it is not possible to protect the receiver of a message. In addition, the email standard does not allow encryption, or signing, of the subject. \\
+The main limitation of both approaches is the fact that meta data is not signed \cite{Green2014}. In the email system it is not possible to protect the receiver of a message, since the email headers are not encrypted. In addition, the email standard does not allow encryption, or signing, of the subject. \\
 
 OpenPGP is also used to digitally \textbf{sign software}, a very common practice in the free/libre/open-source software (FLOSS) community. This is done to ensure integrity and authenticate the source of downloaded software. 
 
@@ -112,7 +112,7 @@ Because the community providing the software already built a Web of Trust it is 
 % Cite Monkeysphere too?
 % /FEEDBACK:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-In addition, it is possible to use OpenPGP keys for \textbf{Transport Layer Security} (\myacro{TLS}) authentication \cite{RFC6091}. This allows using a different trust model. Therefore, it is possible to use the decentralized \textit{Web of Trust} instead of the hierarchical \textit{Public Key Infrastructure} \citep{RFC5280}. 
+In addition, it is possible to use OpenPGP keys for \textbf{Transport Layer Security} (\myacro{TLS}) authentication \cite{RFC6091}. This allows using the decentralized \textit{Web of Trust} model instead of the hierarchical \textit{Public Key Infrastructure}  \citep{RFC5280}. 
 
 \section{Related Protocol} \label{section:openpgp:smime}
 
